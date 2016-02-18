@@ -1,0 +1,79 @@
+/*@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat-Regular'), url('/fonts/Montserrat-regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Montserrat-bold';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Montserrat-Bold'), url('/fonts/Montserrat-bold.woff') format('woff');
+} */
+
+body {
+  font-family: 'Montserrat';
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding-left: 15%;
+  padding-right: 25%;
+  padding-top: 2%;
+}
+
+section#title h1 {
+  padding-bottom: 0.6em;
+  margin: 0;
+  font-size: 2.7em;
+  font-family: 'Roboto';
+  font-weight:500;
+}
+
+aside#sidebuttons {
+  float:left;
+  width:2.5em;
+  text-align: center;
+  padding-right:1em;
+}
+
+.votes {
+  display: inline-block;
+  background-color: #e6e600;
+  display: inline-block;
+  padding: 0.6em 0;
+  width:90%;
+  margin: 0;
+}
+
+.votebutton {
+  width: 90%;
+  height: 90%;
+  margin: 0;
+}
+
+.votedown {
+  padding-top: 0.3em;
+}
+
+.voteup {
+  padding-bottom: 0.3em;
+}
+
+.button {
+  padding: 0.6em;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.button:link, .button:visited, .button:active {
+  color: #ffffff;
+  display: inline-block;
+  background-color: #128FDC;
+}
+
+.button:hover {
+
+  background-color: #1D74AB;
+}
