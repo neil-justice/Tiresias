@@ -21,6 +21,10 @@ a {
   text-decoration: none;
 }
 
+a > .plussign {
+  font-size: 1.2em;
+}
+
 h1 {
   padding-bottom: 0.6em;
   margin: 0;
