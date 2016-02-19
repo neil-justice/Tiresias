@@ -50,23 +50,25 @@ nav > .button {
   float:right;
   margin-right: 5%;
   vertical-align: middle;
-  margin-top: 0.75em;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
   font-size: 0.8em;
   font-weight: 500;
   font-family: 'Roboto';
+  letter-spacing: 0.12em;
 }
 
 li > a{
   display: block;
-  width: 5%;
   float: left;
   color: white;
   font-style: normal;
   text-align: center;
-  padding: 1em 1em;
+  padding: 1em 1.62em;
   left: 13%;
   position: relative;
 }
+
 li > a:hover {
   background-color: #128FDC;
 }
