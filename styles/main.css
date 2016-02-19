@@ -17,10 +17,27 @@ body {
   padding: 0;
 }
 
-main {
-  padding-left: 15%;
-  padding-right: 25%;
-  padding-top: 5%;
+a {
+  text-decoration: none;
+}
+
+h1 {
+  padding-bottom: 0.6em;
+  margin: 0;
+  font-size: 2.7em;
+  font-family: 'Roboto';
+  font-weight:500;
+}
+
+nav
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: black;
 }
 
 ul {
@@ -29,43 +46,35 @@ ul {
   padding: 0;
 }
 
+nav > .button {
+  float:right;
+  margin-right: 5%;
+  vertical-align: middle;
+  margin-top: 0.6em;
+  font-size: 0.85em;
+}
+
 li > a{
-    display: block;
-    width: 5%;
-    float: left;
-    color: white;
-    font-style: normal;
-    text-align: center;
-    padding: 1em 1em;
-    text-decoration: none;
-    left: 13%;
-    position: relative;
+  display: block;
+  width: 5%;
+  float: left;
+  color: white;
+  font-style: normal;
+  text-align: center;
+  padding: 1em 1em;
+  left: 13%;
+  position: relative;
 }
 li > a:hover {
-    background-color: #26A65B;
+  background-color: #128FDC;
 }
 
-section#navbar
-{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  color: white;
-  vertical-align: middle;
+main {
+  padding-left: 15%;
+  padding-right: 25%;
+  padding-top: 5%;
 }
 
-section#title h1 {
-  padding-bottom: 0.6em;
-  margin: 0;
-  font-size: 2.7em;
-  font-family: 'Roboto';
-  font-weight:500;
-}
 
 aside#sidebuttons {
   float:left;
@@ -106,19 +115,30 @@ aside#sidebuttons {
   background-color: rgb(144,195,170);
 }
 
+.votedown:active {
+  background-color: rgb(181,77,89);
+}
+
+.voteup:active {
+  background-color: rgb(164,215,190);
+}
+
 .button {
   padding: 0.6em;
   text-decoration: none;
   border-radius: 3px;
 }
 
-.button:link, .button:visited, .button:active {
+.button:link, .button:visited {
   color: #ffffff;
   display: inline-block;
   background-color: #128FDC;
 }
 
 .button:hover {
-
   background-color: #1D74AB;
+}
+
+.button:active {
+  background-color: #1570A5;
 }
