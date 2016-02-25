@@ -12,6 +12,7 @@
 } */
 
 body {
+  width: 100%;
   font-family: 'Montserrat';
   margin: 0;
   padding: 0;
@@ -33,65 +34,22 @@ h1 {
   font-weight:500;
 }
 
-nav
-{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  background-color: black;
-}
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav > .button {
-  float:right;
-  margin-right: 5%;
-  vertical-align: middle;
-  margin-top: 0.8em;
-  margin-bottom: 0.8em;
-  font-size: 0.8em;
-  font-weight: 500;
-  font-family: 'Roboto';
-  letter-spacing: 0.12em;
-}
-
-li > a{
-  display: block;
-  float: left;
-  color: white;
-  font-style: normal;
-  text-align: center;
-  padding: 1em 1.62em;
-  left: 13%;
-  position: relative;
-}
-
-li > a:hover {
-  background-color: #128FDC;
-}
-
 main {
-  padding-left: 15%;
-  padding-right: 25%;
-  padding-top: 5%;
+  margin-left: 15%;
+  margin-right: 25%;
+  margin-top: 5%;
+  display: block;
 }
 
 
-aside#sidebuttons {
+aside#side-buttons {
   float:left;
   width:2.5em;
   text-align: center;
   padding-right:1em;
 }
 
-.votes {
+.vote-number {
   display: inline-block;
   background-color: #e6e600;
   display: inline-block;
@@ -100,34 +58,34 @@ aside#sidebuttons {
   margin: 0;
 }
 
-.votebutton {
+.vote-button {
   width: 90%;
   height: 90%;
   margin: 0;
   background-color: rgb(115,121,118);
 }
 
-.votedown {
+.vote-down {
   margin-top: 0.3em;
 }
 
-.voteup {
+.vote-up {
   margin-bottom: 0.3em;
 }
 
-.votedown:hover {
+.vote-down:hover {
   background-color: rgb(161,57,69);
 }
 
-.voteup:hover {
+.vote-up:hover {
   background-color: rgb(144,195,170);
 }
 
-.votedown:active {
+.vote-down:active {
   background-color: rgb(181,77,89);
 }
 
-.voteup:active {
+.vote-up:active {
   background-color: rgb(164,215,190);
 }
 
@@ -164,6 +122,5 @@ aside#sidebuttons {
 }
 
 .tag:hover {
-  background-color:#128FDC;
-  color: #FFFFFF;
+  background-color:#DBFFFF;
 }
