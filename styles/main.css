@@ -164,5 +164,6 @@ aside#sidebuttons {
 }
 
 .tag:hover {
-  background-color:#DBFFFF;
+  background-color:#128FDC;
+  color: #FFFFFF;
 }
