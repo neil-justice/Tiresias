@@ -12,24 +12,91 @@
 } */
 
 body {
+  width: 100%;
   font-family: 'Montserrat';
   margin: 0;
   padding: 0;
 }
 
-main {
-  padding-left: 15%;
-  padding-right: 25%;
-  padding-top: 2%;
+a {
+  text-decoration: none;
 }
 
-section#title h1 {
+a > .plussign {
+  font-size: 1em;
+}
+
+h1 {
   padding-bottom: 0.6em;
   margin: 0;
   font-size: 2.7em;
   font-family: 'Roboto';
   font-weight:500;
 }
+
+nav
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3em;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  overflow:hidden;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav > .navbutton {
+  float:right;
+  margin-right: 5%;
+  height: 100%;
+  vertical-align: middle;
+  font-size: 0.8em;
+  font-weight: 500;
+  font-family: 'Roboto';
+  letter-spacing: 0.12em;
+  display: table;
+}
+
+nav .navbuttonpad {
+  display: table-row;
+}
+
+nav .navbuttoncontainer {
+  height: 60%;
+  display: table-row;
+}
+
+li > a{
+  display: block;
+  float: left;
+  color: white;
+  font-style: normal;
+  text-align: center;
+  padding: 1em 1.62em;
+  
+  left: 13%;
+  position: relative;
+}
+
+li > a:hover {
+  background-color: #128FDC;
+}
+
+main {
+  margin-left: 15%;
+  margin-right: 25%;
+  margin-top: 5%;
+  display: block;
+}
+
 
 aside#sidebuttons {
   float:left;
@@ -70,19 +137,46 @@ aside#sidebuttons {
   background-color: rgb(144,195,170);
 }
 
+.votedown:active {
+  background-color: rgb(181,77,89);
+}
+
+.voteup:active {
+  background-color: rgb(164,215,190);
+}
+
 .button {
   padding: 0.6em;
   text-decoration: none;
   border-radius: 3px;
 }
 
-.button:link, .button:visited, .button:active {
+.button:link, .button:visited {
   color: #ffffff;
   display: inline-block;
   background-color: #128FDC;
 }
 
 .button:hover {
-
   background-color: #1D74AB;
+}
+
+.button:active {
+  background-color: #1570A5;
+}
+
+.tag {
+  padding:0.2em 0.6em;
+  margin-right:0.3em;
+  border-radius: 3px;
+  color: #128FDC;
+  border-color: #128FDC;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.tag:hover {
+  background-color:#DBFFFF;
 }
