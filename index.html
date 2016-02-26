@@ -6,22 +6,23 @@
     <link href="./styles/nav.css" rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900,400italic' rel='stylesheet' type='text/css'/>
+    <script src=./scripts/nav-height.js></script>
     <meta charset="UTF-8"/>
     <title>Predictions</title>
   </head>
-  <body>
-        <nav>
-          <div class="nav-links">
+  <body onload="setNavElementHeights()">
+        <nav id="navBar">
+          <div class="nav-link-list">
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a class="nav-link" href="#">Home</a></li>
+              <li><a class="nav-link" href="#">About</a></li>
+              <li><a class="nav-link" href="#">Contact</a></li>
             </ul>
           </div>
           <div class="nav-button">
             <div class="nav-button-padding"></div>
             <div class="nav-button-container">
-              <a class="button" href="#"><span class="plussign">+</span>  NEW PREDICTION</a></div>
+              <a id="nav-button" class="button" href="#"><span class="plussign">+</span>  NEW PREDICTION</a></div>
             <div class="nav-button-padding"></div>
           </div>
         </nav> 

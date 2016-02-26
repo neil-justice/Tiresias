@@ -4,7 +4,7 @@ nav
   top: 0;
   left: 0;
   width: 100%;
-  height: 3em;
+  height: 2em;
   margin: 0;
   padding: 0;
   background-color: black;
@@ -40,6 +40,7 @@ nav .button {
   font-weight: 500;
   font-family: 'Roboto';
   letter-spacing: 0.12em;
+  margin-top: 0;
 }
 
 nav li > a{
@@ -48,7 +49,8 @@ nav li > a{
   color: white;
   font-style: normal;
   text-align: center;
-  padding: 1em 1.62em;
+  padding-left: 1.62em;
+  padding-right: 1.62em;
   left: 13%;
   position: relative;
 }
