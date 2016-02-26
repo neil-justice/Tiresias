@@ -12,54 +12,21 @@
 } */
 
 body {
+  width: 100%;
   font-family: 'Montserrat';
   margin: 0;
   padding: 0;
 }
 
-main {
-  padding-left: 15%;
-  padding-right: 25%;
-  padding-top: 5%;
+a {
+  text-decoration: none;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+a > .plussign {
+  font-size: 1em;
 }
 
-li > a{
-    display: block;
-    width: 5%;
-    float: left;
-    color: white;
-    font-style: normal;
-    text-align: center;
-    padding: 1em 1em;
-    text-decoration: none;
-    left: 13%;
-    position: relative;
-}
-li > a:hover {
-    background-color: #26A65B;
-}
-
-section#navbar
-{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  color: white;
-  vertical-align: middle;
-}
-
-section#title h1 {
+h1 {
   padding-bottom: 0.6em;
   margin: 0;
   font-size: 2.7em;
@@ -67,14 +34,22 @@ section#title h1 {
   font-weight:500;
 }
 
-aside#sidebuttons {
+main {
+  margin-left: 15%;
+  margin-right: 25%;
+  margin-top: 5%;
+  display: block;
+}
+
+
+aside#side-buttons {
   float:left;
   width:2.5em;
   text-align: center;
   padding-right:1em;
 }
 
-.votes {
+.vote-number {
   display: inline-block;
   background-color: #e6e600;
   display: inline-block;
@@ -83,27 +58,35 @@ aside#sidebuttons {
   margin: 0;
 }
 
-.votebutton {
+.vote-button {
   width: 90%;
   height: 90%;
   margin: 0;
   background-color: rgb(115,121,118);
 }
 
-.votedown {
+.vote-down {
   margin-top: 0.3em;
 }
 
-.voteup {
+.vote-up {
   margin-bottom: 0.3em;
 }
 
-.votedown:hover {
+.vote-down:hover {
   background-color: rgb(161,57,69);
 }
 
-.voteup:hover {
+.vote-up:hover {
   background-color: rgb(144,195,170);
+}
+
+.vote-down:active {
+  background-color: rgb(181,77,89);
+}
+
+.vote-up:active {
+  background-color: rgb(164,215,190);
 }
 
 .button {
@@ -112,13 +95,32 @@ aside#sidebuttons {
   border-radius: 3px;
 }
 
-.button:link, .button:visited, .button:active {
+.button:link, .button:visited {
   color: #ffffff;
   display: inline-block;
   background-color: #128FDC;
 }
 
 .button:hover {
-
   background-color: #1D74AB;
+}
+
+.button:active {
+  background-color: #1570A5;
+}
+
+.tag {
+  padding:0.2em 0.6em;
+  margin-right:0.3em;
+  border-radius: 3px;
+  color: #128FDC;
+  border-color: #128FDC;
+  border-style: solid;
+  border-width: 1px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.tag:hover {
+  background-color:#DBFFFF;
 }
