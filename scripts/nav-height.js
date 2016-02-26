@@ -1,22 +1,15 @@
 "use strict"
-if(document.addEventListener) {
-  document.addEventListener('load', start);
-} else if (document.attachEvent) {
-  document.attachEvent('onload', start);
-}
 
-function start()
-{
-  setNavElementHeights();
+if (addEventListener) {
+  addEventListener('load', setNavElementHeights);
+} 
+else if (attachEvent) {
+  attachEvent('onload', setNavElementHeights);
 }
 
 function setNavElementHeights() 
 {
-  var navHeight = document.getElementById("navBar").clientHeight;
-  
-  if (!navHeight) {
-    return undefined;
-  }
+  var navHeight = document.querySelector("nav").clientHeight;
   
   setNavButtonVertAlign(navHeight);
   setNavLinkPadding(navHeight);
@@ -24,11 +17,11 @@ function setNavElementHeights()
 
 function setNavButtonVertAlign(navHeight) 
 {
-  var btnHeight = document.getElementById("nav-button").clientHeight;
+  var btnHeight = document.querySelector("nav .button").clientHeight;
   var height = (navHeight - btnHeight) / 2;
   var newHeight = height.toString() + "px";
   
-  var list = document.getElementsByClassName("nav-button-padding");
+  var list = document.querySelectorAll(".nav-button-padding");
   
   for( var i = 0; i < list.length; i++) {
       list[i].style.height = newHeight;

@@ -17,6 +17,10 @@ nav ul {
   padding: 0;
 }
 
+nav a > .plussign {
+  font-size: 1em;
+  margin-right:1em;
+}
 
 nav > .nav-button {
   float:right;
