@@ -22,10 +22,6 @@ a {
   text-decoration: none;
 }
 
-a > .plussign {
-  font-size: 1em;
-}
-
 h1 {
   padding-bottom: 0.6em;
   margin: 0;
@@ -122,6 +118,5 @@ aside#side-buttons {
 }
 
 .tag:hover {
-  background-color:#128FDC;
-  color: #FFFFFF;
+  background-color:#DBFFFF;
 }

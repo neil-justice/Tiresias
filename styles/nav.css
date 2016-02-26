@@ -4,7 +4,7 @@ nav
   top: 0;
   left: 0;
   width: 100%;
-  height: 2em;
+  height: 2.7em;
   margin: 0;
   padding: 0;
   background-color: black;
@@ -17,6 +17,9 @@ nav ul {
   padding: 0;
 }
 
+nav a > .plussign {
+  margin-right:1em;
+}
 
 nav > .nav-button {
   float:right;
@@ -43,7 +46,7 @@ nav .button {
   margin-top: 0;
 }
 
-nav li > a{
+nav li > a {
   display: block;
   float: left;
   color: white;
