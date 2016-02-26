@@ -39,3 +39,4 @@ function setNavLinkPadding(navHeight)
       links[i].style.paddingBottom = newLinkHeight;
   }
 }
+
