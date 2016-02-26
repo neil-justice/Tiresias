@@ -1,5 +1,5 @@
 "use strict"
-addEventListener('load', start);
+document.addEventListener('load', start);
 
 function start()
 {
