@@ -1,5 +1,9 @@
 "use strict"
-document.addEventListener('load', start);
+if(document.addEventListener) {
+  document.addEventListener('load', start);
+} else if (document.attachEvent) {
+  document.attachEvent('onload', start);
+}
 
 function start()
 {
