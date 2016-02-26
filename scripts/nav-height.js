@@ -1,10 +1,10 @@
 "use strict"
 
-if (addEventListener) {
-  addEventListener('load', setNavElementHeights);
+if (window.addEventListener) {
+  window.addEventListener('load', setNavElementHeights);
 } 
-else if (attachEvent) {
-  attachEvent('onload', setNavElementHeights);
+else if (window.attachEvent) {
+  window.attachEvent('onload', setNavElementHeights);
 }
 
 function setNavElementHeights() 

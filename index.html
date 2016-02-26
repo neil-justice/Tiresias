@@ -4,12 +4,20 @@
   <head>
     <link href="./styles/main.css" rel="stylesheet" type="text/css" />
     <link href="./styles/nav.css" rel="stylesheet" type="text/css" />
+    <link media="only screen and (max-width: 480px), only screen and (max-device-width: 480px)" href="./styles/small.css" rel="stylesheet" type="text/css"/>
+     
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900,400italic' rel='stylesheet' type='text/css'/>
+    
     <script src=./scripts/nav-height.js></script>
+    <!--[if IE]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"
+      ></script>
+    <![endif]--> 
     <meta charset="UTF-8"/>
     <title>Predictions</title>
   </head>
+  
   <body>
         <nav>
           <div class="nav-link-list">
@@ -19,12 +27,17 @@
               <li><a href="#">Contact</a></li>
             </ul>
           </div>
-          <div class="nav-button">
+          <div class="nav-button-container">
             <div class="nav-button-padding"></div>
-            <div class="nav-button-container">
-              <a class="button" href="#"><span class="plussign">+</span>  NEW PREDICTION</a></div>
+            <a class="button" href="#"><span class="plussign">+</span>  NEW PREDICTION</a>
             <div class="nav-button-padding"></div>
           </div>
+          </div>
+          <div class="nav-button-container">
+            <div class="nav-button-padding"></div>
+            <a class="button login-button" href="#">LOGIN</a>
+            <div class="nav-button-padding"></div>
+          </div>          
         </nav> 
     <main>
       <section id="title">

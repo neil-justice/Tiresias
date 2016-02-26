@@ -3,12 +3,13 @@ nav
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 95%;
   height: 2.7em;
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color: #282222;
   overflow:hidden;
+  padding-right:5%;
 }
 
 nav ul {
@@ -21,20 +22,15 @@ nav a > .plussign {
   margin-right:1em;
 }
 
-nav > .nav-button {
+nav > .nav-button-container {
   float:right;
-  margin-right: 5%;
   height: 100%;
   vertical-align: middle;
   display: table;
+  padding-right:2%;
 }
 
 nav .nav-button-padding {
-  display: table-row;
-}
-
-nav .nav-button-container {
-  height: 60%;
   display: table-row;
 }
 
@@ -44,6 +40,7 @@ nav .button {
   font-family: 'Roboto';
   letter-spacing: 0.12em;
   margin-top: 0;
+  display: table-row;
 }
 
 nav li > a {
@@ -52,12 +49,17 @@ nav li > a {
   color: white;
   font-style: normal;
   text-align: center;
-  padding-left: 1.62em;
-  padding-right: 1.62em;
+  padding-left: 2%;
+  padding-right: 2%;
   left: 13%;
   position: relative;
 }
 
 nav li > a:hover {
   background-color: #128FDC;
+}
+
+nav .login-button {
+  padding-left:1em;
+  padding-right:1em;
 }

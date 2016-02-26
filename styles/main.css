@@ -33,10 +33,14 @@ h1 {
 main {
   margin-left: 15%;
   margin-right: 25%;
-  margin-top: 5%;
+  margin-top: 3em;
   display: block;
 }
 
+/* Disables blue border outline on image links in IE8/9/10: */
+a img {
+ border:none;
+}
 
 aside#side-buttons {
   float:left;
