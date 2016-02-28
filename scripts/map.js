@@ -8,6 +8,10 @@ function initMap() {
         zoom: 10
     });
 
+    var marker = createMarker(map);
+}
+
+function createMarker(map) {
     var marker = new google.maps.Marker({
         position: bristol,
         animation:google.maps.Animation.DROP
