@@ -9,7 +9,8 @@ function initMap() {
     });
 
     var marker = new google.maps.Marker({
-        position: bristol
+        position: bristol,
+        animation:google.maps.Animation.DROP
     });
     marker.setMap(map);
 }
