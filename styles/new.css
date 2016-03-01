@@ -1,0 +1,32 @@
+form div {
+  background-color: #F9F9F9;
+  color: #888888;
+  border: 1px solid #D4D4D4;
+  padding:1em;
+}
+
+.new {
+  padding-top:0.3em;
+  padding-bottom: 0.3em;
+}
+
+form label {
+  font-size: 0.9em;
+  font-weight: 600;
+  font-family: roboto;
+  padding-bottom: 0.3em;
+}
+
+.new > *  {
+  display:block;
+}
+
+.col-left {
+  width:49%;
+  float:left;
+}
+
+.col-right {
+  width:49%;
+  float:right;
+}
