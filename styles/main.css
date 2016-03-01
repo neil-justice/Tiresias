@@ -89,9 +89,6 @@ aside#side-buttons {
   padding: 0.6em;
   text-decoration: none;
   border-radius: 3px;
-}
-
-.button:link, .button:visited {
   color: #ffffff;
   display: inline-block;
   background-color: #128FDC;
@@ -127,4 +124,3 @@ aside#side-buttons {
   height: 15em;
   width: 100%;
 }
-

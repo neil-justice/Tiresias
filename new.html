@@ -1,78 +1,45 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-  lang="en-GB" xml:lang="en-GB">
-  <head>
-    <link href="./styles/main.css" rel="stylesheet" type="text/css" />
-    <link href="./styles/nav.css" rel="stylesheet" type="text/css" />
-    <link href="./styles/new.css" rel="stylesheet" type="text/css" />
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900,400italic' rel='stylesheet' type='text/css'/>
-    <script src="./scripts/nav-height.js"></script>
-    <meta charset="UTF-8"/>
-    <title>New Prediction</title>
-  </head>
-  <body>
-        <nav>
-          <div class="nav-link-list">
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-          <div class="nav-button">
-            <div class="nav-button-padding"></div>
-            <div class="nav-button-container">
-              <a class="button" href="#"><span class="plussign">+</span>  NEW PREDICTION</a></div>
-            <div class="nav-button-padding"></div>
-          </div>
-        </nav>
-    <main>
-      <h1>New Prediction</h1>
-      <div id="form-div"><form>
-        <section class="input-fields">
-          <section class="new new-title ">
-            <label>Title</label>
-            <input type="text" name="new-title"/>
-          </section>
-
-          <section class="new new-link">
-            <label>Link</label>
-            <input type="text" name="new-link"/>
-          </section>
-
-          <section class="new new-text">
-            <label>Text</label>
-            <textarea name="new-text" rows="15"></textarea>
-          </section>
-          <div class="new col-left">
-            <section class="new new-date-start">
-              <label>Date made</label>
-              <input type="date" name="new-date-start"/>
-            </section>
-
-            <section class="new new-date-end">
-              <label>Date</label>
-              <input type="date" name="new-date-end"/>
-            </section>
-          </div>
-          <div class="new col-right">
-            <section class="new new-location">
-              <label>Location</label>
-              <input type="text" name="new-location"/>
-            </section>
-
-            <section class="new new-claimant">
-              <label>Claimant</label>
-              <input type="text" name="new-claimant"/>
-            </section>
-          </div>
-        </section>
-      <section class="new new-submit">
-        <input type="submit" value="SUBMIT" class="button" id="submit"/>
+<div class="modal-dark-background">
+  <div id="form-div"><form>
+    <section class="input-fields">
+      <section class="new new-title ">
+        <label>Title</label>
+        <input type="text" name="new-title"/>
       </section>
-      </form></div>
 
-    </main>
-  </body>
-</html>
+      <section class="new new-link">
+        <label>Link</label>
+        <input type="text" name="new-link"/>
+      </section>
+
+      <section class="new new-text">
+        <label>Text</label>
+        <textarea name="new-text" rows="5"></textarea>
+      </section>
+      <div class="new col-left">
+        <section class="new new-date-start">
+          <label>Date made</label>
+          <input type="date" name="new-date-start"/>
+        </section>
+
+        <section class="new new-date-end">
+          <label>Date</label>
+          <input type="date" name="new-date-end"/>
+        </section>
+      </div>
+      <div class="new col-right">
+        <section class="new new-location">
+          <label>Location</label>
+          <input type="text" name="new-location"/>
+        </section>
+
+        <section class="new new-claimant">
+          <label>Claimant</label>
+          <input type="text" name="new-claimant"/>
+        </section>
+      </div>
+    </section>
+  <section class="new new-submit">
+    <input type="submit" value="SUBMIT" class="button" id="submit"/>
+  </section>
+  </form></div>
+</div>
