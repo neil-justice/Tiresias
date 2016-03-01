@@ -6,7 +6,9 @@
     <link href="./styles/nav.css" rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900,400italic' rel='stylesheet' type='text/css'/>
-    <script src=./scripts/nav-height.js></script>
+    <script src="./scripts/nav-height.js"></script>
+    <script src='./scripts/map.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg67S7m3vG4o51-RyozMWZ1mtmzSIS-1o"></script>
     <meta charset="UTF-8"/>
     <title>Predictions</title>
   </head>
@@ -33,12 +35,14 @@
       <aside id="side-buttons">
         <a href="#">
           <img  class="vote-button vote-up"
-                src="./images/Upvote.png"/>
+                src="./images/Upvote.png"
+                alt="Upvote button"/>
         </a>
-        <scan class="vote-number">150</scan>
+        <span class="vote-number">150</span>
         <a href="#">
           <img  class="vote-button vote-down"
-                src="./images/Downvote.png"/>
+                src="./images/Downvote.png"
+                alt="Downvote button"/>
         </a>
       </aside>
       <section id="link">
@@ -67,9 +71,7 @@
           <a class="tag" href="#">Unlikely</a>
           <a class="tag" href="#">Gaming</a>
       </section>
-      <section id="map">
-
-      </section>
+      <section id="map"></section>
       <section id="comments">
 
       </section>
