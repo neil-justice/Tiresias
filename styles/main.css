@@ -126,3 +126,9 @@ aside#side-buttons {
   color: #FFFFFF;
 }
 
+#map {
+  margin-top: 2em;
+  height: 15em;
+  width: 100%;
+}
+
