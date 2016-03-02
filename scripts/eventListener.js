@@ -1,12 +1,12 @@
 "use strict"
 
 //Handles browsers which don't understand addEventListener
-function  eventListener(eventType, func, e)
+function  eventListener(eventType, func, element)
 {
-  if (e.addEventListener) {
-    e.addEventListener(eventType, func);
+  if (element.addEventListener) {
+    element.addEventListener(eventType, func);
   }
-  else if (e.attachEvent) {
-    e.attachEvent("on" + eventType, func);
+  else if (element.attachEvent) {
+    element.attachEvent("on" + eventType, func);
   }
 }

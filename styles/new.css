@@ -1,13 +1,36 @@
+/* CSS for the New Prediction modal window */
+
 #form-div {
   background-color: #F9F9F9;
   color: #888888;
   border: 1px solid #D4D4D4;
+  border-radius: 5px;
   padding:1em;
+  padding-top: 0;
   width:40%;
   position:fixed;;
   left:30%;
   top:6%;
   z-index:7;
+}
+
+#form-div h1  {
+  font-size: 1.6em;
+  padding-bottom: 0;
+  width:90%;
+}
+
+.form-title  {
+  border-bottom: 1px solid #D4D4D4;
+  margin-bottom: 0.5em
+}
+
+.close-button {
+  display:inline;
+  position:absolute;
+  top:0;
+  right:0;
+  cursor:pointer;
 }
 
 .modal-dark-background {
