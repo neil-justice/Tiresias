@@ -9,9 +9,37 @@ var https = require('https');
 var fs = require('fs');
 var path = require('path');
 
+var express = require('express');
+var app = express();
+
+app.use(express.static(__dirname + '/public'));
+
+var string = "yo";
+app.get('/homepage', function(req, res) {
+//     // res.set('Content-Type', 'text/html');
+    res.sendFile(__dirname + '/homepage.html');
+//     //res.send(string);
+       // res.json(__dirname + '/data.json');
+        // res.sendFile(__dirname + '/data.json');
+});
+
+app.get('/homepagedata.json', function(req, res) {
+//     // res.set('Content-Type', 'text/html');
+    // res.sendFile(__dirname + '/homepage.html');
+//     //res.send(string);
+       // res.json(__dirname + '/data.json');
+        res.sendFile(__dirname + '/otherdata.json');
+});
+
+app.get('*', function(req, res) {
+    serve(req, res);
+});
+
+app.listen(8081);
+
 // The default port numbers are the standard ones [80,443] for convenience.
 // Change them to e.g. [8080,8443] to avoid privilege or clash problems.
-var ports = [8081, 4431];
+var ports = [8081, 8443];
 
 // The most common standard file extensions are supported.
 // The most common non-standard file extensions are excluded, with a message.
@@ -30,10 +58,12 @@ var types = {
     '.json' : 'application/json',
     '.pdf'  : 'application/pdf',
     '.txt'  : 'text/plain', // plain text only
+    '.ttf'  : 'application/x-font-ttf',
     '.xhtml': '#not suitable for dual delivery, use .html',
     '.htm'  : '#proprietary, non-standard, use .html',
     '.jpg'  : '#common but non-standard, use .jpeg',
     '.rar'  : '#proprietary, non-standard, platform dependent, use .zip',
+    '.docx' : '#proprietary, non-standard, platform dependent, use .pdf',
     '.doc'  : '#proprietary, non-standard, platform dependent, ' +
               'closed source, unstable over versions and installations, ' +
               'contains unsharable personal and printer preferences, use .pdf',
@@ -95,6 +125,9 @@ function fail(response, code) {
 function serve(request, response) {
     var file = request.url;
     if (ends(file,'/')) file = file + 'index.html';
+    // If there are parameters, take them off
+    var parts = file.split("?");
+    if (parts.length > 1) file = parts[0];
     file = "." + file;
     var type = findType(request, path.extname(file));
     if (! type) return fail(response, BadType);
@@ -124,7 +157,7 @@ function findType(request, extension) {
 
 // Check whether a string starts with a prefix, or ends with a suffix
 function starts(s, x) { return s.lastIndexOf(x, 0) == 0; }
-function ends(s, x) { return s.indexOf(x, s.length-x.length) == 0; }
+function ends(s, x) { return s.indexOf(x, s.length-x.length) >= 0; }
 
 // Check that a file is inside the site.  This is essential for security.
 var site = fs.realpathSync('.') + path.sep;

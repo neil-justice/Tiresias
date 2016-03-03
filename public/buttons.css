@@ -1,0 +1,19 @@
+.button {
+  padding: 0.6em;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.button:link, .button:visited {
+  color: #ffffff;
+  display: inline-block;
+  background-color: #128FDC;
+}
+
+.button:hover {
+  background-color: #1D74AB;
+}
+
+.button:active {
+  background-color: #1570A5;
+}
