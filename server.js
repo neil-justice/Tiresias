@@ -27,21 +27,7 @@ app.get('/homepage', function(req, res) {
 });
 
 app.get('/homepagedata', function(req, res) {
-    //res.sendFile(__dirname + '/json/.json');
-        res.json([
-        {
-            'title':'something else',
-            'link':'ajhdfshkjshdkjfs',
-        },
-        {
-            'title':'Title2',
-            'link':'bit.ly/43433'
-        },
-        {
-            'title':'This is a new title',
-            'link':'bit.ly/49593'
-        }
-    ]);
+    res.sendFile(__dirname + '/json/predictions.json');
 });
 
 app.listen(8081);

@@ -4,7 +4,8 @@ homepageApp.controller('homepageController', function($scope, $http) {
 
     $http.get('/homepagedata')
         .success(function(data) {
-            $scope.predictions = data;
+            var array = data['predictions'];
+            $scope.predictions = array;
         })
         .error(function(data) {
             console.log('Error: ' + data);
