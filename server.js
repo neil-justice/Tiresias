@@ -9,6 +9,8 @@ var https = require('https');
 var fs = require('fs');
 var path = require('path');
 
+
+// MongoDB setup
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/tiresias';
 var database, collection;
@@ -19,6 +21,8 @@ MongoClient.connect(url, function(err, db) {
     console.log("Connected correctly to server.");
 });
 
+
+// Express setup
 var express = require('express');
 var app = express();
 
