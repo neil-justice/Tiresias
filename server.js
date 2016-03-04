@@ -9,6 +9,16 @@ var https = require('https');
 var fs = require('fs');
 var path = require('path');
 
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://localhost:27017/tiresias';
+var database, collection;
+
+MongoClient.connect(url, function(err, db) {
+    database=db;
+    collection = database.collection('predictions');
+    console.log("Connected correctly to server.");
+});
+
 var express = require('express');
 var app = express();
 
@@ -27,7 +37,17 @@ app.get('/homepage', function(req, res) {
 });
 
 app.get('/homepagedata', function(req, res) {
-    res.sendFile(__dirname + '/json/predictions.json');
+    // res.sendFile(__dirname + '/json/predictions.json');
+
+    // Get all the documents in the collection
+    collection.find().toArray(function(err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(data); // Already an array
+        }
+    })
 });
 
 app.listen(8081);
