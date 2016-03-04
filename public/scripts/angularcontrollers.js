@@ -12,19 +12,24 @@ homepageApp.controller('homepageController', function($scope, $http) {
 
     $scope.links = [
         {
-            'name':'Home'
+            'name':'Home',
+            'link': '/homepage'
         },
         {
-            'name':'About'
+            'name':'About',
+            'link':'#'
         },
         {
-            'name':'Contact'
+            'name':'Contact',
+            'link':'#'
         },
         {
-            'name':'OTHERTITLE!'
+            'name':'OTHERTITLE!',
+            'link':'#'
         },
         {
-            'name':'Hello'
+            'name':'Hello',
+            'link':'#'
         }];
 
 });
