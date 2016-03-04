@@ -18,6 +18,11 @@ app.use(express.static(__dirname + '/public'));
 app.use(express.static("bower_components"));
 
 var string = "yo";
+
+
+app.get('/', function(req, res) {
+    res.render('index');
+});
 app.get('/homepage', function(req, res) {
 //     // res.set('Content-Type', 'text/html');
     //res.sendFile(__dirname + '/homepage.html');
