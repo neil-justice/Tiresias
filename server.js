@@ -13,30 +13,20 @@ var express = require('express');
 var app = express();
 
 app.set('view engine', 'ejs');
-
 app.use(express.static(__dirname + '/public'));
 app.use(express.static("bower_components"));
 
-var string = "yo";
 
-
+// Routes
 app.get('/', function(req, res) {
     res.render('index');
 });
+
 app.get('/homepage', function(req, res) {
-//     // res.set('Content-Type', 'text/html');
-    //res.sendFile(__dirname + '/homepage.html');
-//     //res.send(string);
-       // res.json(__dirname + '/data.json');
-        // res.sendFile(__dirname + '/data.json');
-        res.render('homepage');
+    res.render('homepage');
 });
 
 app.get('/homepagedata', function(req, res) {
-//     // res.set('Content-Type', 'text/html');
-    // res.sendFile(__dirname + '/homepage.html');
-//     //res.send(string);
-       // res.json(__dirname + '/data.json');
     //res.sendFile(__dirname + '/json/.json');
         res.json([
         {
