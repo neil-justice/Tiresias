@@ -1,0 +1,25 @@
+{
+  "name": "tiresias",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Berk M <berkmolla@gmail.com>"
+    "Neil J <nj15347@bristol.ac.uk>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/neil-justice/Tiresias",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "ejs": "^1.0.0"
+  }
+}
