@@ -24,7 +24,7 @@ nav a > .plussign {
 }
 
 nav > .nav-link-list {
-  width: 70%;
+  width: 40%;
   height:100%;
   float:left;
 }
@@ -35,6 +35,7 @@ nav > .nav-button-container {
   vertical-align: middle;
   display: table;
   padding-right:1.2%;
+  width: 10%;
 }
 
 nav .nav-button-padding {
@@ -47,7 +48,7 @@ nav .button {
   font-family: 'Roboto';
   letter-spacing: 0.12em;
   margin-top: 0;
-
+  white-space: nowrap;
 }
 
 nav li > a {
@@ -72,17 +73,14 @@ nav .login-button {
 }
 
 .login-slider-wrapper {
-  position: fixed;
-  top: 0;
-  left: -100%;
+  position:absolute;
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #282255;
+  background-color: #e65100;
   z-index: 6;
   padding-right:5%;
   padding-bottom: 6px;
-  transition: 200ms;
 }
 
 .login-slider {
