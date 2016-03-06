@@ -25,9 +25,13 @@ function setupPositioning()
   var bcoords = getCoordinates(button);
   var vOffset = bcoords.top + sliderHeight;
 
+
   // Lower the navbar and main section
   document.querySelector("nav").style.top = sliderHeight + "px";
   document.querySelector("main").style.paddingTop = sliderHeight + "px";
+
+  // Slide on-screen with CSS (if supported)
+  document.querySelector(".login-slider-wrapper").style.top = "0";
 
   // Position the cancel button next to the login button
   document.querySelector(".login-close-button").style.left = bcoords.right + "px";
@@ -54,7 +58,8 @@ function initCloseLoginSlider()
 
 function closeLoginSlider()
 {
-  removeElement("#login-modal", ".login-slider-wrapper");
+  // CSS Slide off-screen (if supported)
+  document.querySelector(".login-slider-wrapper").style.top = "-200px";
 
   // Move the navbar and main section back up to top
   document.querySelector("nav").style.top = 0;
@@ -64,4 +69,9 @@ function closeLoginSlider()
   var button = document.querySelector(".login-button");
   deleteEventListener("click", submitLoginForm, button);
   initLoginSlider();
+
+  // Finally, remove the HTML
+  setTimeout(function() {
+    removeElement("#login-modal", ".login-slider-wrapper");
+  }, 400);
 }

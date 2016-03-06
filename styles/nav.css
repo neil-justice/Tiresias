@@ -10,6 +10,7 @@ nav
   background-color: #282222;
   z-index: 5;
   padding-right:5%;
+  transition: 400ms;
 }
 
 nav ul {
@@ -72,7 +73,7 @@ nav .login-button {
 
 .login-slider-wrapper {
   position: fixed;
-  top: 0;
+  top: -200px;
   left: 0%;
   width: 100%;
   margin: 0;
@@ -80,6 +81,7 @@ nav .login-button {
   background-color: #282222;
   z-index: 6;
   padding-right:5%;
+  transition: 400ms;
 }
 
 .login-slider {

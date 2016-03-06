@@ -28,6 +28,7 @@ h1 {
   font-size: 2.7em;
   font-family: 'Roboto';
   font-weight:500;
+  transition: 400ms;
 }
 
 main {
@@ -135,4 +136,8 @@ input, textarea {
   border-width:1px;
   border:none;
   padding:0.25em;
+}
+
+input:focus, textarea:focus {
+  background-color: #8CF;
 }
