@@ -73,15 +73,16 @@ nav .login-button {
 
 .login-slider-wrapper {
   position: fixed;
-  top: -200px;
-  left: 0%;
+  top: 0;
+  left: -100%;
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #282222;
+  background-color: #282255;
   z-index: 6;
   padding-right:5%;
-  transition: 400ms;
+  padding-bottom: 6px;
+  transition: 200ms;
 }
 
 .login-slider {

@@ -31,7 +31,7 @@ function setupPositioning()
   document.querySelector("main").style.paddingTop = sliderHeight + "px";
 
   // Slide on-screen with CSS (if supported)
-  document.querySelector(".login-slider-wrapper").style.top = "0";
+  document.querySelector(".login-slider-wrapper").style.left = "0";
 
   // Position the cancel button next to the login button
   document.querySelector(".login-close-button").style.left = bcoords.right + "px";
@@ -59,7 +59,7 @@ function initCloseLoginSlider()
 function closeLoginSlider()
 {
   // CSS Slide off-screen (if supported)
-  document.querySelector(".login-slider-wrapper").style.top = "-200px";
+  document.querySelector(".login-slider-wrapper").style.left = "-100%";
 
   // Move the navbar and main section back up to top
   document.querySelector("nav").style.top = 0;
