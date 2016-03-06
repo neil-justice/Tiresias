@@ -8,7 +8,6 @@ nav
   margin: 0;
   padding: 0;
   background-color: #282222;
-  overflow:hidden;
   z-index: 5;
   padding-right:5%;
 }
@@ -23,12 +22,18 @@ nav a > .plussign {
   margin-right:1em;
 }
 
+nav > .nav-link-list {
+  width: 70%;
+  height:100%;
+  float:left;
+}
+
 nav > .nav-button-container {
-  float:right;
+  float:left;
   height: 100%;
   vertical-align: middle;
   display: table;
-  padding-right:2%;
+  padding-right:1.2%;
 }
 
 nav .nav-button-padding {
@@ -63,4 +68,47 @@ nav li > a:hover {
 nav .login-button {
   padding-left:1em;
   padding-right:1em;
+}
+
+.login-slider-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #282222;
+  z-index: 6;
+  padding-right:5%;
+}
+
+.login-slider {
+  margin-left:80%;
+  width:20%;
+}
+
+.login-slider .input > * {
+  display:block;
+}
+
+.login-slider .input {
+  margin-top: 0.8em;
+}
+
+.login-slider label {
+  color: #CCC;
+}
+
+
+.login-close-button {
+  margin-left:1em;
+  background-color: #CCC;
+  border:none;
+  font-size:0.8em;
+  color: #888;
+  position:absolute;
+}
+.login-close-button:hover {
+  background-color: #888;
+  color: #CCC;
 }

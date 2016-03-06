@@ -128,3 +128,11 @@ aside#side-buttons {
   height: 15em;
   width: 100%;
 }
+
+input, textarea {
+  background-color: #CCC;
+  border-radius: 3px;
+  border-width:1px;
+  border:none;
+  padding:0.25em;
+}
