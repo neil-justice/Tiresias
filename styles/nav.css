@@ -3,7 +3,7 @@ nav
   position: fixed;
   top: 0;
   left: 0;
-  width: 95%;
+  width: 100%;
   height: 2.7em;
   margin: 0;
   padding: 0;
@@ -24,7 +24,7 @@ nav a > .plussign {
 }
 
 nav > .nav-link-list {
-  width: 40%;
+  width: 70%;
   height:100%;
   float:left;
 }
@@ -79,7 +79,6 @@ nav .login-button {
   padding: 0;
   background-color: #e65100;
   z-index: 6;
-  padding-right:5%;
   padding-bottom: 6px;
 }
 
