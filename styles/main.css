@@ -35,6 +35,7 @@ main {
   margin-right: 25%;
   margin-top: 4em;
   display: block;
+  transition: 400ms;
 }
 
 /* Disables blue border outline on image links in IE8/9/10: */
@@ -127,4 +128,16 @@ aside#side-buttons {
   margin-top: 2em;
   height: 15em;
   width: 100%;
+}
+
+input, textarea {
+  background-color: #CCC;
+  border-radius: 3px;
+  border-width:1px;
+  border:none;
+  padding:0.25em;
+}
+
+input:focus, textarea:focus {
+  background-color: #DDE;
 }
