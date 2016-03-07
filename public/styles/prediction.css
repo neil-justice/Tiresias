@@ -46,23 +46,6 @@ aside#side-buttons {
   background-color: rgb(164,215,190);
 }
 
-.button {
-  padding: 0.6em;
-  text-decoration: none;
-  border-radius: 3px;
-  color: #ffffff;
-  display: inline-block;
-  background-color: #128FDC;
-}
-
-.button:hover {
-  background-color: #1D74AB;
-}
-
-.button:active {
-  background-color: #1570A5;
-}
-
 .tag {
   padding:0.2em 0.6em;
   margin-right:0.3em;

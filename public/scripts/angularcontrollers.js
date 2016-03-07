@@ -12,26 +12,26 @@ homepageApp.controller('homepageController', function($scope, $http) {
             console.log('Error: ' + data);
         });
 
-    $scope.links = [
-        {
-            'name':'Home',
-            'link': '/homepage'
-        },
-        {
-            'name':'About',
-            'link':'#'
-        },
-        {
-            'name':'Contact',
-            'link':'#'
-        },
-        {
-            'name':'OTHERTITLE!',
-            'link':'#'
-        },
-        {
-            'name':'Hello',
-            'link':'#'
-        }];
-
-});
+//     $scope.links = [
+//         {
+//             'name':'Home',
+//             'link': '/homepage'
+//         },
+//         {
+//             'name':'About',
+//             'link':'#'
+//         },
+//         {
+//             'name':'Contact',
+//             'link':'#'
+//         },
+//         {
+//             'name':'OTHERTITLE!',
+//             'link':'#'
+//         },
+//         {
+//             'name':'Hello',
+//             'link':'#'
+//         }];
+//
+    });
