@@ -14,7 +14,8 @@
     <h3>Prediction Page</h3>
     <p>The biggest chunk of our effort has gone towards making the prediction page. This page will include information about a single prediction, including its title, description, a link to the source, a map showing the area(s) affected, a timer/progress bar showing the time left, tags, comments, stats, and it will give the users the ability to upvote/downvote a prediction. <br/>
     Currently, we have all the features with the exception of the comments and the stats, complete with CSS styling and a script to set the navigation bar item positioning (in case we ever need to change it).<br/>
-    Our 'New Prediction' button also uses JavaScript to inject a modal window containing a form into the page. This form doesn't submit data yet.</p>
+    Our 'New Prediction' button also uses JavaScript to inject a modal window containing a form into the page. This form doesn't submit data yet.<br/>
+    The login button injects a login form which slides down at the top of the page.  Clicking the button again submits the username and password.</p>
     <h3>Homepage</h3>
     <p>We've also started work on a home page, which for now will be a list of 10 or so predictions, ordered by most recent (though it could have other options). We thought that this would be a good place to learn and test Angular, and make use of its templating, loop constructs and its ability to dynamically update the page, giving our web page a modern feel while also making it easy to provide such interactivity.</p>
     <p>We have made a start on the server-side as part of the experiments with the home page, and we have managed to get Angular communicating with Express, which then accesses a MongoDB database in order to fetch a dummy list of predictions, and display them on the homepage. </p>
