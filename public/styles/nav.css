@@ -7,9 +7,10 @@ nav
   height: 2.7em;
   margin: 0;
   padding: 0;
-  background-color: black;
-  overflow:hidden;
-  z-index: 1;
+  background-color: #282222;
+  z-index: 5;
+  padding-right:5%;
+  transition: 400ms;
 }
 
 nav ul {
@@ -22,20 +23,22 @@ nav a > .plussign {
   margin-right:1em;
 }
 
-nav > .nav-button {
-  float:right;
-  margin-right: 5%;
+nav > .nav-link-list {
+  width: 70%;
+  height:100%;
+  float:left;
+}
+
+nav > .nav-button-container {
+  float:left;
   height: 100%;
   vertical-align: middle;
   display: table;
+  padding-right:1.2%;
+  width: 10%;
 }
 
 nav .nav-button-padding {
-  display: table-row;
-}
-
-nav .nav-button-container {
-  height: 60%;
   display: table-row;
 }
 
@@ -45,6 +48,7 @@ nav .button {
   font-family: 'Roboto';
   letter-spacing: 0.12em;
   margin-top: 0;
+  white-space: nowrap;
 }
 
 nav li > a {
@@ -53,12 +57,62 @@ nav li > a {
   color: white;
   font-style: normal;
   text-align: center;
-  padding-left: 1.62em;
-  padding-right: 1.62em;
+  padding-left: 2%;
+  padding-right: 2%;
   left: 13%;
   position: relative;
 }
 
 nav li > a:hover {
   background-color: #128FDC;
+}
+
+nav .login-button {
+  padding-left:1em;
+  padding-right:1em;
+}
+
+.login-slider-wrapper {
+  position:absolute;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #2c3e50;
+  z-index: 6;
+  padding-bottom: 6px;
+}
+
+.login-slider {
+  margin-left:80%;
+  width:20%;
+}
+
+.login-slider .input > * {
+  display:block;
+}
+
+.login-slider .input {
+  margin-top: 0.8em;
+}
+
+.login-slider label {
+  color: #CCC;
+}
+
+
+.login-close-button {
+  margin-left:1em;
+  background-color: #CCC;
+  border:none;
+  font-size:0.8em;
+  color: #888;
+  position:absolute;
+}
+.login-close-button:hover {
+  background-color: #888;
+  color: #CCC;
+}
+
+nav input:focus, nav textarea:focus {
+  background-color: #ffff8d;
 }

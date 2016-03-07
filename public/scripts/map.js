@@ -1,4 +1,5 @@
-window.addEventListener('load', initMap);
+"use strict"
+eventListener('load', initMap, window);
 
 var map;
 var bristol = {lat: 51.4500, lng: -2.5833};

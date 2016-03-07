@@ -1,10 +1,3 @@
-h1 {
-  padding-bottom: 0.6em;
-  margin: 0;
-  font-size: 2.7em;
-  font-family: 'Roboto';
-  font-weight:500;
-}
 
 aside#side-buttons {
   float:left;
@@ -57,9 +50,6 @@ aside#side-buttons {
   padding: 0.6em;
   text-decoration: none;
   border-radius: 3px;
-}
-
-.button:link, .button:visited {
   color: #ffffff;
   display: inline-block;
   background-color: #128FDC;
@@ -96,3 +86,14 @@ aside#side-buttons {
   width: 100%;
 }
 
+input, textarea {
+  background-color: #CCC;
+  border-radius: 3px;
+  border-width:1px;
+  border:none;
+  padding:0.25em;
+}
+
+input:focus, textarea:focus {
+  background-color: #DDE;
+}
