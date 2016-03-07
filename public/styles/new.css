@@ -1,0 +1,103 @@
+/* CSS for the New Prediction modal window */
+
+#form-div {
+  background-color: #F9F9F9;
+  color: #888888;
+  border: 1px solid #D4D4D4;
+  border-radius: 5px;
+  padding:1em;
+  padding-top: 0;
+  width:40%;
+  position:fixed;
+  left:30%;
+  top:6%;
+  z-index:7;
+}
+
+#form-div h1  {
+  font-size: 1.6em;
+  padding-bottom: 0;
+  width:90%;
+}
+
+.form-title  {
+  border-bottom: 1px solid #D4D4D4;
+  margin-bottom: 0.5em
+}
+
+.close-button {
+  display:inline;
+  position:absolute;
+  top:0;
+  right:0;
+  cursor:pointer;
+}
+
+.modal-dark-background {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#000000;
+  z-index:6;
+  background-color: rgba(0,0,0,0.7);
+}
+
+.input-fields {
+  overflow:hidden;
+}
+
+.new {
+  padding-top:0.3em;
+  padding-bottom: 0.3em;
+}
+
+form label {
+  font-size: 0.9em;
+  font-weight: 600;
+  font-family: roboto;
+  padding-bottom: 0.3em;
+}
+
+.new > *  {
+  display:block;
+}
+
+.col-left {
+  width:49%;
+  float:left;
+}
+
+.col-right {
+  width:49%;
+  float:right;
+}
+
+.new input {
+  width:97%;
+}
+
+textarea, .new-title input, .new-link input {
+  width:98.5%;
+}
+
+.new-submit {
+  margin-top:2em;
+}
+
+#submit {
+  width:auto;
+  border:1px solid #3e9cbf;
+  cursor:pointer;
+  font-family: roboto;
+  font-weight: 500;
+  padding-left:15%;
+  padding-right:15%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#submit:hover {
+  background-color: #1D74AB;
+}
