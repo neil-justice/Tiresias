@@ -24,7 +24,7 @@
     <p>We have made a start on the server-side as part of the experiments with the home page, and we have managed to get Angular communicating with Express, which then accesses a MongoDB database in order to fetch a dummy list of predictions, and display them on the homepage. </p>
     <p>Unfortunately in order to use express we have had to replace server.js with a barebones version which is currently lacking any security features.</p>
     <h3>Usage</h3>
-    <p>In order to run, mongodb and npm must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json.  To run, the mongo server ("mongod") must be running, as well as the node server.<br/></p>
+    <p>In order to run, mongodb and npm must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json.  To run, the mongo server ("mongod") must be running, as well as the node server.<br/>  To populate the database with our dummy data, the command  "mongorestore --collection predictions --db tiresias mongobackup/tiresias/predictions.bson" can be run.</p>
     </main>
 </body>
 </html>
