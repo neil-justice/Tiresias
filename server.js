@@ -15,6 +15,8 @@ var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/tiresias';
 var database, collection;
 
+ObjectID = require('mongodb').ObjectID;
+
 MongoClient.connect(url, function(err, db) {
     database=db;
     collection = database.collection('predictions');
@@ -25,35 +27,49 @@ MongoClient.connect(url, function(err, db) {
 // Express setup
 var express = require('express');
 var app = express();
+var router = express.Router();
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(express.static("bower_components"));
 
-
 // Routes
-app.get('/', function(req, res) {
+router.route('/predictions').get(function(req, res, next) {
+
+        // Get all the documents in the collection
+        collection.find().toArray(function(err, data) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                res.send(data); // Already an array
+            }
+        });
+    });
+
+router.route('/predictions/:p_id').get(function(req, res, next) {
     res.render('index');
 });
 
-app.get('/homepage', function(req, res) {
+router.route('/api/predictions/:pid')
+    .get(function(req, res) {
+        console.log('params received ' + '' + req.params['pid'])
+        collection.find({"_id": new ObjectID(req.params['pid'])}).toArray(function(err, data) {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                console.log(data);
+               res.send(data[0]);
+            }
+        });
+    });
+
+router.route('/homepage').get(function(req, res) {
     res.render('homepage');
 });
 
-app.get('/homepagedata', function(req, res) {
-    // res.sendFile(__dirname + '/json/predictions.json');
-
-    // Get all the documents in the collection
-    collection.find().toArray(function(err, data) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(data); // Already an array
-        }
-    })
-});
-
+app.use('/', router);
 app.listen(8081);
 
 // // The default port numbers are the standard ones [80,443] for convenience.
