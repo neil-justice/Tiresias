@@ -17,11 +17,14 @@
     Currently, we have all the features with the exception of the comments and the stats, complete with CSS styling and a script to set the navigation bar item positioning (in case we ever need to change it).<br/>
     Our 'New Prediction' button also uses JavaScript to inject a modal window containing a form into the page. This form doesn't submit data yet.<br/>
     The login button injects a login form which slides down at the top of the page.  Clicking the button again submits the username and password.<br/>
-    We have also implemented a variety of useful JavaScript functions for common tasks, such as inserting and deleting elements, getting element coordinates, and adding and removing event listeners.</br>
+    We have also implemented a variety of useful JavaScript functions for common tasks, such as inserting and deleting elements, getting element coordinates, and adding and removing event listeners.<br/>
     Our HTML and CSS is IE8 compatible, but not all our JavaScript scripts are yet.</p>
     <h3>Homepage</h3>
     <p>We've also started work on a home page, which for now will be a list of 10 or so predictions, ordered by most recent (though it could have other options). We thought that this would be a good place to learn and test Angular, and make use of its templating, loop constructs and its ability to dynamically update the page, giving our web page a modern feel while also making it easy to provide such interactivity.</p>
     <p>We have made a start on the server-side as part of the experiments with the home page, and we have managed to get Angular communicating with Express, which then accesses a MongoDB database in order to fetch a dummy list of predictions, and display them on the homepage. </p>
+    <p>Unfortunately in order to use express we have had to replace server.js with a barebones version which is currently lacking any security features.</p>
+    <h3>Usage</h3>
+    <p>In order to run, mongodb and npm must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json.  To run, the mongo server ("mongod") must be running, as well as the node server.<br/></p>
     </main>
 </body>
 </html>
