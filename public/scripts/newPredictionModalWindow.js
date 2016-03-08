@@ -13,7 +13,7 @@ function initNewPredictionButton()
 
 function newPredictionWindow()
 {
-  insertElement("new.html", "#new-modal");
+  insertElement("/new.html", "#new-modal");
   initCloseModalWindowButton();
 }
 

@@ -14,7 +14,7 @@ function initLoginSlider()
 // Function attached to login button when slider is hidden
 function loginSlider()
 {
-  insertElement("login.html", "#login-modal");
+  insertElement("/login.html", "#login-modal");
   initCloseLoginSlider();
   setupPositioning();
 }
