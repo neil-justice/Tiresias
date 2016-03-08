@@ -25,7 +25,7 @@
     <p>We have also implemented fetching of data from the MongoDB database for individual predictions, and we are injecting that data into the prediction page template using Angular, and these can be accessed by following links from the homepage.</p>
     <p>Unfortunately in order to use express we have had to replace server.js with a barebones version which is currently lacking any security features.</p>
     <h3>Usage</h3>
-    <p>In order to run, mongodb and npm must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json.  To run, the mongo server ("mongod") must be running, as well as the node server.<br/>  To populate the database with our dummy data, the command  "mongorestore --collection predictions --db tiresias mongobackup/tiresias/predictions.bson" can be run.</p>
+    <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json.  To run, the mongo server ("mongod") must be running, as well as the node server.<br/>  To populate the database with our dummy data, the command  "mongorestore --collection predictions --db tiresias mongobackup/tiresias/predictions.bson" can be run.</p>
     </main>
 </body>
 </html>
