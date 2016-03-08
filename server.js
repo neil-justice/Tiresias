@@ -47,7 +47,7 @@ router.route('/predictions').get(function(req, res, next) {
         });
     });
 
-router.route('/predictions/:p_id').get(function(req, res, next) {
+router.route('/predictions/:pid').get(function(req, res, next) {
     res.render('index');
 });
 

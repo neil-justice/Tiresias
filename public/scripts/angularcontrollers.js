@@ -1,7 +1,15 @@
 var homepageApp = angular.module('homepageApp', ['ngRoute', 'ngResource']);
 
+homepageApp.config(function ($locationProvider) {
+
+        // enable HTML5mode to disable hashbang urls
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false});
+    });
+
 homepageApp.factory('Prediction', function($resource) {
-     return $resource("/api/predictions/:pid", {pid: '@_id'});
+     return $resource("/api/predictions/:pid");
  });
 
 homepageApp.controller('homepageController', function($scope, $http) {
@@ -15,10 +23,11 @@ homepageApp.controller('homepageController', function($scope, $http) {
         });
 });
 
-homepageApp.controller('predictionsController', function($scope, Prediction) {
-
+homepageApp.controller('predictionsController', ['$scope', '$location', 'Prediction', function($scope, $location, Prediction) {
  
-    var entry = Prediction.get({pid: '56d9ec10af5da8a69d144ed4'}, function() {
+    var pId = $location.path().split("/")[2]||"Unknown";
+    console.log(pId);
+    var entry = Prediction.get({ pid: pId }, function() {
         $scope.title = entry['title'];
         $scope.link = entry['link'];
     });
@@ -38,4 +47,4 @@ homepageApp.controller('predictionsController', function($scope, Prediction) {
     // });
 
 
-});
+}]);
