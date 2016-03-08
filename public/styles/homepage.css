@@ -1,6 +1,12 @@
-#prediction {
+.prediction {
     margin: 1em 0;
-    padding: 0 0 5em 0;
-    border-bottom: thin solid #000000;
+    padding: 0.3em 0.3em 2em 0.3em;
+    border: none;
+    border-radius: 3px;
     list-style-type: none;
+    background-color: #DEF;
+}
+
+.prediction a, .prediction a:visited {
+  color: #128FDC;
 }
