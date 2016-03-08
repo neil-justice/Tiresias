@@ -1,13 +1,14 @@
-"use strict"
-
+"use strict";
 eventListener('load', initLoginSlider, window);
 
 // Setup the login button
 function initLoginSlider()
 {
   var button = document.querySelector(".login-button");
+  var insert = document.querySelector("#login-modal");
   if (button  != null) {
     eventListener("click", loginSlider, button);
+    observeMutation(postSliderLoading,insert);
   }
 }
 
@@ -15,8 +16,17 @@ function initLoginSlider()
 function loginSlider()
 {
   insertElement("/login.html", "#login-modal");
-  initCloseLoginSlider();
-  setupPositioning();
+}
+
+// Activated after the slider has loaded, allowing for asynchronous AJAX
+// The if statement stops it trying to act when nodes are removed
+function postSliderLoading()
+{
+  if (document.querySelector(".login-slider-wrapper"))
+  {
+    setupPositioning();
+    initCloseLoginSlider();
+  }
 }
 
 function setupPositioning()
@@ -62,9 +72,6 @@ function initCloseLoginSlider()
 // Function attached to the close button
 function closeLoginSlider()
 {
-  // CSS Slide off-screen (if supported)
-  // document.querySelector(".login-slider-wrapper").style.top = "-100%";
-
   // Move the navbar and main section back up to top
   document.querySelector("nav").style.top = 0;
   document.querySelector("main").style.paddingTop = 0;
