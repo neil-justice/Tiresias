@@ -42,7 +42,7 @@ function setupPositioning()
   document.querySelector("main").style.paddingTop = sliderHeight + "px";
 
   // Set login slider position
-  document.querySelector(".login-slider-wrapper").style.top = -sliderHeight + "px";
+  document.querySelector(".login-slider-wrapper").style.top = -sliderHeight +1 + "px";
   document.querySelector(".login-slider").style.marginLeft = bcoords.left + "px";
   document.querySelector(".login-slider").style.width = (w - bcoords.left - 10) + "px";
 
