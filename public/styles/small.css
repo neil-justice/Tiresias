@@ -6,3 +6,15 @@ main {
   margin-left: 1%;
   margin-right: 1%;
 }
+
+av > .nav-button-container {
+  right:55%;
+}
+
+nav > .nav-button-container:last-child {
+  right:8%;
+}
+
+nav .login-button {
+  margin-left: 3em;
+}

@@ -35,6 +35,7 @@ function setupPositioning()
   var button = document.querySelector(".login-button")
   var bcoords = getCoordinates(button);
   var vOffset = bcoords.top + sliderHeight;
+  var w = window.innerWidth;
 
   // Lower the navbar and main section
   document.querySelector("nav").style.top = sliderHeight + "px";
@@ -43,6 +44,7 @@ function setupPositioning()
   // Set login slider position
   document.querySelector(".login-slider-wrapper").style.top = -sliderHeight + "px";
   document.querySelector(".login-slider").style.marginLeft = bcoords.left + "px";
+  document.querySelector(".login-slider").style.width = (w - bcoords.left - 10) + "px";
 
   // Position the cancel button next to the login button
   document.querySelector(".login-close-button").style.left = bcoords.right + "px";

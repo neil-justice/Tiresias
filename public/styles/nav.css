@@ -36,6 +36,13 @@ nav > .nav-button-container {
   display: table;
   padding-right:1.2%;
   width: 10%;
+  position: absolute;
+  right:15.5%;
+  padding-right: 6em;
+}
+
+nav > .nav-button-container:last-child {
+  right:5%;
 }
 
 nav .nav-button-padding {
@@ -84,7 +91,7 @@ nav .login-button {
 
 .login-slider {
   margin-left:80%;
-  width:20%;
+
 }
 
 .login-slider .input > * {
@@ -111,6 +118,10 @@ nav .login-button {
 .login-close-button:hover {
   background-color: #888;
   color: #CCC;
+}
+
+nav input, nav textarea {
+  width:90%;
 }
 
 nav input:focus, nav textarea:focus {
