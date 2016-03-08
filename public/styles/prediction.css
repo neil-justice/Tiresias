@@ -81,3 +81,8 @@ input:focus, textarea:focus {
   background-color: #DDE;
   outline: none;
 }
+
+#link {
+  max-width: 80%;
+  display: inline-block;
+}
