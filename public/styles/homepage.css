@@ -7,6 +7,10 @@
     background-color: #DEF;
 }
 
+.prediction:hover {
+  background-color: #C0E5F5;
+}
+
 .prediction a, .prediction a:visited {
   color: #128FDC;
 }
