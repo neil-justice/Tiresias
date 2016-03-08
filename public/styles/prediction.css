@@ -79,4 +79,5 @@ input, textarea {
 
 input:focus, textarea:focus {
   background-color: #DDE;
+  outline: none;
 }

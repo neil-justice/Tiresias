@@ -12,7 +12,7 @@ function insertElement(url, target)
     }
   };
 
-  x.open("GET", url, false);
+  x.open("GET", url, true);
   x.send(null);
 }
 
