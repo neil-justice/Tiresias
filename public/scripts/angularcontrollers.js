@@ -23,5 +23,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', 'Predictio
     var entry = Prediction.get({ pid: pId }, function() {
         $scope.title = entry['title'];
         $scope.link = entry['link'];
+        $scope.description = entry['description'];
+        $scope.tags = entry['tags'];
     });
 }]);
