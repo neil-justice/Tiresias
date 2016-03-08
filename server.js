@@ -65,7 +65,7 @@ router.route('/api/predictions/:pid')
         });
     });
 
-router.route('/homepage').get(function(req, res) {
+router.route('/').get(function(req, res) {
     res.render('homepage');
 });
 
