@@ -1,12 +1,12 @@
 var homepageApp = angular.module('homepageApp', ['ngRoute', 'ngResource']);
 
-homepageApp.config(function ($locationProvider) {
+// homepageApp.config(function ($locationProvider) {
 
-        // enable HTML5mode to disable hashbang urls
-        $locationProvider.html5Mode({
-            enabled: true,
-            requireBase: false});
-    });
+//     $locationProvider.html5Mode({
+//             enabled: true,
+//             requireBase: false
+//     });
+// });
 
 homepageApp.factory('Prediction', function($resource) {
      return $resource("/api/predictions/:pid");
@@ -23,9 +23,9 @@ homepageApp.controller('homepageController', function($scope, $http) {
         });
 });
 
-homepageApp.controller('predictionsController', ['$scope', '$location', 'Prediction', function($scope, $location, Prediction) {
+homepageApp.controller('predictionsController', ['$scope', '$window', 'Prediction', function($scope, $window, Prediction) {
  
-    var pId = $location.path().split("/")[2]||"Unknown";
+    var pId = $window.location.pathname.split("/")[2]||"Unknown";
     console.log(pId);
     var entry = Prediction.get({ pid: pId }, function() {
         $scope.title = entry['title'];
