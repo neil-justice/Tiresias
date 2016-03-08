@@ -1,9 +1,5 @@
-{
-    "predictions": [
-        {"title": "title1", "link": "adjfmskdfjmskdjfmd"},
-        {"title": "something else", "link": "bit.ly/20920"},
-        {"title": "another thing", "link": "bit.ly/349834"},
-        {"title": "something else", "link": "bit.ly/39483"},
-        {"title": "something else", "link": "http://link.com"}
-    ]
-}
+{"_id":{"$oid":"56dee81824c4865e4e5424e9"},"title":"title1","link":"http://google.com"}
+{"_id":{"$oid":"56dee81824c4865e4e5424ea"},"title":"title5","link":"http://link.com"}
+{"_id":{"$oid":"56dee81824c4865e4e5424eb"},"title":"something else","link":"http://someotherlink.com"}
+{"_id":{"$oid":"56dee81824c4865e4e5424ec"},"title":"another thing","link":"http://link3.com"}
+{"_id":{"$oid":"56dee81824c4865e4e5424ed"},"title":"title4","link":"http://link2.com"}
