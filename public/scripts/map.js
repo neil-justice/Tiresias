@@ -1,10 +1,7 @@
 "use strict"
 
-var map;
-var location;
-
 function initMap(latlng) {
-    map = new google.maps.Map(document.querySelector('#map'), {
+    var map = new google.maps.Map(document.querySelector('#map'), {
         center: latlng,
         zoom: 10
     });
