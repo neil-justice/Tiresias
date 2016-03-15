@@ -1,21 +1,23 @@
 "use strict"
-eventListener('load', initMap, window);
 
-var map;
-var bristol = {lat: 51.4500, lng: -2.5833};
-function initMap() {
-    map = new google.maps.Map(document.querySelector('#map'), {
-        center: bristol,
+function initMap(latlng) {
+    var map = new google.maps.Map(document.querySelector('#map'), {
+        center: latlng,
         zoom: 10
     });
 
-    var marker = createMarker(map);
+    return map;
 }
 
-function createMarker(map) {
+function createMarker(map, location) {
     var marker = new google.maps.Marker({
-        position: bristol,
+        position:location,
         animation:google.maps.Animation.DROP
     });
     marker.setMap(map);
+}
+
+function setLocation (lat, lng) {
+    location = {lat: lat, lng: lng};
+    var marker = createMarker(map, location);
 }
