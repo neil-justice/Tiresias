@@ -75,8 +75,6 @@ app.use('/', router);
 app.listen(8081);
 
 function sendAsXHTML(request, res) {
-    if (path.extname(request.url) == '.css') return;
-    var accepts = request.headers['accept'].split(",");
     if (request.accepts('xhtml') ) {
         res.header('Content-Type', 'application/xhtml+xml'); 
     }
