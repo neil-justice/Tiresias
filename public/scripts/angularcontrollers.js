@@ -6,10 +6,16 @@ homepageApp.factory('Prediction', function($resource) {
 
 homepageApp.controller('homepageController', function($scope, $http) {
 
-    $http.get('/predictions')
-        .success(function(data) {
+    $http({method: 'GET', 
+        url:'/predictions',
+        headers: {
+            accept:'application/json'
+        }
+        })
+        .then(function successCallback(res) {
+
             // response is an array of documents
-            $scope.predictions = data;
+            $scope.predictions = res.data;
 
             // Turn ISODate back into normal date object ready to display
             angular.forEach($scope.predictions, function(prediction) {
@@ -17,8 +23,8 @@ homepageApp.controller('homepageController', function($scope, $http) {
                     prediction.date = new Date(prediction.date).toLocaleString();
                 }
             });
-        }).error(function errorCallback(data) {
-            console.log('Error: ' + data);
+        }, function errorCallback(res) {
+            console.log('Error: ' + res);
         });
 });
 
@@ -39,5 +45,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', 'Predictio
         var latlng = new google.maps.LatLng(lat, lng);
         $scope.map = initMap(latlng);
         createMarker($scope.map, location);
+    }, function error(res) {
+        $window.location.href = '/';
     });
 }]);
