@@ -25,5 +25,13 @@ homepageApp.controller('predictionsController', ['$scope', '$window', 'Predictio
         $scope.link = entry['link'];
         $scope.description = entry['description'];
         $scope.tags = entry['tags'];
+
+        // Get location and create map/marker
+        var location = entry['location'];
+        var lat = location['lat'];
+        var lng = location['lng'];
+        var latlng = new google.maps.LatLng(lat, lng);
+        $scope.map = initMap(latlng);
+        createMarker($scope.map, location);
     });
 }]);
