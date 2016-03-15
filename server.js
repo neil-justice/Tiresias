@@ -37,30 +37,42 @@ app.use(express.static("bower_components"));
 router.route('/predictions').get(function(req, res, next) {
 
         // Get all the documents in the collection
-        collection.find().toArray(function(err, data) {
-            if (err) {
-                console.log(err);
-            }
-            else {
-                res.send(data); // Already an array
-            }
-        });
+    collection.find().toArray(function(err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.type('json');
+            res.send(data); // Already an array
+        }
     });
+});
 
 router.route('/predictions/:pid').get(function(req, res, next) {
+    //res.setHeader('Content-Type', 'application/xhtml+xml');
     res.render('index');
 });
 
 router.route('/api/predictions/:pid')
     .get(function(req, res) {
-        console.log('params received ' + '' + req.params['pid'])
+
+        // Invalid pid length
+        if (req.params['pid'].length != 24) {
+            res.sendStatus(404);
+        }
+
         collection.find({"_id": new ObjectID(req.params['pid'])}).toArray(function(err, data) {
             if (err) {
                 console.log(err);
             }
             else {
-                console.log(data);
-               res.send(data[0]);
+             
+                // Returned document is empty
+                if (!data[0]) {
+                    res.sendStatus(404);
+                }
+                else
+                    res.send(data[0]);
             }
         });
     });
