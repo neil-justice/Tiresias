@@ -8,7 +8,6 @@ homepageApp.controller('homepageController', function($scope, $http) {
 
     $http.get('/predictions')
         .success(function(data) {
-            console.log(data);
             // response is an array of documents
             $scope.predictions = data;
         }).error(function errorCallback(data) {
