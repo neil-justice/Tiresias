@@ -86,3 +86,7 @@ input:focus, textarea:focus {
   max-width: 80%;
   display: inline-block;
 }
+
+#timer {
+  width:100%;
+}
