@@ -23,6 +23,9 @@ main {
   transition: 400ms;
 }
 
+ul {
+  list-style: none;
+}
 
 
 h1 {

@@ -32,5 +32,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', 'Predictio
         var latlng = new google.maps.LatLng(lat, lng);
         $scope.map = initMap(latlng);
         createMarker($scope.map, location);
+
+        $scope.comments = entry['comments'];
     });
 }]);

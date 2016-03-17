@@ -86,3 +86,37 @@ input:focus, textarea:focus {
   max-width: 80%;
   display: inline-block;
 }
+
+#comments {
+  margin-top: 5em;
+  margin-left: 0;
+}
+
+.comment {
+  padding: 1em 0.5em;
+  margin: 1em 0;
+  background-color: #DEF;
+}
+.comments-list {
+  -webkit-padding-start: 0px;
+}
+.comment-image {
+  width: 10%;
+  height: 100%;
+  float: left;
+  display: inline;
+}
+
+.comment-text {
+  display: inline;
+  width: 90%;
+  height: 100%;
+}
+
+div.comment-image {
+   content: url('/images/avatar.png');
+   height: 90%;
+   width: 3.5em;
+   padding-right: 1.7em;
+   padding-left: 0.4em;
+}​

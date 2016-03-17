@@ -48,7 +48,7 @@ router.route('/predictions').get(function(req, res, next) {
     });
 
 router.route('/predictions/:pid').get(function(req, res, next) {
-    res.render('index');
+    res.render('prediction');
 });
 
 router.route('/api/predictions/:pid')
@@ -66,7 +66,7 @@ router.route('/api/predictions/:pid')
     });
 
 router.route('/').get(function(req, res) {
-    res.render('homepage');
+    res.render('index');
 });
 
 app.use('/', router);
