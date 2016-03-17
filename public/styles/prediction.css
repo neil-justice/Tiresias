@@ -93,30 +93,45 @@ input:focus, textarea:focus {
 }
 
 .comment {
-  padding: 1em 0.5em;
-  margin: 1em 0;
-  background-color: #DEF;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  margin-left: 1em;
+  background-color: #EEE;
+  border: 1px solid #AAA;
+  border-radius: 3px;
 }
 .comments-list {
   -webkit-padding-start: 0px;
 }
 .comment-image {
-  width: 10%;
-  height: 100%;
+  height: 2em;
   float: left;
   display: inline;
+}
+
+.comment-user {
+  margin-bottom: 0.5em;
+  background-color: #CCC;
+  color: #777;
+  border-bottom: 1px solid #AAA;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding-left: 1em;
+}
+
+.comment-body {
+  padding-left: 1em;
+  color: #555;
+}
+
+.comment-image img {
+  width: 3em;
+  margin-left: -4em;
 }
 
 .comment-text {
   display: inline;
   width: 90%;
   height: 100%;
+  font-size:0.8em;
 }
-
-div.comment-image {
-   content: url('/images/avatar.png');
-   height: 90%;
-   width: 3.5em;
-   padding-right: 1.7em;
-   padding-left: 0.4em;
-}​

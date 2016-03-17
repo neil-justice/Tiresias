@@ -97,12 +97,11 @@
       <ul class="comments-list">
         <li class="comment" ng-repeat="comment in comments">
           <div class="comment-image" >
-  
+            <img src="/images/avatar.png" />
           </div>
           <div class="comment-text">
-            <span>{{comment.username}}</span> <br/>
-            <span class="comment-body">{{comment.body}}</span> <br/>
-            <span>sdsds</span>
+            <div class="comment-user">{{comment.username}}</div>
+            <div class="comment-body">{{comment.body}}</div>
           </div>
         </li>
       </ul>
