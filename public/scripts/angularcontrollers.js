@@ -10,6 +10,7 @@ homepageApp.controller('homepageController', function($scope, $http) {
         .success(function(data) {
             // response is an array of documents
             $scope.predictions = data;
+            console.log($scope.predictions.tags);
         }).error(function errorCallback(data) {
             console.log('Error: ' + data);
         });
