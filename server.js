@@ -48,6 +48,7 @@ router.route('/predictions').get(function(req, res, next) {
     });
 
 router.route('/predictions/:pid').get(function(req, res, next) {
+    sendAsXHTML(req, res);
     res.render('index');
 });
 
@@ -66,11 +67,21 @@ router.route('/api/predictions/:pid')
     });
 
 router.route('/').get(function(req, res) {
+    sendAsXHTML(req, res);
     res.render('homepage');
 });
 
 app.use('/', router);
 app.listen(8081);
+
+function sendAsXHTML(request, res) {
+    if (request.accepts('xhtml') ) {
+        res.header('Content-Type', 'application/xhtml+xml'); 
+    }
+    else {
+        res.header('Content-Type', 'text/html');
+    }
+}
 
 // // The default port numbers are the standard ones [80,443] for convenience.
 // // Change them to e.g. [8080,8443] to avoid privilege or clash problems.
