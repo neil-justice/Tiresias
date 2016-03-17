@@ -57,8 +57,19 @@
       <section>
         <ul>
           <li class="prediction" ng-repeat="prediction in predictions">
-            <!-- <img src="https://s-media-cache-ak0.pinimg.com/originals/65/fe/9c/65fe9c5ebb76d9dbc05c4cc516e90215.jpg" height="40px" width="40px" align="left" /> -->
-            <a ng-href="/predictions/{{prediction._id}}">{{prediction.title}}</a>
+          <div class="prediction-image">
+          </div>
+            <!-- <img src="https://s-media-cache-ak0.pinimg.com/originals/65/fe/9c/<65fe9c5ebb76d9dbc05c4cc516e90215></65fe9c5ebb76d9dbc05c4cc516e90215>.jpg" height="40px" width="40px" align="left" /> -->
+          <div class="prediction-text">
+            <a ng-href="/predictions/{{prediction._id}}">{{prediction.title}}</a> <br/>
+            <p class="prediction-description">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+            <div class="prediction-links">
+              <a href="">ocomments</a>
+              <a href="">tags</a>
+              <a href=""></a>
+              <a href=""></a>
+            </div>
+          </div>
           </li>
         </ul>
       </section>
