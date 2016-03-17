@@ -89,4 +89,5 @@ input:focus, textarea:focus {
 
 #timer {
   width:100%;
+  transition: 400ms;
 }
