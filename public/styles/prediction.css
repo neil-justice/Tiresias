@@ -135,3 +135,9 @@ input:focus, textarea:focus {
   height: 100%;
   font-size:0.8em;
 }
+
+.comment-image:before {
+  position:absolute;
+  margin-left: -1em;
+  content: url('/images/comSide.png');
+}
