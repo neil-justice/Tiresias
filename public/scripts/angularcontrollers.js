@@ -4,6 +4,10 @@ homepageApp.factory('Prediction', function($resource) {
      return $resource("/api/predictions/:pid");
  });
 
+homepageApp.config(function($locationProvider) {
+    $locationProvider.html5Mode({ enabled: true, requireBase: false });
+});
+
 homepageApp.controller('homepageController', function($scope, $http) {
 
     $http({method: 'GET', 
@@ -21,7 +25,7 @@ homepageApp.controller('homepageController', function($scope, $http) {
         });
 });
 
-homepageApp.controller('predictionsController', ['$scope', '$window', 'Prediction', function($scope, $window, Prediction) {
+homepageApp.controller('predictionsController', ['$scope', '$window', '$location', 'Prediction', function($scope, $window, $location, Prediction) {
  
     var pId = $window.location.pathname.split("/")[2]||"Unknown";
 
@@ -39,6 +43,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', 'Predictio
         $scope.map = initMap(latlng);
         createMarker($scope.map, location);
     }, function error(res) {
+        $location.path('/').replace();
         $window.location.href = '/';
     });
 }]);
