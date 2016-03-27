@@ -1,19 +1,20 @@
 "use strict";
 
-eventListener('load', initNewPredictionButton, window);
+// eventListener('load', initNewPredictionButton, window);
 
-function initNewPredictionButton()
-{
-  var button = document.querySelector("#np");
-  var insert = document.querySelector("#new-modal");
-  if (button  != null) {
-    eventListener("click", newPredictionWindow, button);
-    observeMutation(postModalLoading,insert);
-  }
-}
+// function initNewPredictionButton()
+// {
+//   var button = document.querySelector("#np");
+//   var insert = document.querySelector("#new-modal");
+//   if (button  != null) {
+//     eventListener("click", newPredictionWindow, button);
+//     observeMutation(postModalLoading,insert);
+//   }
+// }
 
 function newPredictionWindow()
 {
+  console.log("hello");
   insertElement("/new.html", "#new-modal");
 }
 
@@ -35,5 +36,6 @@ function initCloseModalWindowButton()
 
 function closeModalWindow()
 {
+  console.log("closeModalWindow()");
   removeElement("#new-modal", ".modal-dark-background")
 }
