@@ -1,0 +1,39 @@
+ <section id="title">
+        <h1>{{title}}</h1>
+      </section>
+      <aside id="side-buttons">
+        <a href="#">
+          <img  class="vote-button vote-up"
+                src="/images/Upvote.png"
+                alt="Upvote button"/>
+        </a>
+        <span class="vote-number">150</span>
+        <a href="#">
+          <img  class="vote-button vote-down"
+                src="/images/Downvote.png"
+                alt="Downvote button"/>
+        </a>
+      </aside>
+      <section id="link">
+        <a class="button" href="{{link}}">
+          LINK: {{link}} </a>
+        <!-- Make these all bit.ly links -->
+      </section>
+      <section id="description">
+        <p>{{description}}</p>
+      </section>
+      <section id="timer">
+
+      </section>
+      <section id="stats">
+
+      </section>
+      <section id="tags">
+        <span ng-repeat="tag in tags"><a class="tag" href="#">{{tag}}</a>
+        </span>
+      </section>
+      <section id="map"></section>
+      <section id="comments">
+
+      </section>
+

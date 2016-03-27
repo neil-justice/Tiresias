@@ -1,0 +1,9 @@
+
+      <section>
+        <ul>
+          <li class="prediction" ng-repeat="prediction in predictions">
+            <!-- <img src="https://s-media-cache-ak0.pinimg.com/originals/65/fe/9c/65fe9c5ebb76d9dbc05c4cc516e90215.jpg" height="40px" width="40px" align="left" /> -->
+            <a ng-href="#/predictions/{{prediction._id}}">{{prediction.title}}</a>
+          </li>
+        </ul>
+      </section>

@@ -28,9 +28,11 @@ MongoClient.connect(url, function(err, db) {
 var express = require('express');
 var app = express();
 var router = express.Router();
+var srouter = express.Router();
 
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
+app.use('/views', express.static(__dirname + '/views'));
 app.use(express.static("bower_components"));
 
 // Routes
@@ -48,10 +50,10 @@ router.route('/predictions').get(function(req, res, next) {
     });
 });
 
-router.route('/predictions/:pid').get(function(req, res, next) {
-    //res.setHeader('Content-Type', 'application/xhtml+xml');
-    res.render('index');
-});
+// router.route('/predictions/:pid').get(function(req, res, next) {
+//     //res.setHeader('Content-Type', 'application/xhtml+xml');
+//     res.sendFile('/views/homepage.html', {root: __dirname});
+// });
 
 router.route('/api/predictions/:pid')
     .get(function(req, res) {
@@ -77,8 +79,8 @@ router.route('/api/predictions/:pid')
         });
     });
 
-router.route('/').get(function(req, res) {
-    res.render('homepage');
+router.route('/*').get(function(req, res) {
+    res.sendFile('/views/index.html', {root: __dirname});
 });
 
 app.use('/', router);

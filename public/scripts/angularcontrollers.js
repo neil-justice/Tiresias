@@ -1,11 +1,39 @@
-var homepageApp = angular.module('homepageApp', ['ngResource']);
+var homepageApp = angular.module('homepageApp', ['ngResource', 'ngRoute']);
 
 homepageApp.factory('Prediction', function($resource) {
      return $resource("/api/predictions/:pid");
  });
 
-homepageApp.config(function($locationProvider) {
-    $locationProvider.html5Mode({ enabled: true, requireBase: false });
+homepageApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+    
+    $routeProvider.
+        when('/predictions/:pid', {
+            templateUrl: '/views/prediction.html',
+            controller: 'predictionsController'
+        }).
+        when('/', {
+            templateUrl: '/views/homepage.html',
+            controller: 'homepageController'
+        }).
+        otherwise({
+            redirectTo: '/'
+        });
+}]);
+
+// Navbar stuff
+homepageApp.controller('navController', function($scope) {
+
+    // Shows modal window (with ng-show)
+    $scope.newPredictionWindow = function() {
+        $scope.showModal = true;
+    };
+
+    // Hides modal window 
+    $scope.closePredictionWindow = function() {
+        console.log($scope.showModal);
+        $scope.showModal = false;
+        console.log($scope.showModal);
+    };
 });
 
 homepageApp.controller('homepageController', function($scope, $http) {
@@ -25,9 +53,8 @@ homepageApp.controller('homepageController', function($scope, $http) {
         });
 });
 
-homepageApp.controller('predictionsController', ['$scope', '$window', '$location', 'Prediction', function($scope, $window, $location, Prediction) {
- 
-    var pId = $window.location.pathname.split("/")[2]||"Unknown";
+homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', function($scope, $window, $routeParams, $location, Prediction) {
+    var pId = $routeParams.pid;
 
     var entry = Prediction.get({ pid: pId }, function() {
         $scope.title = entry['title'];
@@ -44,6 +71,5 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$location
         createMarker($scope.map, location);
     }, function error(res) {
         $location.path('/').replace();
-        $window.location.href = '/';
     });
 }]);
