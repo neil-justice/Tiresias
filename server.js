@@ -50,9 +50,8 @@ router.route('/predictions').get(function(req, res, next) {
 });
 
 // router.route('/predictions/:pid').get(function(req, res, next) {
-//     sendAsXHTML(req, res);
 //     //res.setHeader('Content-Type', 'application/xhtml+xml');
-//     res.render('index');
+//     res.sendFile('/views/homepage.html', {root: __dirname});
 // });
 
 router.route('/api/predictions/:pid')
@@ -78,7 +77,6 @@ router.route('/api/predictions/:pid')
             }
         });
     });
-
 
 router.route('/*').get(function(req, res) {
     res.sendFile('/views/index.html', {root: __dirname});
