@@ -28,7 +28,6 @@ MongoClient.connect(url, function(err, db) {
 var express = require('express');
 var app = express();
 var router = express.Router();
-var srouter = express.Router();
 
 // app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));

@@ -30,9 +30,7 @@ homepageApp.controller('navController', function($scope) {
 
     // Hides modal window 
     $scope.closePredictionWindow = function() {
-        console.log($scope.showModal);
         $scope.showModal = false;
-        console.log($scope.showModal);
     };
 });
 
