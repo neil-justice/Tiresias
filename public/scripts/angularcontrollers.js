@@ -44,15 +44,17 @@ homepageApp.controller('homepageController', function($scope, $http) {
         })
         .then(function successCallback(res) {
 
-            // response is an array of documents
-            $scope.predictions = res.data;
+            if (res.status === 200) {
 
-            // Turn ISODate back into normal date object ready to display
-            angular.forEach($scope.predictions, function(prediction) {
-                if (prediction.date !== undefined) {
-                    prediction.date = new Date(prediction.date).toLocaleString();
-                }
-            });
+                $scope.predictions = res.data;
+
+                // Turn ISODate back into normal date object ready to display
+                angular.forEach($scope.predictions, function(prediction) {
+                    if (prediction.date !== undefined) {
+                        prediction.date = new Date(prediction.date).toLocaleString();
+                    }
+                });
+            }
         }, function errorCallback(res) {
             console.log('Error: ' + res);
         });
