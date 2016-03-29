@@ -1,16 +1,39 @@
 .prediction {
     margin: 1em 0;
-    padding: 0.3em 0.3em 2em 0.3em;
-    border: none;
-    border-radius: 3px;
+    padding: 0.5em;
     list-style-type: none;
-    background-color: #DEF;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: 1px;
+    border-color: #808080;
 }
 
 .prediction:hover {
-  background-color: #C0E5F5;
+  background-color: #f0f8fa;
 }
 
-.prediction a, .prediction a:visited {
+.prediction-title, .prediction-title:visited {
   color: #128FDC;
+}
+
+.prediction-description {
+    font-size: small;
+    padding-right: 1.2em;
+}
+
+.prediction-text {
+    margin-left: 10%;
+}
+
+.prediction-links {
+    font-size: 80%;
+}
+
+.prediction-comments-link {
+    color: #128FDC;
+    margin-right: 1%;
+}
+
+.prediction-tag {
+    float: right;
 }

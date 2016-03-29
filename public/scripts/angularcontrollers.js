@@ -10,6 +10,13 @@ homepageApp.controller('homepageController', function($scope, $http) {
         .success(function(data) {
             // response is an array of documents
             $scope.predictions = data;
+
+            // Turn ISODate back into normal date object ready to display
+            angular.forEach($scope.predictions, function(prediction) {
+                if (prediction.date !== undefined) {
+                    prediction.date = new Date(prediction.date).toLocaleString();
+                }
+            });
         }).error(function errorCallback(data) {
             console.log('Error: ' + data);
         });
@@ -32,5 +39,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', 'Predictio
         var latlng = new google.maps.LatLng(lat, lng);
         $scope.map = initMap(latlng);
         createMarker($scope.map, location);
+
+        $scope.comments = entry['comments'];
     });
 }]);
