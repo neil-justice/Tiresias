@@ -86,6 +86,13 @@ textarea, .new-title input, .new-link input {
   margin-top:2em;
 }
 
+.new-prediction-error {
+  font-weight: bold;
+  font-size: 11px;
+  color: red;
+  margin: 0;
+}
+
 #submit {
   width:auto;
   border:1px solid #3e9cbf;
