@@ -23,6 +23,10 @@ main {
   transition: 400ms;
 }
 
+ul {
+  list-style: none;
+}
+
 p {
   text-align: justify;
 }
