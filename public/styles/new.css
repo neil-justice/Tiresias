@@ -76,6 +76,7 @@ form label {
 
 .new input {
   width:97%;
+  height: 1.2em;
 }
 
 textarea, .new-title input, .new-link input {
@@ -91,10 +92,13 @@ textarea, .new-title input, .new-link input {
   font-size: 11px;
   color: red;
   margin: 0;
+  padding-right: 2em;
+  float: right;
 }
 
 #submit {
   width:auto;
+  height:auto;
   border:1px solid #3e9cbf;
   cursor:pointer;
   font-family: roboto;
