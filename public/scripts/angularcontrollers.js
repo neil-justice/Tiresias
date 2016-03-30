@@ -39,31 +39,43 @@ homepageApp.controller('navController', function($scope) {
     };
 });
 
-homepageApp.controller('homepageController', function($scope, $http) {
+homepageApp.controller('homepageController', ['$scope', '$http', 'Prediction', function($scope, $http, Prediction) {
 
-    $http({method: 'GET', 
-        url:'/predictions',
-        headers: {
-            accept:'application/json'
-        }
-        })
-        .then(function successCallback(res) {
+    // $http({method: 'GET', 
+    //     url:'/predictions',
+    //     headers: {
+    //         accept:'application/json'
+    //     }
+    //     })
+    //     .then(function successCallback(res) {
 
-            if (res.status === 200) {
+    //         if (res.status === 200) {
 
-                $scope.predictions = res.data;
+    //             $scope.predictions = res.data;
 
-                // Turn ISODate back into normal date object ready to display
-                angular.forEach($scope.predictions, function(prediction) {
-                    if (prediction.date !== undefined) {
-                        prediction.date = new Date(prediction.date).toLocaleString();
-                    }
-                });
+    //             // Turn ISODate back into normal date object ready to display
+    //             angular.forEach($scope.predictions, function(prediction) {
+    //                 if (prediction.date !== undefined) {
+    //                     prediction.date = new Date(prediction.date).toLocaleString();
+    //                 }
+    //             });
+    //         }
+    //     }, function errorCallback(res) {
+    //         console.log('Error: ' + res);
+    //     });
+
+    $scope.predictions = Prediction.query(function(data) {
+        
+        angular.forEach($scope.predictions, function(prediction) {
+            if (prediction.date !== undefined) {
+                prediction.date = new Date(prediction.date).toLocaleString();
             }
-        }, function errorCallback(res) {
-            console.log('Error: ' + res);
         });
-});
+    }, function error(res) {
+        console.log('Error: ' + res);
+    } );
+
+}]);
 
 homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', function($scope, $window, $routeParams, $location, Prediction) {
     var pId = $routeParams.pid;

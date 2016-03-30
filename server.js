@@ -35,7 +35,7 @@ app.use('/views', express.static(__dirname + '/views'));
 app.use(express.static("bower_components"));
 
 // Routes
-router.route('/predictions').get(function(req, res, next) {
+router.route('/api/predictions').get(function(req, res, next) {
 
         // Get all the documents in the collection
     collection.find().toArray(function(err, data) {
@@ -43,7 +43,7 @@ router.route('/predictions').get(function(req, res, next) {
             console.log(err);
         }
         else {
-            res.type('json');
+            console.log(data);
             res.send(data); // Already an array
         }
     });
