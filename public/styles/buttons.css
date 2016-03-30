@@ -5,6 +5,7 @@
   color: #ffffff;
   display: inline-block;
   background-color: #128FDC;
+  cursor: pointer;
 }
 
 .button:hover {
