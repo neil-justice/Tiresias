@@ -79,18 +79,26 @@ router.route('/api/predictions/:pid')
     });
 
 router.route('/*').get(function(req, res) {
-    res.sendFile('/views/index.html', {root: __dirname});
+
+    var options = {
+      root: __dirname,
+      dotfiles: 'deny',
+      headers: {}
+    };
+    sendAsXHTML(req, options);
+
+    res.sendFile('/views/index.html', options);
 });
 
 app.use('/', router);
 app.listen(8081);
 
-function sendAsXHTML(request, res) {
-    if (request.accepts('xhtml') ) {
-        res.header('Content-Type', 'application/xhtml+xml'); 
+function sendAsXHTML(req, options) {
+    if (req.accepts('xhtml') ) {
+        options.headers = { 'Content-Type': 'application/xhtml+xml' };
     }
     else {
-        res.header('Content-Type', 'text/html');
+       options.headers = { 'Content-Type': 'text/html' };
     }
 }
 

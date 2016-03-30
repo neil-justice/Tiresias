@@ -1,21 +1,21 @@
 <div class="modal-dark-background">
   <div id="form-div">
-  <form name="submitForm" novalidate>
+  <form name="submitForm" novalidate="">
     <section class="form-title">
       <h1>New Prediction</h1>
       <img class="close-button" src="/images/close.png" alt="Close Window" ng-click="closePredictionWindow()"/>
     </section>
     <section class="input-fields">
       <section class="new new-title ">
-        <label>Title*</label>
-        <input type="text" name="newTitle" ng-model="newTitle" required/>
-         <div ng-messages="submitForm.newTitle.$error">
-            <p class="new-prediction-error" ng-message="required" ng-show="submitForm.newTitle.$touched">Title is required</p>
-         </div>
+        <label ng-messages="submitForm.newTitle.$error">Title
+          <span class="required-field">*</span>
+          <span class="new-prediction-error" ng-message="required" ng-show="submitForm.newTitle.$touched">Title is required</span>
+        </label>
+        <input type="text" name="newTitle" ng-model="newTitle" required=""/>
       </section>
 
       <section class="new new-link">
-        <label>Link*</label>
+        <label>Link</label>
         <input type="text" name="new-link"/>
       </section>
 
@@ -25,20 +25,21 @@
       </section>
       <div class="new col-left">
         <section class="new new-date-start">
-          <label>Date made*</label>
-          <input type="date" name="newDateStart" ng-model="newDateStart" required/>
-         <div ng-messages="submitForm.newDateStart.$error">
-            <p class="new-prediction-error" ng-message="required" ng-show="submitForm.newDateStart.$touched">Start date is required</p>
-         </div>
+          <label  ng-messages="submitForm.newDateStart.$error">Date made
+            <span class="required-field">*</span>
+            <span class="new-prediction-error" ng-message="required" ng-show="submitForm.newDateStart.$touched">Start date is required</span>
+          </label>
+          <input type="date" name="newDateStart" ng-model="newDateStart" required=""/>
         </section>
 
         <section class="new new-date-end">
-          <label>End Date*</label>
-          <input type="date" name="newDateEnd" ng-model="newDateStart" required/>
-         <div ng-messages="submitForm.newDateEnd.$error">
-            <p class="new-prediction-error" ng-message="required" ng-show="submitForm.newDateEnd.$touched">End date is required</p>
-         </div>
+          <label ng-messages="submitForm.newDateEnd.$error">End Date
+            <span class="required-field">*</span>
+            <span class="new-prediction-error" ng-message="required" ng-show="submitForm.newDateEnd.$touched">End date is required</span>
+          </label>
+          <input type="date" name="newDateEnd" ng-model="newDateStart" required=""/>
         </section>
+        
       </div>
       <div class="new col-right">
         <section class="new new-location">
