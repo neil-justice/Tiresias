@@ -29,8 +29,13 @@ homepageApp.controller('navController', function($scope) {
     };
 
     // Hides modal window 
-    $scope.closePredictionWindow = function() {
+    $scope.closePredictionWindow = function(form) {
         $scope.showModal = false;
+
+        if (form) {
+            form.$setPristine();
+            form.$setUntouched();
+        }
     };
 });
 
