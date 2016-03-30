@@ -7,14 +7,15 @@
     </section>
     <section class="input-fields">
       <section class="new new-title ">
-        <label ng-messages="submitForm.newTitle.$error">Title*
+        <label ng-messages="submitForm.newTitle.$error">Title
+          <span class="required-field">*</span>
           <span class="new-prediction-error" ng-message="required" ng-show="submitForm.newTitle.$touched">Title is required</span>
         </label>
         <input type="text" name="newTitle" ng-model="newTitle" required=""/>
       </section>
 
       <section class="new new-link">
-        <label>Link*</label>
+        <label>Link</label>
         <input type="text" name="new-link"/>
       </section>
 
@@ -24,14 +25,16 @@
       </section>
       <div class="new col-left">
         <section class="new new-date-start">
-          <label  ng-messages="submitForm.newDateStart.$error">Date made*
+          <label  ng-messages="submitForm.newDateStart.$error">Date made
+            <span class="required-field">*</span>
             <span class="new-prediction-error" ng-message="required" ng-show="submitForm.newDateStart.$touched">Start date is required</span>
           </label>
           <input type="date" name="newDateStart" ng-model="newDateStart" required=""/>
         </section>
 
         <section class="new new-date-end">
-          <label ng-messages="submitForm.newDateEnd.$error">End Date*
+          <label ng-messages="submitForm.newDateEnd.$error">End Date
+            <span class="required-field">*</span>
             <span class="new-prediction-error" ng-message="required" ng-show="submitForm.newDateEnd.$touched">End date is required</span>
           </label>
           <input type="date" name="newDateEnd" ng-model="newDateStart" required=""/>

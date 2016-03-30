@@ -96,6 +96,10 @@ textarea, .new-title input, .new-link input {
   float: right;
 }
 
+.required-field {
+  color:red;
+}
+
 #submit {
   width:auto;
   height:auto;
