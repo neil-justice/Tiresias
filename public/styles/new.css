@@ -79,7 +79,7 @@ form label {
   height: 1.2em;
 }
 
-textarea, .new-title input, .new-link input {
+.new textarea, .new-title input, .new-link input {
   width:98.5%;
 }
 
