@@ -21,7 +21,7 @@ homepageApp.config(['$locationProvider', '$routeProvider', function($locationPro
 }]);
 
 // Navbar stuff
-homepageApp.controller('navController', function($scope, Prediction) {
+homepageApp.controller('navController', function($scope, Prediction, $location) {
 
     $scope.newPrediction = new Prediction();
 
@@ -51,18 +51,22 @@ homepageApp.controller('navController', function($scope, Prediction) {
             // If response is OK, alter the location property to contain LatLng instead.
             if (status === google.maps.GeocoderStatus.OK) {
                 $scope.newPrediction.location = results[0].geometry.location;
-
-                // Save new prediction data
-                $scope.newPrediction.$save(function successCallback(res) {
-                    console.log(res.message);
-                }, function errorCallback(res) {
-                    console.log('Error: ' + res);
-                });
-
-
-                $scope.closePredictionWindow();
+            } else {
+                delete $scope.newPrediction.location;
             }
+
+            // Save new prediction data
+            $scope.newPrediction.$save(function successCallback(res) {
+                console.log(res.message);
+            }, function errorCallback(res) {
+                console.log('Error: ' + res);
+            });
+
+            $scope.closePredictionWindow();
         });
+
+        
+
     };
 });
 
