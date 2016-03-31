@@ -41,8 +41,14 @@ homepageApp.controller('navController', function($scope, Prediction) {
     };
 
     $scope.submitPrediction = function() {
-        console.log($scope.newPrediction);
-        $scope.newPrediction.$save();
+        
+        // Save new prediction data
+        $scope.newPrediction.$save(function successCallback(res) {
+            console.log(res.message);
+        }, function errorCallback(res) {
+
+        });
+        $scope.closePredictionWindow();
     };
 
 });
