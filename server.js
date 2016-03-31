@@ -59,12 +59,14 @@ router.route('/api/predictions/').post(function(req, res) {
 
     // Insert the body of the request into the db as a new document
     collection.insertOne(req.body, function(err, result) {
+
         if (err) {
             res.json({message: "Failure"});
         } else {
             res.json({message: "Successssssss"});
         }
     });
+    
 
 });
 

@@ -41,16 +41,29 @@ homepageApp.controller('navController', function($scope, Prediction) {
     };
 
     $scope.submitPrediction = function() {
-        
-        // Save new prediction data
-        $scope.newPrediction.$save(function successCallback(res) {
-            console.log(res.message);
-        }, function errorCallback(res) {
 
+        // For coordinate lookup
+        var geocoder = new google.maps.Geocoder();
+
+        // Look up coordinate of given value in 'Location'
+        geocoder.geocode({'address': $scope.newPrediction.location}, function(results, status) {
+            
+            // If response is OK, alter the location property to contain LatLng instead.
+            if (status === google.maps.GeocoderStatus.OK) {
+                $scope.newPrediction.location = results[0].geometry.location;
+
+                // Save new prediction data
+                $scope.newPrediction.$save(function successCallback(res) {
+                    console.log(res.message);
+                }, function errorCallback(res) {
+                    console.log('Error: ' + res);
+                });
+
+
+                $scope.closePredictionWindow();
+            }
         });
-        $scope.closePredictionWindow();
     };
-
 });
 
 homepageApp.controller('homepageController', ['$scope', '$http', 'Prediction', function($scope, $http, Prediction) {
