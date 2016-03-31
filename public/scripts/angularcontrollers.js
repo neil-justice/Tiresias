@@ -21,7 +21,9 @@ homepageApp.config(['$locationProvider', '$routeProvider', function($locationPro
 }]);
 
 // Navbar stuff
-homepageApp.controller('navController', function($scope) {
+homepageApp.controller('navController', function($scope, Prediction) {
+
+    $scope.newPrediction = new Prediction();
 
     // Shows modal window (with ng-show)
     $scope.newPredictionWindow = function() {
@@ -37,6 +39,12 @@ homepageApp.controller('navController', function($scope) {
             form.$setUntouched();
         }
     };
+
+    $scope.submitPrediction = function() {
+        console.log($scope.newPrediction);
+        $scope.newPrediction.$save();
+    };
+
 });
 
 homepageApp.controller('homepageController', ['$scope', '$http', 'Prediction', function($scope, $http, Prediction) {
@@ -64,7 +72,7 @@ homepageApp.controller('homepageController', ['$scope', '$http', 'Prediction', f
     //         console.log('Error: ' + res);
     //     });
 
-    $scope.predictions = Prediction.query(function(data) {
+    $scope.predictions = Prediction.query({}, function(data) {
         
         angular.forEach($scope.predictions, function(prediction) {
             if (prediction.date !== undefined) {
@@ -78,9 +86,11 @@ homepageApp.controller('homepageController', ['$scope', '$http', 'Prediction', f
 }]);
 
 homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', function($scope, $window, $routeParams, $location, Prediction) {
+    
+
     var pId = $routeParams.pid;
 
-    var entry = Prediction.get({ pid: pId }, function() {
+    var entry = Prediction.get({ pid: pId }, function(data, headers) {
         $scope.title = entry['title'];
         $scope.link = entry['link'];
         $scope.description = entry['description'];

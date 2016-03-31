@@ -10,6 +10,7 @@ var fs = require('fs');
 var path = require('path');
 
 
+
 // MongoDB setup
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/tiresias';
@@ -28,11 +29,15 @@ MongoClient.connect(url, function(err, db) {
 var express = require('express');
 var app = express();
 var router = express.Router();
+var bodyParser = require('body-parser');
 
 // app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use('/views', express.static(__dirname + '/views'));
 app.use(express.static("bower_components"));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Routes
 router.route('/api/predictions').get(function(req, res, next) {
@@ -47,6 +52,13 @@ router.route('/api/predictions').get(function(req, res, next) {
             res.send(data); // Already an array
         }
     });
+});
+
+
+router.route('/api/predictions/').post(function(req, res) {
+    console.log(req.body);
+    
+    collection.insert(req.body);
 });
 
 // router.route('/predictions/:pid').get(function(req, res, next) {
