@@ -40,8 +40,6 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
     $scope.closePredictionWindow = function(form) {
         $scope.showModal = false;
 
-        console.log(form);
-
         if (form) {
             form.$setPristine();
             form.$setUntouched();
@@ -68,10 +66,20 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
 
             // Save new prediction data
             $scope.newPrediction.$save(function successCallback(res) {
+
+                // $save updates the newPrediction resource automatically with the response, and so the ng-model
+                // in the html is also updated due to two-way binding. It then complains that the date is an incorrect
+                // format cause mongoDB stores the date as ISODate whereas the input type='date' html expects a normal
+                // yyyy-mm-dd format.
+                // That's why the contents of newPrediction are saved into a new variable above and added to the predictions.list
+                // service here rather than newPrediction itself.
                 dataBeforeSave._id = res._id;
                 predictions.list.push(dataBeforeSave);
+
+                // Clear contents of newPrediction so that the form is not populated next time.
                 $scope.newPrediction = new Prediction();
                 $scope.closePredictionWindow(form);
+
             }, function errorCallback(res) {
                 console.log('Error: ' + res);
             });            
@@ -79,7 +87,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
     };
 });
 
-homepageApp.controller('homepageController', ['$scope', '$http', 'Prediction', 'predictions', function($scope, $http, Prediction, predictions) {
+homepageApp.controller('homepageController', ['$scope','Prediction', 'predictions', function($scope, Prediction, predictions) {
 
     // $http({method: 'GET', 
     //     url:'/predictions',

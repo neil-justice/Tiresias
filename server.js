@@ -48,7 +48,6 @@ router.route('/api/predictions').get(function(req, res, next) {
             console.log(err);
         }
         else {
-            //console.log(data);
             res.send(data); // Already an array
         }
     });
