@@ -4,16 +4,19 @@
     list-style-type: none;
     border-style: solid;
     border-radius: 3px;
-    border-width: 1px;
+    border-width: 0.5px;
+    box-shadow: #e9ebec 0 3px 3px;
     border-color: #808080;
 }
 
 .prediction:hover {
   background-color: #f0f8fa;
+  box-shadow: #e9ebec 0 2px 2px inset;
 }
 
 .prediction-title, .prediction-title:visited {
   color: #128FDC;
+  /*color: #000000;*/
 }
 
 .prediction-description {
