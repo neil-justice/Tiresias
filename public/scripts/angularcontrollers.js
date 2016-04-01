@@ -20,8 +20,14 @@ homepageApp.config(['$locationProvider', '$routeProvider', function($locationPro
         });
 }]);
 
+homepageApp.factory('predictions', function() {
+    return {
+        list: []
+    };
+});
+
 // Navbar stuff
-homepageApp.controller('navController', function($scope, Prediction, $location) {
+homepageApp.controller('navController', function($scope, Prediction, predictions) {
 
     $scope.newPrediction = new Prediction();
 
@@ -34,13 +40,15 @@ homepageApp.controller('navController', function($scope, Prediction, $location) 
     $scope.closePredictionWindow = function(form) {
         $scope.showModal = false;
 
+        console.log(form);
+
         if (form) {
             form.$setPristine();
             form.$setUntouched();
         }
     };
 
-    $scope.submitPrediction = function() {
+    $scope.submitPrediction = function(form) {
 
         // For coordinate lookup
         var geocoder = new google.maps.Geocoder();
@@ -52,25 +60,26 @@ homepageApp.controller('navController', function($scope, Prediction, $location) 
             if (status === google.maps.GeocoderStatus.OK) {
                 $scope.newPrediction.location = results[0].geometry.location;
             } else {
+                // Remove invalid location
                 delete $scope.newPrediction.location;
             }
 
+            var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
+
             // Save new prediction data
             $scope.newPrediction.$save(function successCallback(res) {
-                console.log(res.message);
+                dataBeforeSave._id = res._id;
+                predictions.list.push(dataBeforeSave);
+                $scope.newPrediction = new Prediction();
+                $scope.closePredictionWindow(form);
             }, function errorCallback(res) {
                 console.log('Error: ' + res);
-            });
-
-            $scope.closePredictionWindow();
+            });            
         });
-
-        
-
     };
 });
 
-homepageApp.controller('homepageController', ['$scope', '$http', 'Prediction', function($scope, $http, Prediction) {
+homepageApp.controller('homepageController', ['$scope', '$http', 'Prediction', 'predictions', function($scope, $http, Prediction, predictions) {
 
     // $http({method: 'GET', 
     //     url:'/predictions',
@@ -95,13 +104,20 @@ homepageApp.controller('homepageController', ['$scope', '$http', 'Prediction', f
     //         console.log('Error: ' + res);
     //     });
 
-    $scope.predictions = Prediction.query({}, function(data) {
-        
-        angular.forEach($scope.predictions, function(prediction) {
+    Prediction.query({}, function(data) {
+
+        predictions.list = [];
+    
+        angular.forEach(data, function(predictionResource) {
+            var prediction = predictionResource.toJSON();
+            predictions.list.push(prediction);
+
             if (prediction.date !== undefined) {
                 prediction.date = new Date(prediction.date).toLocaleString();
             }
         });
+
+        $scope.predictions = predictions.list;
     }, function error(res) {
         console.log('Error: ' + res);
     } );

@@ -48,7 +48,7 @@ router.route('/api/predictions').get(function(req, res, next) {
             console.log(err);
         }
         else {
-            console.log(data);
+            //console.log(data);
             res.send(data); // Already an array
         }
     });
@@ -63,7 +63,9 @@ router.route('/api/predictions/').post(function(req, res) {
         if (err) {
             res.json({message: "Failure"});
         } else {
-            res.json({message: "Successssssss"});
+            // Return the result given by mongoDB after the Insert operation
+            // This is the object that was inserted as it exists in the db
+            res.json(result.ops[0]);
         }
     });
     
