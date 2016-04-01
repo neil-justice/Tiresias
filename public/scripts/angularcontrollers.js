@@ -120,9 +120,18 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
             var prediction = predictionResource.toJSON();
             predictions.list.push(prediction);
 
+            // Date formatting
             if (prediction.date !== undefined) {
                 prediction.date = new Date(prediction.date).toLocaleString();
             }
+
+            // Number of comments
+            if (prediction.comments === undefined) {
+                prediction.noOfComments = 0;
+            } else {
+                prediction.noOfComments = prediction.comments.length;
+            }
+
         });
 
         $scope.predictions = predictions.list;
