@@ -37,3 +37,20 @@
 .prediction-tag {
     float: right;
 }
+
+.searchBar {
+    display: block;
+    height: 35px;
+    color: #333;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 0 35px;
+    margin: 0 auto;
+    text-align: center;
+    width: 20%;
+}
+
+#search {
+    display: block;
+    width: 90%;
+    margin-left: 10%;
+}
