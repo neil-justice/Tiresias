@@ -68,3 +68,11 @@ growl-notifications growl-notification {
     border-radius: 5px;
     margin-top: 15px;
 }
+
+.success-notification {
+  background-color: #33FFBB;
+}
+
+.failure-notification {
+  background-color: #FF3333;
+}

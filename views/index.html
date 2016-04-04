@@ -38,12 +38,11 @@
     
     <growl-notifications>
         <div ng-repeat="(id, notification) in notifications track by id">
-            <growl-notification>
-                {{notification}}
+            <growl-notification ng-class="notification.style">
+                {{notification.text}}
             </growl-notification>
-        </div>
+        </div>      
     </growl-notifications>
-    
   
     <div id="login-modal"></div>
     <div class="nav-link-list">

@@ -50,9 +50,9 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
     var notificationIndex = 0; //ID for notifications
     $scope.notifications = {}; // list of notifications
     
-    $scope.addNotification = function(notification){
+    $scope.addNotification = function(notification, style){
       var i = notificationIndex++;
-      $scope.notifications[i] = notification;
+      $scope.notifications[i] = { text: notification, style: style };
     };
 
     $scope.submitPrediction = function(form) {
@@ -88,11 +88,11 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 // Clear contents of newPrediction so that the form is not populated next time.
                 $scope.newPrediction = new Prediction();
                 $scope.closePredictionWindow(form);
-                $scope.addNotification("Success!");
+                $scope.addNotification("Prediction added!", 'success-notification');
                 
             }, function errorCallback(res) {
                 console.log('Error: ' + res);
-                $scope.addNotification("Failure!");
+                $scope.addNotification("Error: Prediction not be added", 'failure-notification');
             });            
         });
     };
