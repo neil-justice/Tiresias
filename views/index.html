@@ -42,12 +42,13 @@
       <div ng-repeat="(id, notification) in notifications track by id">
           <growl-notification ng-class="notification.style">
               {{notification.text}}
+              <img class="close-notification" src="/images/closeNotification.png" ng-click="$growlNotification.remove()"/>
           </growl-notification>
       </div> 
       
       <form>
         <button ng-click="addNotification('Prediction added successfully!', 'success-notification')">Succeed</button>
-        <button ng-click="addNotification('Error: Prediction not be added', 'failure-notification')">Fail</button>
+        <button ng-click="addNotification('Error: Prediction could not be added!', 'failure-notification')">Fail</button>
       </form>
         
     </growl-notifications>

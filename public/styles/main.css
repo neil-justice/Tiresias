@@ -63,7 +63,7 @@ growl-notifications {
 growl-notifications growl-notification {
     background-color: #FFF;
     color: white;
-    padding: 1em 30px;
+    padding: 1em 10px 1em 30px;
     display: block;
     border-radius: 3px;
     margin-top: 15px;
@@ -80,10 +80,18 @@ growl-notifications growl-notification {
   background-color: #FFDDDD;
 }
 
+.close-notification {
+  display:inline;
+  cursor:pointer;
+  height:1em;
+  float:right;
+  opacity: 0.5;
+}
+
 growl-notification.ng-move{
     opacity: 0;
-    -webkit-transition: 1s linear all; /* Safari/Chrome */
-    transition: 1s linear all; /* All other modern browsers and IE10+ */
+    -webkit-transition: 0.3s linear all; /* Safari/Chrome */
+    transition: 0.3s linear all; /* All other modern browsers and IE10+ */
 }
 
 growl-notification.ng-move.ng-move-active {
@@ -91,8 +99,8 @@ growl-notification.ng-move.ng-move-active {
 }
 growl-notification.ng-leave {
     opacity: 1;
-    -webkit-transition: 1s linear all; /* Safari/Chrome */
-    transition: 1s linear all; /* All other modern browsers and IE10+ */
+    -webkit-transition: 0.3s linear all; /* Safari/Chrome */
+    transition: 0.3s linear all; /* All other modern browsers and IE10+ */
 }
 
 growl-notification.ng-leave.ng-leave-active {
