@@ -60,19 +60,24 @@ growl-notifications {
 }
 
 growl-notifications growl-notification {
-    background-color: #282222;
+    background-color: #FFF;
     color: white;
-    padding: 15px 30px;
-    width: 200px;
+    padding: 5px 30px;
     display: block;
     border-radius: 5px;
     margin-top: 15px;
+    text-align: center;
 }
 
 .success-notification {
-  background-color: rgba(85,162,84,0.7);
+  border: 3px solid #52A060;
+  color: #52A060;
+  background-color: rgba(82,160,96, 0.1);
+  
 }
 
 .failure-notification {
-  background-color: rgba(255,10,10,0.7);
+  border: 3px solid #A50000;
+  color: #A50000;
+  background-color: rgba(180,0,0, 0.1);
 }

@@ -37,13 +37,21 @@
   <nav ng-controller="navController">
     
     <growl-notifications>
-        <div ng-repeat="(id, notification) in notifications track by id">
-            <growl-notification ng-class="notification.style">
-                {{notification.text}}
-            </growl-notification>
-        </div>      
+    
+      <div ng-repeat="(id, notification) in notifications track by id">
+          <growl-notification ng-class="notification.style">
+              {{notification.text}}
+          </growl-notification>
+      </div> 
+      
+      <form>
+        <button ng-click="addNotification('Prediction added!', 'success-notification')">Succeed</button>
+        <button ng-click="addNotification('Error: Prediction not be added', 'failure-notification')">Fail</button>
+      </form>
+        
     </growl-notifications>
-  
+
+    
     <div id="login-modal"></div>
     <div class="nav-link-list">
       <ul>
