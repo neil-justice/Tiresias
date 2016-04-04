@@ -1,4 +1,4 @@
-var homepageApp = angular.module('homepageApp', ['ngResource', 'ngRoute', 'ngMessages', 'growlNotifications']);
+var homepageApp = angular.module('homepageApp', ['ngResource', 'ngRoute', 'ngMessages', 'growlNotifications', 'ngAnimate']);
 
 homepageApp.factory('Prediction', function($resource) {
      return $resource("/api/predictions/:pid");
@@ -88,11 +88,11 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 // Clear contents of newPrediction so that the form is not populated next time.
                 $scope.newPrediction = new Prediction();
                 $scope.closePredictionWindow(form);
-                $scope.addNotification("Prediction added!", 'success-notification');
+                $scope.addNotification("Prediction added successfully!", 'success-notification');
                 
             }, function errorCallback(res) {
                 console.log('Error: ' + res);
-                $scope.addNotification("Error: Prediction not be added", 'failure-notification');
+                $scope.addNotification("Error: Prediction not be added!", 'failure-notification');
             });            
         });
     };
