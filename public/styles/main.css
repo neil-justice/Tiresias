@@ -51,3 +51,20 @@ h1 {
   background-color:#128FDC;
   color: #FFFFFF;
 }
+
+growl-notifications {
+    position: fixed;
+    top: 40px;
+    right: 10px;
+    z-index: 1000;
+}
+
+growl-notifications growl-notification {
+    background-color: #282222;
+    color: white;
+    padding: 15px 30px;
+    width: 200px;
+    display: block;
+    border-radius: 5px;
+    margin-top: 15px;
+}
