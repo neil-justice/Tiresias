@@ -70,9 +70,9 @@ growl-notifications growl-notification {
 }
 
 .success-notification {
-  background-color: #33FFBB;
+  background-color: rgba(85,162,84,0.7);
 }
 
 .failure-notification {
-  background-color: #FF3333;
+  background-color: rgba(255,10,10,0.7);
 }
