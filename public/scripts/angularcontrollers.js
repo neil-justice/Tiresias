@@ -63,8 +63,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             }
 
             var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
-            var submitSuccess = false;
-            
+
             // Save new prediction data
             $scope.newPrediction.$save(function successCallback(res) {
 
@@ -80,8 +79,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 // Clear contents of newPrediction so that the form is not populated next time.
                 $scope.newPrediction = new Prediction();
                 $scope.closePredictionWindow(form);
-                submitSuccess = true;
-                
+
             }, function errorCallback(res) {
                 console.log('Error: ' + res);
             });            
