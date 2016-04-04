@@ -45,6 +45,15 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             form.$setUntouched();
         }
     };
+    
+    
+    var notificationIndex = 0; //ID for notifications
+    $scope.notifications = {}; // list of notifications
+    
+    $scope.addNotification = function(notification){
+      var i = notificationIndex++;
+      $scope.notifications[i] = notification;
+    };
 
     $scope.submitPrediction = function(form) {
 
@@ -79,9 +88,11 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 // Clear contents of newPrediction so that the form is not populated next time.
                 $scope.newPrediction = new Prediction();
                 $scope.closePredictionWindow(form);
-
+                $scope.addNotification("Success!");
+                
             }, function errorCallback(res) {
                 console.log('Error: ' + res);
+                $scope.addNotification("Failure!");
             });            
         });
     };
@@ -163,3 +174,9 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         $location.path('/').replace();
     });
 }]);
+
+homepageApp.controller('ShowNotification', ['$scope', function($scope){
+
+
+
+  }]);
