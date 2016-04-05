@@ -50,6 +50,8 @@ homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q)
 }]);
 
 
+
+
 // Navbar stuff
 homepageApp.controller('navController', function($scope, Prediction, predictions, loadGoogleMapAPI) {
 
