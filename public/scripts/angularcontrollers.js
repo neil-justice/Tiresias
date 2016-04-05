@@ -174,13 +174,9 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
     }, function error(res) {
         $location.path('/').replace();
     });
+    
+    $scope.$on('$viewContentLoaded', function(){
+      calcProgress();
+    });
 }]);
 
-// Provides onload event listener functionality for ng-view loads
-homepageApp.controller('mainController', function($scope) {
-
-  $scope.$on('$viewContentLoaded', function(){
-    calcProgress();
-
-  });
-});
