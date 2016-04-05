@@ -39,8 +39,8 @@
     
     <growl-notifications>
     
-      <div ng-repeat="(id, notification) in notifications track by id">
-          <growl-notification ng-class="notification.style">
+      <div ng-repeat="notification in notifications">
+          <growl-notification ng-class="notification.style" ttl="2500">
               {{notification.text}}
               <img class="close-notification" src="/images/closeNotification.png" ng-click="$growlNotification.remove()"/>
           </growl-notification>

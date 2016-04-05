@@ -92,7 +92,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 
             }, function errorCallback(res) {
                 console.log('Error: ' + res);
-                $scope.addNotification("Error: Prediction not be added!", 'failure-notification');
+                $scope.addNotification("Error: Prediction could not be added!", 'failure-notification');
             });            
         });
     };
