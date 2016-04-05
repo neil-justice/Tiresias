@@ -26,6 +26,30 @@ homepageApp.factory('predictions', function() {
     };
 });
 
+// Lazy loading of Google Map API - only gets called the first time and appends the google maps script to the head of the page.
+homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q) {
+
+        var deferred = $q.defer();
+
+        // Load Google map API script
+        function loadScript() {  
+            var script = document.createElement('script');
+            script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAg67S7m3vG4o51-RyozMWZ1mtmzSIS-1o&callback=scriptLoaded";
+
+            document.head.appendChild(script);
+        }
+
+        // Script loaded callback, send resolve
+        $window.scriptLoaded = function () {
+            deferred.resolve();
+        }
+
+        loadScript();
+
+        return deferred.promise;
+}]);
+
+
 // Navbar stuff
 homepageApp.controller('navController', function($scope, Prediction, predictions) {
 
@@ -152,25 +176,36 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
 
 }]);
 
-homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', function($scope, $window, $routeParams, $location, Prediction) {
-    
+// Single prediction page
+homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', 
+    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI) {
 
+    // Gets the prediction's _id value from the url
     var pId = $routeParams.pid;
 
-    var entry = Prediction.get({ pid: pId }, function(data, headers) {
-        $scope.title = entry['title'];
-        $scope.link = entry['link'];
-        $scope.description = entry['description'];
-        $scope.tags = entry['tags'];
+    // Request the prediction with that _id from the database
+    $scope.entry = Prediction.get({ pid: pId }, function(data, headers) {
+        $scope.title = $scope.entry['title'];
+        $scope.link = $scope.entry['link'];
+        $scope.description = $scope.entry['description'];
+        $scope.tags = $scope.entry['tags'];
 
-        // Get location and create map/marker
-        var location = entry['location'];
-        var lat = location['lat'];
-        var lng = location['lng'];
-        var latlng = new google.maps.LatLng(lat, lng);
-        $scope.map = initMap(latlng);
-        createMarker($scope.map, location);
-        $scope.comments = entry['comments'];
+
+        // Load google maps API and if successful, create map with location details of the prediction.
+        loadGoogleMapAPI.then(function success() {
+
+            // Get location and create map/marker
+            var location = $scope.entry['location'];
+            var lat = location['lat'];
+            var lng = location['lng'];
+            var latlng = new google.maps.LatLng(lat, lng);
+            $scope.map = initMap(latlng);
+            createMarker($scope.map, location);
+        }), function error() {
+            console.log("Error loading google maps API script");
+        };
+
+        $scope.comments = $scope.entry['comments'];
     }, function error(res) {
         $location.path('/').replace();
     });
