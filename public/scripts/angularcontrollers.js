@@ -174,9 +174,3 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         $location.path('/').replace();
     });
 }]);
-
-homepageApp.controller('ShowNotification', ['$scope', function($scope){
-
-
-
-  }]);
