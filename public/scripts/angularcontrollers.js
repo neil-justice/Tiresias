@@ -170,7 +170,17 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         var latlng = new google.maps.LatLng(lat, lng);
         $scope.map = initMap(latlng);
         createMarker($scope.map, location);
+        $scope.comments = entry['comments'];
     }, function error(res) {
         $location.path('/').replace();
     });
 }]);
+
+// Provides onload event listener functionality for ng-view loads
+homepageApp.controller('mainController', function($scope) {
+
+  $scope.$on('$viewContentLoaded', function(){
+    calcProgress();
+
+  });
+});
