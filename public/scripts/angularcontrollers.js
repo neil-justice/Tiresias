@@ -176,15 +176,14 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
 
 }]);
 
-homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI) {
-    
-    // $scope.initGoogleMaps = function() {
-        // console.log("MAPS");
+// Single prediction page
+homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', 
+    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI) {
 
-    // }
-
+    // Gets the prediction's _id value from the url
     var pId = $routeParams.pid;
 
+    // Request the prediction with that _id from the database
     $scope.entry = Prediction.get({ pid: pId }, function(data, headers) {
         $scope.title = $scope.entry['title'];
         $scope.link = $scope.entry['link'];
@@ -192,8 +191,10 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         $scope.tags = $scope.entry['tags'];
 
 
-        // Load google maps API and if
+        // Load google maps API and if successful, create map with location details of the prediction.
         loadGoogleMapAPI.then(function success() {
+
+            // Get location and create map/marker
             var location = $scope.entry['location'];
             var lat = location['lat'];
             var lng = location['lng'];
@@ -201,10 +202,9 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
             $scope.map = initMap(latlng);
             createMarker($scope.map, location);
         }), function error() {
+            console.log("Error loading google maps API script");
         };
 
-        // Get location and create map/marker
-        
         $scope.comments = $scope.entry['comments'];
     }, function error(res) {
         $location.path('/').replace();
