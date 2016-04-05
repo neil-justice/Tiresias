@@ -1,4 +1,5 @@
 "use strict";
+
 eventListener('load', initLoginSlider, window);
 
 // Setup the login button
@@ -12,10 +13,15 @@ function initLoginSlider()
   }
 }
 
-// Function attached to login button when slider is hidden
+// When slider is hidden, show slider; otherwise submit form
 function loginSlider()
 {
-  insertElement("/login.html", "#login-modal");
+  if (document.querySelector(".login-slider-wrapper")) {
+    document.querySelector("#login-form").submit();
+  }
+  else {
+    insertElement("/login.html", "#login-modal");
+  }
 }
 
 // Activated after the slider has loaded, allowing for asynchronous AJAX
@@ -31,35 +37,28 @@ function postSliderLoading()
 
 function setupPositioning()
 {
-  var sliderHeight = document.querySelector(".login-slider-wrapper").clientHeight;
-  var button = document.querySelector(".login-button")
-  var bcoords = getCoordinates(button);
+  var lbutton = document.querySelector(".login-button");
+  var cbutton = document.querySelector(".login-close-button");
+  var slider  = document.querySelector(".login-slider");
+  var wrapper = document.querySelector(".login-slider-wrapper");
+  
+  var sliderHeight = wrapper.clientHeight;
+  var bcoords = getCoordinates(lbutton);
   var vOffset = bcoords.top + sliderHeight;
   var w = window.innerWidth;
 
   // Lower the navbar and main section
-  document.querySelector("nav").style.top = sliderHeight + "px";
+  document.querySelector("nav").style.top = sliderHeight - 1 + "px";
   document.querySelector("main").style.paddingTop = sliderHeight + "px";
 
-  // Set login slider position
-  document.querySelector(".login-slider-wrapper").style.top = -sliderHeight +1 + "px";
-  document.querySelector(".login-slider").style.marginLeft = bcoords.left + "px";
-  document.querySelector(".login-slider").style.width = (w - bcoords.left - 10) + "px";
+  // Set login form position
+  wrapper.style.top = -sliderHeight + 1 + "px";
+  slider.style.marginLeft = bcoords.left + "px";
+  slider.style.width = (w - bcoords.left - 10) + "px";
 
   // Position the cancel button next to the login button
-  document.querySelector(".login-close-button").style.left = bcoords.right + "px";
-  document.querySelector(".login-close-button").style.top = vOffset + "px";
-
-  // Change the function of the login button to a form submit button
-  deleteEventListener("click", loginSlider, button);
-  eventListener("click", submitLoginForm, button);
-
-}
-
-// Function to be attached to the login button when slider is out
-function submitLoginForm()
-{
-  document.querySelector("#login-form").submit();
+  cbutton.style.left = bcoords.right + "px";
+  cbutton.style.top = vOffset + "px";
 }
 
 // Setup the cancel button
@@ -78,12 +77,7 @@ function closeLoginSlider()
   document.querySelector("nav").style.top = 0;
   document.querySelector("main").style.paddingTop = 0;
 
-  // Reset login button behaviour
-  var button = document.querySelector(".login-button");
-  deleteEventListener("click", submitLoginForm, button);
-  initLoginSlider();
-
-  // Finally, remove the HTML
+  // Finally, remove the HTML after a timeout to allow for animation
   setTimeout(function() {
     removeElement("#login-modal", ".login-slider-wrapper");
   }, 400);

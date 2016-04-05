@@ -5,9 +5,9 @@ function getCoordinates(element) {
   var rect = element.getBoundingClientRect();
 
   return {
-    left:   rect.left + window.scrollX,
-    right:  rect.right+ window.scrollX,
-    top:    rect.top + window.scrollY,
-    bottom: rect.bottom + window.scrollY
+    left:   rect.left,
+    right:  rect.right,
+    top:    rect.top,
+    bottom: rect.bottom
   }
 }

@@ -1,3 +1,4 @@
+// No longer in use.  Functionality for this script has been ported to Angular.
 "use strict";
 
 // eventListener('load', initNewPredictionButton, window);

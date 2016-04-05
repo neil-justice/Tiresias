@@ -116,7 +116,8 @@ app.use('/', router);
 app.listen(8081);
 
 function sendAsXHTML(req, options) {
-    if (req.accepts('xhtml') ) {
+
+    if (req.accepts('application/xhtml+xml') ) {
         options.headers = { 'Content-Type': 'application/xhtml+xml' };
     }
     else {

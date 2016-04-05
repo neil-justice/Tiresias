@@ -1,4 +1,5 @@
-"use strict"
+"use strict";
+
 eventListener("load", setNavElementHeights, window);
 
 function setNavElementHeights()
