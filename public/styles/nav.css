@@ -126,23 +126,32 @@ nav .login-button {
 
 .nav-button {
   width: 2.5em;
-    height: 0;
-    padding-bottom: 2.5em;
-    left: 13%;
-    position: relative;
-    display: inline-block;
-    margin: 0 0.5%;
-    border-radius: 50%;
-    border: 1px solid #f5f5f5;
-    overflow: hidden;
+  height: 0;
+  padding-bottom: 2.5em;
+  left: 13%;
+  position: relative;
+  display: inline-block;
+  margin: 0 0.5%;
+  border-radius: 50%;
+  border: 1px solid #f5f5f5;
+  overflow: hidden;
+}
+
+.nav-button:hover {
+  background-color: #ecf0f1;
+
 }
 
 .nav-button img {
     display: block;
-    width: 76%;
-    padding: 0%;
+    width: 70%;
+    padding: 0;
     margin: 0;
     height: auto;
+}
+
+.nav-button a:hover {
+  background-color: transparent;
 }
 
 .home-button {
