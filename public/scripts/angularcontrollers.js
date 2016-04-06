@@ -71,6 +71,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 delete $scope.newPrediction.location;
             }
 
+            $scope.newPrediction.dateAdded = new Date();
             var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
 
             // Save new prediction data

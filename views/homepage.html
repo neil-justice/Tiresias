@@ -3,7 +3,7 @@
 </section>
 <section>
   <ul>
-    <li class="prediction" ng-repeat="prediction in predictions | filter:searchQuery:strict">
+    <li class="prediction" ng-repeat="prediction in predictions | filter:searchQuery:strict | orderBy : 'prediction.dateAdded' : true ">
       <div class="prediction-image">
       </div>
       <div class="prediction-text">
@@ -12,7 +12,7 @@
         <div class="prediction-links">
           <a class="prediction-comments-link" href="">{{prediction.noOfComments}} comments</a>
           <a class="tag prediction-tag" href="#" ng-repeat="tag in prediction.tags">{{tag}}</a>
-          <a href="">{{prediction.date}}</a>
+          <a href="">{{prediction.dateAdded}}</a>
           <a href=""></a>
         </div>
       </div>
