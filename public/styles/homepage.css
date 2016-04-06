@@ -7,6 +7,8 @@
     border-width: 0.5px;
     box-shadow: #e9ebec 0 3px 3px;
     border-color: #808080;
+    /*min-height: 8em;*/
+    position: relative;
 }
 
 .prediction:hover {
@@ -16,6 +18,9 @@
 
 .prediction-title, .prediction-title:visited {
   color: #128FDC;
+  font-family: 'Nunito', sans-serif;
+  font-weight: bold;
+  font-size: 18px;
   /*color: #000000;*/
 }
 
@@ -26,10 +31,15 @@
 
 .prediction-text {
     margin-left: 10%;
+    padding-bottom: 5px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
 }
 
 .prediction-links {
     font-size: 80%;
+    bottom: 0;
+    margin-top: 5px;
 }
 
 .prediction-comments-link {

@@ -9,13 +9,14 @@
       <div class="prediction-text">
         <a class="prediction-title" ng-href="#/predictions/{{prediction._id}}">{{prediction.title}}</a> <br/>
         <p class="prediction-description">{{prediction.description}}</p>
-        <div class="prediction-links">
+       <div class="prediction-links">
           <a class="prediction-comments-link" href="">{{prediction.noOfComments}} comments</a>
           <a class="tag prediction-tag" href="#" ng-repeat="tag in prediction.tags">{{tag}}</a>
           <a href="">{{prediction.date}}</a>
           <a href=""></a>
-        </div>
+        </div> 
       </div>
+      
     </li>
   </ul>
 </section>
