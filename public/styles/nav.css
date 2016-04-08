@@ -67,9 +67,7 @@ nav li > a {
   color: white;
   font-style: normal;
   text-align: center;
-  padding-left: 2%;
-  padding-right: 2%;
-  left: 13%;
+
   position: relative;
 }
 
@@ -125,15 +123,14 @@ nav .login-button {
 }
 
 .nav-button {
-  width: 2.5em;
-  height: 0;
-  padding-bottom: 2.5em;
+  width: 3em;
+  height: 3em;
   left: 13%;
   position: relative;
   display: inline-block;
-  margin: 0 0.5%;
+  margin: 0;
   border-radius: 50%;
-  border: 1px solid #f5f5f5;
+  border: 2px solid #f5f5f5;
   overflow: hidden;
 }
 
@@ -145,13 +142,13 @@ nav .login-button {
 .nav-button img {
     display: block;
     width: 70%;
-    padding: 0;
+    padding: 15%;
     margin: 0;
     height: auto;
 }
 
 .nav-button a:hover {
-  background-color: transparent;
+  background-color: #fff;
 }
 
 .home-button {
