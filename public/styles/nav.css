@@ -132,6 +132,7 @@ nav .login-button {
   border-radius: 50%;
   border: 2px solid #fff;
   overflow: hidden;
+  z-index:6;
 }
 
 .nav-button:hover {
