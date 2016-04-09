@@ -70,6 +70,9 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             form.$setPristine();
             form.$setUntouched();
         }
+        
+        // Clear contents of newPrediction so that the form is not populated next time.
+        $scope.newPrediction = new Prediction();
     };
     
     
@@ -113,8 +116,6 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                     dataBeforeSave._id = res._id;
                     predictions.list.push(dataBeforeSave);
 
-                    // Clear contents of newPrediction so that the form is not populated next time.
-                    $scope.newPrediction = new Prediction();
                     $scope.closePredictionWindow(form);
                     $scope.addNotification("Prediction added successfully!", 'success-notification');
                     
