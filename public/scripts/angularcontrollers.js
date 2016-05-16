@@ -215,12 +215,13 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         };
 
         $scope.comments = $scope.entry['comments'];
+        $scope.startDate = $scope.entry['startDate'];
+        $scope.endDate = $scope.entry['endDate'];
+        var start = $scope.startDate;
+        var end = $scope.endDate;
+        calcProgress(start, end);
     }, function error(res) {
         $location.path('/').replace();
-    });
-    
-    $scope.$on('$viewContentLoaded', function(){
-      calcProgress();
     });
 }]);
 
