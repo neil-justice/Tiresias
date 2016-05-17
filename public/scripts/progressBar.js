@@ -31,7 +31,7 @@ function setProgress(percent)
   var rect = cont.getBoundingClientRect();
   var contWidth = rect.right - rect.left;
 
-  var maxBarWidth = contWidth * 0.9737669854;
+  var maxBarWidth = contWidth * 0.985;
   var width = maxBarWidth / (100 / percent);
 
   animate.setAttribute("to",  width + 'px');

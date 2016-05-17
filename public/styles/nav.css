@@ -159,6 +159,11 @@ nav .login-button {
 .about-button {
     background-color: #f1c40f;
 }
+
+.nav-button a {
+  transition: 0.5s;
+}
+ 
 nav input, nav textarea {
   width:90%;
   margin-bottom: 6px;

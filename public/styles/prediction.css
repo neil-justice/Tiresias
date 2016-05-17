@@ -8,11 +8,12 @@ aside#side-buttons {
 
 .vote-number {
   display: inline-block;
-  background-color: #e6e600;
+  background-color: #f1c40f;
   display: inline-block;
   padding: 0.6em 0;
   width:90%;
   margin: 0;
+  border-radius: 50%;
 }
 
 .vote-button {
@@ -20,6 +21,7 @@ aside#side-buttons {
   height: 90%;
   margin: 0;
   background-color: rgb(115,121,118);
+  cursor: pointer;
 }
 
 .vote-down {
