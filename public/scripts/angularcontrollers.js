@@ -26,8 +26,34 @@ homepageApp.factory('predictions', function() {
     };
 });
 
+// Lazy loading of Google Map API - only gets called the first time and appends the google maps script to the head of the page.
+homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q) {
+
+        var deferred = $q.defer();
+
+        // Load Google map API script
+        function loadScript() {  
+            var script = document.createElement('script');
+            script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAg67S7m3vG4o51-RyozMWZ1mtmzSIS-1o&callback=scriptLoaded";
+
+            document.head.appendChild(script);
+        }
+
+        // Script loaded callback, send resolve
+        $window.scriptLoaded = function () {
+            deferred.resolve();
+        }
+
+        loadScript();
+
+        return deferred.promise;
+}]);
+
+
+
+
 // Navbar stuff
-homepageApp.controller('navController', function($scope, Prediction, predictions) {
+homepageApp.controller('navController', function($scope, Prediction, predictions, loadGoogleMapAPI) {
 
     $scope.newPrediction = new Prediction();
 
@@ -44,6 +70,9 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             form.$setPristine();
             form.$setUntouched();
         }
+        
+        // Clear contents of newPrediction so that the form is not populated next time.
+        $scope.newPrediction = new Prediction();
     };
     
     
@@ -77,25 +106,46 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             // Save new prediction data
             $scope.newPrediction.$save(function successCallback(res) {
 
-                // $save updates the newPrediction resource automatically with the response, and so the ng-model
-                // in the html is also updated due to two-way binding. It then complains that the date is an incorrect
-                // format cause mongoDB stores the date as ISODate whereas the input type='date' html expects a normal
-                // yyyy-mm-dd format.
-                // That's why the contents of newPrediction are saved into a new variable above and added to the predictions.list
-                // service here rather than newPrediction itself.
-                dataBeforeSave._id = res._id;
-                predictions.list.push(dataBeforeSave);
+            // For coordinate lookup
+            var geocoder = new google.maps.Geocoder();
 
-                // Clear contents of newPrediction so that the form is not populated next time.
-                $scope.newPrediction = new Prediction();
-                $scope.closePredictionWindow(form);
-                $scope.addNotification("Prediction added successfully!", 'success-notification');
+            // Look up coordinate of given value in 'Location'
+            geocoder.geocode({'address': $scope.newPrediction.location}, function(results, status) {
                 
-            }, function errorCallback(res) {
-                console.log('Error: ' + res);
-                $scope.addNotification("Error: Prediction could not be added!", 'failure-notification');
-            });            
-        });
+                // If response is OK, alter the location property to contain LatLng instead.
+                if (status === google.maps.GeocoderStatus.OK) {
+                    $scope.newPrediction.location = results[0].geometry.location;
+                } else {
+                    // Remove invalid location
+                    delete $scope.newPrediction.location;
+                }
+
+                var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
+
+                // Save new prediction data
+                $scope.newPrediction.$save(function successCallback(res) {
+
+                    // $save updates the newPrediction resource automatically with the response, and so the ng-model
+                    // in the html is also updated due to two-way binding. It then complains that the date is an incorrect
+                    // format cause mongoDB stores the date as ISODate whereas the input type='date' html expects a normal
+                    // yyyy-mm-dd format.
+                    // That's why the contents of newPrediction are saved into a new variable above and added to the predictions.list
+                    // service here rather than newPrediction itself.
+                    dataBeforeSave._id = res._id;
+                    predictions.list.push(dataBeforeSave);
+
+                    $scope.closePredictionWindow(form);
+                    $scope.addNotification("Prediction added successfully!", 'success-notification');
+                    
+                }, function errorCallback(res) {
+                    console.log('Error: ' + res);
+                    $scope.addNotification("Error: Prediction could not be added!", 'failure-notification');
+                });            
+            });
+        }, function error() {
+            console.log("Failed to load google maps API");
+        })
+
     };
 });
 
@@ -153,25 +203,36 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
 
 }]);
 
-homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', function($scope, $window, $routeParams, $location, Prediction) {
-    
+// Single prediction page
+homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', 
+    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI) {
 
+    // Gets the prediction's _id value from the url
     var pId = $routeParams.pid;
 
-    var entry = Prediction.get({ pid: pId }, function(data, headers) {
-        $scope.title = entry['title'];
-        $scope.link = entry['link'];
-        $scope.description = entry['description'];
-        $scope.tags = entry['tags'];
+    // Request the prediction with that _id from the database
+    $scope.entry = Prediction.get({ pid: pId }, function(data, headers) {
+        $scope.title = $scope.entry['title'];
+        $scope.link = $scope.entry['link'];
+        $scope.description = $scope.entry['description'];
+        $scope.tags = $scope.entry['tags'];
 
-        // Get location and create map/marker
-        var location = entry['location'];
-        var lat = location['lat'];
-        var lng = location['lng'];
-        var latlng = new google.maps.LatLng(lat, lng);
-        $scope.map = initMap(latlng);
-        createMarker($scope.map, location);
-        $scope.comments = entry['comments'];
+
+        // Load google maps API and if successful, create map with location details of the prediction.
+        loadGoogleMapAPI.then(function success() {
+
+            // Get location and create map/marker
+            var location = $scope.entry['location'];
+            var lat = location['lat'];
+            var lng = location['lng'];
+            var latlng = new google.maps.LatLng(lat, lng);
+            $scope.map = initMap(latlng);
+            createMarker($scope.map, location);
+        }), function error() {
+            console.log("Error loading google maps API script");
+        };
+
+        $scope.comments = $scope.entry['comments'];
     }, function error(res) {
         $location.path('/').replace();
     });

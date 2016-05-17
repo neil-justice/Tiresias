@@ -67,9 +67,8 @@ nav li > a {
   color: white;
   font-style: normal;
   text-align: center;
-  padding-left: 2%;
-  padding-right: 2%;
-  left: 13%;
+  border: 2px solid #fff;
+  border-radius: 50%;
   position: relative;
 }
 
@@ -124,6 +123,42 @@ nav .login-button {
   color: #CCC;
 }
 
+.nav-button {
+  width: 3em;
+  height: 3em;
+  left: 13%;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  border-radius: 50%;
+  border: 4px solid #282222;
+  overflow: hidden;
+}
+
+.nav-button:hover {
+  background-color: #ecf0f1;
+
+}
+
+.nav-button img {
+    display: block;
+    width: 70%;
+    padding: 15%;
+    margin: 0;
+    height: auto;
+}
+
+.nav-button a:hover {
+  background-color: #fff;
+}
+
+.home-button {
+    background-color: #26A65B;
+}
+
+.about-button {
+    background-color: #f1c40f;
+}
 nav input, nav textarea {
   width:90%;
   margin-bottom: 6px;

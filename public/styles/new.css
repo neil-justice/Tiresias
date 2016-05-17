@@ -116,3 +116,8 @@ form label {
 #submit:hover {
   background-color: #1D74AB;
 }
+
+#submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
