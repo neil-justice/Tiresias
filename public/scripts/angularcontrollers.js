@@ -102,6 +102,8 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                     delete $scope.newPrediction.location;
                 }
 
+                $scope.newPrediction.votes = 0;
+
                 var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
 
                 // Save new prediction data
