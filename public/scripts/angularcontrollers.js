@@ -86,25 +86,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
 
     $scope.submitPrediction = function(form) {
 
-        // For coordinate lookup
-        var geocoder = new google.maps.Geocoder();
-
-        // Look up coordinate of given value in 'Location'
-        geocoder.geocode({'address': $scope.newPrediction.location}, function(results, status) {
-            
-            // If response is OK, alter the location property to contain LatLng instead.
-            if (status === google.maps.GeocoderStatus.OK) {
-                $scope.newPrediction.location = results[0].geometry.location;
-            } else {
-                // Remove invalid location
-                delete $scope.newPrediction.location;
-            }
-
-            $scope.newPrediction.dateAdded = new Date();
-            var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
-
-            // Save new prediction data
-            $scope.newPrediction.$save(function successCallback(res) {
+        loadGoogleMapAPI.then(function success() {
 
             // For coordinate lookup
             var geocoder = new google.maps.Geocoder();
