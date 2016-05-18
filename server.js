@@ -60,11 +60,11 @@ userSchema.methods.generateJwt = function() {
     expiry.setDate(expiry.getDate() + 7);
 
     return jwt.sign({
-        _id: this._id;
+        _id: this._id,
         email: this.email,
-        usernamename: this.username,
+        username: this.username,
         exp: parseInt(expiry.getTime() / 1000)
-    }, "SKMDLKSMDLSKMDLSMLKDM");
+    }, fs.readFileSync('config/secret.txt'));
 };
 
 mongoose.model('User', userSchema);
