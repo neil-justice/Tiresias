@@ -69,6 +69,9 @@ userSchema.methods.generateJwt = function() {
 
 mongoose.model('User', userSchema);
 
+
+
+
 // Express setup
 var express = require('express');
 var app = express();
@@ -140,8 +143,30 @@ router.route('/api/predictions/:pid')
                 else
                     res.send(data[0]);
             }
-        });
     });
+});
+
+router.post('/signup', function(req, res) {
+    if (!req.body.username || !req.body.password) {
+        res.json({success: false, msg: 'Please enter a username and a password'});
+    } else {
+        var newUser = new User({
+            name: req.body.username,
+            password: req.body.password
+        });
+
+        // save the user
+        newUser.save(function(err) {
+            if (err) {
+                return res.json({success: false, msg: 'Username already exists'});
+            }
+            else {
+                res.json({success: true, msg: 'Successful created new user'});
+            }
+        });
+
+    }
+})
 
 router.route('/*').get(function(req, res) {
 
