@@ -29,6 +29,8 @@ MongoClient.connect(url, function(err, db) {
 });
 
 // Mongoose setup
+mongoose.connect(url);
+
 var userSchema = new mongoose.Schema( {
     email: {
         type: String,
@@ -67,7 +69,7 @@ userSchema.methods.generateJwt = function() {
     }, fs.readFileSync('config/secret.txt'));
 };
 
-mongoose.model('User', userSchema);
+var User = mongoose.model('User', userSchema);
 
 
 
@@ -114,7 +116,7 @@ router.route('/api/predictions/').post(function(req, res) {
             res.json(result.ops[0]);
         }
     });
-    
+
 });
 
 // router.route('/predictions/:pid').get(function(req, res, next) {
@@ -135,7 +137,7 @@ router.route('/api/predictions/:pid')
                 console.log(err);
             }
             else {
-             
+
                 // Returned document is empty
                 if (!data[0]) {
                     res.sendStatus(404);
@@ -146,14 +148,15 @@ router.route('/api/predictions/:pid')
     });
 });
 
-router.post('/signup', function(req, res) {
+router.post('/api/signup', function(req, res) {
     if (!req.body.username || !req.body.password) {
         res.json({success: false, msg: 'Please enter a username and a password'});
     } else {
         var newUser = new User({
-            name: req.body.username,
-            password: req.body.password
+            username: req.body.username,
+            email: req.body.email,
         });
+        newUser.setPassword(req.body.password);
 
         // save the user
         newUser.save(function(err) {

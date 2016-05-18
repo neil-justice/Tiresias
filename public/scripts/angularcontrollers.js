@@ -4,6 +4,10 @@ homepageApp.factory('Prediction', function($resource) {
      return $resource("/api/predictions/:pid");
  });
 
+homepageApp.factory('User', function($resource) {
+     return $resource("/api/signup");
+ });
+
 homepageApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
     $routeProvider.
@@ -53,7 +57,7 @@ homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q)
 
 
 // Navbar stuff
-homepageApp.controller('navController', function($scope, Prediction, predictions, loadGoogleMapAPI) {
+homepageApp.controller('navController', function($scope, Prediction, predictions, User, loadGoogleMapAPI) {
 
     $scope.newPrediction = new Prediction();
 
@@ -143,10 +147,26 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             form.$setPristine();
             form.$setUntouched();
         }
+        $scope.newUser = new User();
     };
+
+    $scope.passwordsDontMatch = function(pass1, pass2) {
+        return pass1 != pass2;
+    }
+
+    $scope.newUser = new User();
 
     $scope.submitUser = function(form) {
 
+        $scope.newUser.$save(function successCallback(res) {
+
+            $scope.closeUserWindow(form);
+            $scope.addNotification("Account created!", 'success-notification');
+
+        }, function errorCallback(res) {
+            console.log('Error: ' + res);
+            $scope.addNotification("Error: account could not be created!", 'failure-notification');
+        });
     }
 });
 
