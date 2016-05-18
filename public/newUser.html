@@ -1,5 +1,5 @@
-<div class="modal-dark-background">
-  <div class="form-div">
+<div class="modal-dark-background" ng-click="closeUserWindow(userForm)">
+  <div class="form-div user-modal" ng-click="stopPropagation($event)">
   <form name="userForm" novalidate="">
     <section class="form-title">
       <h1>Register</h1>

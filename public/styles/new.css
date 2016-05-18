@@ -53,13 +53,6 @@
   padding-bottom: 0.3em;
 }
 
-.form-div form label {
-  font-size: 0.9em;
-  font-weight: 600;
-  font-family: roboto;
-  padding-bottom: 0.3em;
-}
-
 .form-div .new > *  {
   display:block;
 }
@@ -131,4 +124,9 @@
 
 .form-div #submit:focus {
   background-color: #1D74AB;
+}
+
+.user-modal {
+  width:20%;
+  left:40%;
 }

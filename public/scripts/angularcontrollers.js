@@ -169,6 +169,10 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             $scope.addNotification("Error: account could not be created!", 'failure-notification');
         });
     }
+    
+    $scope.stopPropagation = function($event) {
+        $event.stopPropagation();
+    }
 });
 
 homepageApp.controller('homepageController', ['$scope','Prediction', 'predictions', function($scope, Prediction, predictions) {
