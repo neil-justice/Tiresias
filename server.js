@@ -8,6 +8,10 @@ var http = require('http');
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
+var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+var crypto = require('crypto');
+
 
 
 
@@ -23,6 +27,47 @@ MongoClient.connect(url, function(err, db) {
     collection = database.collection('predictions');
     console.log("Connected correctly to server.");
 });
+
+// Mongoose setup
+var userSchema = new mongoose.Schema( {
+    email: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    hash: String,
+    salt: String,
+    successCount: Number,
+    failCount: Number
+});
+
+userSchema.methods.setPassword = function(password) {
+    this.salt = crypto.randomBytes(16).toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+}
+
+userSchema.methods.isValidPassword = function(password) {
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+    return this.hash === hash;
+}
+
+userSchema.methods.generateJwt = function() {
+    var expiry = new Date();
+    expiry.setDate(expiry.getDate() + 7);
+
+    return jwt.sign({
+        _id: this._id;
+        email: this.email,
+        usernamename: this.username,
+        exp: parseInt(expiry.getTime() / 1000)
+    }, "SKMDLKSMDLSKMDLSMLKDM");
+};
+
+mongoose.model('User', userSchema);
 
 
 // Express setup

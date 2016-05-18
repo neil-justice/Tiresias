@@ -7,7 +7,9 @@
     "body-parser": "^1.15.0",
     "ejs": "^2.4.1",
     "express": "^4.13.4",
-    "mongodb": "^2.1.7"
+    "jsonwebtoken": "^6.2.0",
+    "mongodb": "^2.1.7",
+    "mongoose": "^4.4.17"
   },
   "devDependencies": {},
   "scripts": {
