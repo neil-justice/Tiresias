@@ -5,7 +5,7 @@ homepageApp.factory('Prediction', function($resource) {
  });
 
 homepageApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-    
+
     $routeProvider.
         when('/predictions/:pid', {
             templateUrl: '/views/prediction.html',
@@ -32,7 +32,7 @@ homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q)
         var deferred = $q.defer();
 
         // Load Google map API script
-        function loadScript() {  
+        function loadScript() {
             var script = document.createElement('script');
             script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAg67S7m3vG4o51-RyozMWZ1mtmzSIS-1o&callback=scriptLoaded";
 
@@ -62,7 +62,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         $scope.showModal = true;
     };
 
-    // Hides modal window 
+    // Hides modal window
     $scope.closePredictionWindow = function(form) {
         $scope.showModal = false;
 
@@ -70,15 +70,14 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             form.$setPristine();
             form.$setUntouched();
         }
-        
+
         // Clear contents of newPrediction so that the form is not populated next time.
         $scope.newPrediction = new Prediction();
     };
-    
-    
+
     var notificationIndex = 0; //ID for notifications
     $scope.notifications = {}; // list of notifications
-    
+
     $scope.addNotification = function(notification, style){
       var i = notificationIndex++;
       $scope.notifications[i] = { text: notification, style: style };
@@ -93,7 +92,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
 
             // Look up coordinate of given value in 'Location'
             geocoder.geocode({'address': $scope.newPrediction.location}, function(results, status) {
-                
+
                 // If response is OK, alter the location property to contain LatLng instead.
                 if (status === google.maps.GeocoderStatus.OK) {
                     $scope.newPrediction.location = results[0].geometry.location;
@@ -118,22 +117,42 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
 
                     $scope.closePredictionWindow(form);
                     $scope.addNotification("Prediction added successfully!", 'success-notification');
-                    
+
                 }, function errorCallback(res) {
                     console.log('Error: ' + res);
                     $scope.addNotification("Error: Prediction could not be added!", 'failure-notification');
-                });            
+                });
             });
         }, function error() {
             console.log("Failed to load google maps API");
         })
 
     };
+
+
+    // Shows modal window (with ng-show)
+    $scope.newUserWindow = function() {
+        $scope.showUserModal = true;
+    };
+
+    // Hides modal window
+    $scope.closeUserWindow = function(form) {
+        $scope.showUserModal = false;
+
+        if (form) {
+            form.$setPristine();
+            form.$setUntouched();
+        }
+    };
+
+    $scope.submitUser = function(form) {
+
+    }
 });
 
 homepageApp.controller('homepageController', ['$scope','Prediction', 'predictions', function($scope, Prediction, predictions) {
 
-    // $http({method: 'GET', 
+    // $http({method: 'GET',
     //     url:'/predictions',
     //     headers: {
     //         accept:'application/json'
@@ -159,7 +178,7 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
     Prediction.query({}, function(data) {
 
         predictions.list = [];
-    
+
         angular.forEach(data, function(predictionResource) {
             var prediction = predictionResource.toJSON();
             predictions.list.push(prediction);
@@ -186,7 +205,7 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
 }]);
 
 // Single prediction page
-homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', 
+homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI',
     function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI) {
 
     // Gets the prediction's _id value from the url
@@ -218,9 +237,8 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
     }, function error(res) {
         $location.path('/').replace();
     });
-    
+
     $scope.$on('$viewContentLoaded', function(){
       calcProgress();
     });
 }]);
-

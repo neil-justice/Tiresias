@@ -1,0 +1,48 @@
+<div class="modal-dark-background">
+  <div id="form-div">
+  <form name="userForm" novalidate="">
+    <section class="form-title">
+      <h1>Register</h1>
+      <img class="close-button" src="/images/close.png" alt="Close Window" ng-click="closeUserWindow(userForm)"/>
+    </section>
+    <section class="input-fields">
+
+      <section class="new new-user">
+        <label ng-messages="userForm.newUser.$error">Username
+          <span class="required-field">*</span>
+          <span class="new-error" ng-message="required" ng-show="userForm.newUser.$touched">Username is required</span>
+        </label>
+        <input type="text" name="newUser" ng-model="newUser.username" required=""/>
+      </section>
+
+      <section class="new new-email">
+        <label ng-messages="userForm.newUser.$error">Email
+          <span class="required-field">*</span>
+          <span class="new-error" ng-message="required" ng-show="userForm.newEmail.$touched">Email is required</span>
+        </label>
+        <input type="text" name="newEmail" ng-model="newUser.email" required=""/>
+      </section>
+
+      <section class="new new-password">
+        <label ng-messages="userForm.newUser.$error">Password
+          <span class="required-field">*</span>
+          <span class="new-error" ng-message="required" ng-show="userForm.newPassword.$touched">Password is required</span>
+        </label>
+        <input type="text" name="newPassword" ng-model="newUser.password" required=""/>
+      </section>
+
+      <section class="new new-confirm-password">
+        <label ng-messages="userForm.newUser.$error">Confirm Password
+          <span class="required-field">*</span>
+          <span class="new-error" ng-message="required" ng-show="userForm.newConfirmPassword.$touched">Please confirm your password</span>
+        </label>
+        <input type="text" name="newConfirmPassword" ng-model="newUser.confirmPassword" required=""/>
+      </section>
+
+
+    </section>
+  <section class="new new-submit">
+    <input type="submit" value="SUBMIT" class="button" id="submit" ng-disabled="userForm.$invalid" ng-click="submitUser(userForm)" />
+  </section>
+  </form></div>
+</div>

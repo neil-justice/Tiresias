@@ -87,7 +87,7 @@ form label {
   margin-top:2em;
 }
 
-.new-prediction-error {
+.new-error {
   font-weight: bold;
   font-size: 11px;
   color: red;
