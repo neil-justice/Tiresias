@@ -36,7 +36,7 @@
       <section class="new new-confirm-password">
         <label ng-messages="userForm.newConfirmPassword.$error">Confirm Password
           <span class="required-field">*</span>
-          <span class="new-error" ng-message="required" ng-show="userForm.newConfirmPassword.$touched">Please confirm your password</span>
+          <span class="new-error" ng-message="required" ng-show="userForm.newConfirmPassword.$touched">Please confirm</span>
           <span class="new-error" ng-message="minlength" ng-show="userForm.newPassword.$touched">Password must be 8 or more characters!</span>
           <span class="new-error" ng-show="passwordsDontMatch(newPassword, newConfirmPassword)">Passwords don't match</span>
         </label>
