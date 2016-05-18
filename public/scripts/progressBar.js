@@ -1,9 +1,15 @@
 "use strict";
 
-function calcProgress()
+function calcProgress(start, end)
 {
-  // This is a dummy value while JSON objects don't contain a date
-  setProgress(100);
+  var startDay = moment(start);
+  var endDay = moment(end);
+
+  var now = moment();
+  var totalTime = endDay.diff(startDay, 'days');
+  var daysPassed = now.diff(startDay, 'days');
+
+  setProgress((daysPassed*100) / totalTime);
 }
 
 function setProgress(percent)
