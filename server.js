@@ -69,7 +69,6 @@ userSchema.methods.generateJwt = function() {
 
 mongoose.model('User', userSchema);
 
-
 // Express setup
 var express = require('express');
 var app = express();
