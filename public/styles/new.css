@@ -17,19 +17,24 @@
 .form-div h1  {
   font-size: 1.6em;
   padding-bottom: 0;
-  width:90%;
+  color: #888888;
+  text-align:center;
 }
 
 .form-div .form-title  {
-  border-bottom: 1px solid #D4D4D4;
-  margin-bottom: 0.5em
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 0.5em;
+  margin-left: -1em;
+  margin-right: -1em;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .form-div .close-button {
   display:inline;
   position:absolute;
-  top:0;
-  right:0;
+  top:7px;
+  right:5px;
   cursor:pointer;
 }
 
