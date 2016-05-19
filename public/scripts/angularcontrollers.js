@@ -169,16 +169,16 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             $scope.addNotification("Error: account could not be created!", 'failure-notification');
         });
     }
-    
-    // Can be set as an ng-click event to stop other ng-clicks from being 
+
+    // Can be set as an ng-click event to stop other ng-clicks from being
     // inherited by child nodes
     $scope.stopPropagation = function($event) {
         $event.stopPropagation();
     }
-    
+
     $scope.loginButton = function() {
         var isShowing = $scope.showLogin;
-        
+
         if (isShowing === true) {
             // login stuff here
             $scope.showLogin = false;
@@ -189,7 +189,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             $scope.showLogin = true;
         }
     }
-    
+
     $scope.hideLoginSlider = function() {
         closeLoginSlider();
         $scope.showLogin = false;
@@ -280,11 +280,12 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         };
 
         $scope.comments = $scope.entry['comments'];
+        $scope.startDate = $scope.entry['startDate'];
+        $scope.endDate = $scope.entry['endDate'];
+        var start = $scope.startDate;
+        var end = $scope.endDate;
+        calcProgress(start, end);
     }, function error(res) {
         $location.path('/').replace();
-    });
-
-    $scope.$on('$viewContentLoaded', function(){
-      calcProgress();
     });
 }]);
