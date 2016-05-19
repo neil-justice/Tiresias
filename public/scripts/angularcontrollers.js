@@ -60,6 +60,8 @@ homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q)
 homepageApp.controller('navController', function($scope, Prediction, predictions, User, loadGoogleMapAPI) {
 
     $scope.newPrediction = new Prediction();
+    $scope.username = {};
+    $scope.password = {};
 
     // Shows modal window (with ng-show)
     $scope.newPredictionWindow = function() {
@@ -182,7 +184,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         var isShowing = $scope.showLogin;
 
         if (isShowing === true) {
-            // login stuff here
+            
             $scope.showLogin = false;
             closeLoginSlider();
         }
@@ -299,7 +301,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         $http({
             method: 'POST',
             url: '/api/vote',
-            data: { 
+            data: {
                 vote: vote,
                 _id: pId
             }

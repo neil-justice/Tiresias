@@ -1,15 +1,15 @@
 <div class="login-slider-wrapper">
   <div class="login-slider">
-    <form id="login-form">
+    <form id="login-form" name="loginForm">
       <section>
         <section class="input input-username">
           <label>Username</label>
-          <input type="text" name="username"/>
+          <input type="text" name="username" ng-model="username"/>
         </section>
         <section class="input input-password">
           <label>Password</label>
           <div>
-            <input type="password" name="password"/>
+            <input type="password" name="password" ng-model="password"/>
           </div>
         </section>
         <a class="button login-close-button" ng-click="hideLoginSlider()" ng-show="showLogin">CANCEL</a>

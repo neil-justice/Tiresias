@@ -192,6 +192,26 @@ router.post('/api/signup', function(req, res) {
     }
 });
 
+router.post('/api/login', function(req, res) {
+    var userLogin = new User();
+    userLogin.findOne({
+        username: $scope.username
+    }, function(err, user) {
+        if (err) {
+            throw err;
+        }
+        if (!user) {
+            $scope.addNotification("Error: username or password incorrect", 'failure-notification');
+        }
+        else if (!isValidPassword($scope.password)) {
+            $scope.addNotification("Error: username or password incorrect", 'failure-notification');
+        }
+        else {
+            $scope.addNotification("Successful login!!!!!!!", 'success-notification');
+        }
+    });
+}
+
 router.route('/*').get(function(req, res) {
 
     var options = {
