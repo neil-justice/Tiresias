@@ -97,7 +97,31 @@ router.route('/api/predictions/:pid')
                     res.send(data[0]);
             }
         });
+});
+
+router.route('/api/vote').post(function(req, res) {
+    var data = req.body;
+    var vote = data.vote;
+    var id = data._id;
+
+    console.log(id);
+
+    if (!id || !vote) {
+    }
+
+    var inc = vote ? 1 : -1;
+
+    collection.update({ _id: new ObjectID(id) }, { $inc: { votes: inc} }, function(err, result) {
+
+        if (err) {
+            res.sendStatus(500);
+        } else {
+            res.json(result);
+        }
+
     });
+
+})
 
 router.route('/*').get(function(req, res) {
 

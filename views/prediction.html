@@ -3,13 +3,13 @@
   <h1>{{title}}</h1>
 </section>
 <aside id="side-buttons">
-  <a href="#">
+  <a ng-click="sendVote(true)">
     <img  class="vote-button vote-up"
           src="/images/Upvote.png"
           alt="Upvote button"/>
   </a>
   <span class="vote-number">150</span>
-  <a href="#">
+  <a ng-click="sendVote(false)">
     <img  class="vote-button vote-down"
           src="/images/Downvote.png"
           alt="Downvote button"/>
