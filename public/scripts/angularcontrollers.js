@@ -170,6 +170,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         });
     }
     
+    // Stops ng-click from being inherited by child nodes
     $scope.stopPropagation = function($event) {
         $event.stopPropagation();
     }
