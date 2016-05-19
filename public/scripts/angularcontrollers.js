@@ -202,6 +202,10 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         $scope.tags = $scope.entry['tags'];
         $scope.votes = $scope.entry['votes'];
 
+        if (!$scope.votes) {
+            $scope.votes = 0;
+        }
+
         // Load google maps API and if successful, create map with location details of the prediction.
         loadGoogleMapAPI.then(function success() {
 
@@ -234,7 +238,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
                 _id: pId
             }
         }).then(function successCallback(res) {
-            console.log('Vote successfully counted' + res.status);
+            console.log('Vote successfully counted ' + res.status);
         }, function errorCallback(res) {
             console.log('Failed to vote' + res.status);
         });
