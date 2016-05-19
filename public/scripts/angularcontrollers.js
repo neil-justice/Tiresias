@@ -184,9 +184,6 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
 
         if (isShowing === true) {
 
-            console.log("username " + $scope.loginInfo.username);
-            console.log("password: " + $scope.loginInfo.password);
-           
             $http({
                 method: 'POST',
                 url: '/api/login',
@@ -197,10 +194,12 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             }).then(function successCallback(res) {
                 $scope.addNotification("Success!!!!!!!!!!!!", 'success-notification');
                 $scope.showLogin = false;
+                $scope.loginInfo = {};
                 closeLoginSlider();
             }, function errorCallback(res) {
                 $scope.addNotification("Error: Incorrect username or password!", 'failure-notification');
                 console.log(res.data.message);
+                $scope.loginInfo.password = "";
             });
 
         }

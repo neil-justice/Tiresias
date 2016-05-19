@@ -194,11 +194,8 @@ router.post('/api/signup', function(req, res) {
 
 router.post('/api/login', function(req, res) {
 
-    console.log(req.body.password);
-    console.log(req.body.username);
-
     if (!req.body.username || !req.body.password) {
-        return res.json({success: false, message: "nice try hacker"});
+        return res.sendStatus(400);
     }
 
     User.findOne({
@@ -208,14 +205,14 @@ router.post('/api/login', function(req, res) {
             throw err;
         }
         if (!user) {
-            return res.json({success: false, message: "invalid user"});
+            return res.sendStatus(400);
         }
         else if (!user.isValidPassword(req.body.password)) {
-            return res.json({success: false, message: "Incorrect password"});
+            return res.sendStatus(400);
         }
         else {
             var token = user.generateJwt();
-            return res.json({success: true, token: 'JWT ' + token});
+            return res.json({token: token});
         }
     });
 });

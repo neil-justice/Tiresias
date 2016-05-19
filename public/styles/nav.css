@@ -164,7 +164,7 @@ nav .login-button {
 .nav-button a {
   transition: 0.5s;
 }
- 
+
 nav input, nav textarea {
   width:90%;
   margin-bottom: 6px;
@@ -172,4 +172,8 @@ nav input, nav textarea {
 
 nav input:focus, nav textarea:focus {
   background-color: #ffff8d;
+}
+
+.hidden-button {
+  display:none;
 }
