@@ -42,6 +42,7 @@ nav .nav-button-container {
 nav .nav-button-section {
   right:16.5%;
   position: absolute;
+  height:2.7em;
 }
 
 /*nav > .nav-button-container:last-child {
@@ -79,7 +80,6 @@ nav li > a:hover {
 nav .login-button {
   padding-left:1em;
   padding-right:1em;
-  margin-left: 0.5em;
 }
 
 .login-slider-wrapper {
@@ -87,6 +87,7 @@ nav .login-button {
   width: 100%;
   margin: 0;
   padding: 0;
+  top:-200px;
   background-color: #2c3e50;
   z-index: 6;
 }
@@ -159,6 +160,11 @@ nav .login-button {
 .about-button {
     background-color: #f1c40f;
 }
+
+.nav-button a {
+  transition: 0.5s;
+}
+ 
 nav input, nav textarea {
   width:90%;
   margin-bottom: 6px;

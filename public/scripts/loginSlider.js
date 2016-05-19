@@ -1,40 +1,41 @@
 "use strict";
 
-eventListener('load', initLoginSlider, window);
+// eventListener('load', initLoginSlider, window);
 
 // Setup the login button
-function initLoginSlider()
-{
-  var button = document.querySelector(".login-button");
-  var insert = document.querySelector("#login-modal");
-  if (button  != null) {
-    eventListener("click", loginSlider, button);
-    observeMutation(postSliderLoading,insert);
-  }
-}
+// function initLoginSlider()
+// {
+//   var button = document.querySelector(".login-button");
+//   var insert = document.querySelector("#login-modal");
+//   if (button  != null) {
+//     eventListener("click", loginSlider, button);
+//     observeMutation(postSliderLoading,insert);
+//   }
+// }
 
 // When slider is hidden, show slider; otherwise submit form
-function loginSlider()
-{
-  if (document.querySelector(".login-slider-wrapper")) {
-    document.querySelector("#login-form").submit();
-  }
-  else {
-    insertElement("/login.html", "#login-modal");
-  }
-}
+// function loginSlider()
+// {
+//   if (document.querySelector(".login-slider-wrapper")) {
+//     document.querySelector("#login-form").submit();
+//   }
+//   else {
+//     insertElement("/login.html", "#login-modal");
+//   }
+// }
 
 // Activated after the slider has loaded, allowing for asynchronous AJAX
 // The if statement stops it trying to act when nodes are removed
-function postSliderLoading()
-{
-  if (document.querySelector(".login-slider-wrapper"))
-  {
-    setupPositioning();
-    initCloseLoginSlider();
-  }
-}
+// function postSliderLoading()
+// {
+//   if (document.querySelector(".login-slider-wrapper"))
+//   {
+//     setupPositioning();
+//     initCloseLoginSlider();
+//   }
+// }
 
+// Function now called from angularcontroller.js
 function setupPositioning()
 {
   var lbutton = document.querySelector(".login-button");
@@ -62,23 +63,30 @@ function setupPositioning()
 }
 
 // Setup the cancel button
-function initCloseLoginSlider()
-{
-  var button = document.querySelector(".login-close-button");
-  if (button  != null) {
-    eventListener("click", closeLoginSlider, button);
-  }
-}
+// function initCloseLoginSlider()
+// {
+//   var button = document.querySelector(".login-close-button");
+//   if (button  != null) {
+//     eventListener("click", closeLoginSlider, button);
+//   }
+// }
 
 // Function attached to the close button
+// function closeLoginSlider()
+// {
+//   // Move the navbar and main section back up to top
+//   document.querySelector("nav").style.top = 0;
+//   document.querySelector("main").style.paddingTop = 0;
+// 
+//   // Finally, remove the HTML after a timeout to allow for animation
+//   setTimeout(function() {
+//     removeElement("#login-modal", ".login-slider-wrapper");
+//   }, 400);
+// }
+
 function closeLoginSlider()
 {
   // Move the navbar and main section back up to top
   document.querySelector("nav").style.top = 0;
   document.querySelector("main").style.paddingTop = 0;
-
-  // Finally, remove the HTML after a timeout to allow for animation
-  setTimeout(function() {
-    removeElement("#login-modal", ".login-slider-wrapper");
-  }, 400);
 }

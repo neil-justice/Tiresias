@@ -8,6 +8,10 @@ var http = require('http');
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
+var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+var crypto = require('crypto');
+
 
 
 
@@ -23,6 +27,51 @@ MongoClient.connect(url, function(err, db) {
     collection = database.collection('predictions');
     console.log("Connected correctly to server.");
 });
+
+// Mongoose setup
+mongoose.connect(url);
+
+var userSchema = new mongoose.Schema( {
+    email: {
+        type: String,
+        unique: true,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    hash: String,
+    salt: String,
+    successCount: Number,
+    failCount: Number
+});
+
+userSchema.methods.setPassword = function(password) {
+    this.salt = crypto.randomBytes(16).toString('hex');
+    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+}
+
+userSchema.methods.isValidPassword = function(password) {
+    var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
+    return this.hash === hash;
+}
+
+userSchema.methods.generateJwt = function() {
+    var expiry = new Date();
+    expiry.setDate(expiry.getDate() + 7);
+
+    return jwt.sign({
+        _id: this._id,
+        email: this.email,
+        username: this.username,
+        exp: parseInt(expiry.getTime() / 1000)
+    }, fs.readFileSync('config/secret.txt'));
+};
+
+var User = mongoose.model('User', userSchema);
+
+
 
 
 // Express setup
@@ -67,7 +116,6 @@ router.route('/api/predictions/').post(function(req, res) {
             res.json(result.ops[0]);
         }
     });
-    
 });
 
 // router.route('/predictions/:pid').get(function(req, res, next) {
@@ -88,7 +136,7 @@ router.route('/api/predictions/:pid')
                 console.log(err);
             }
             else {
-             
+
                 // Returned document is empty
                 if (!data[0]) {
                     res.sendStatus(404);
@@ -120,8 +168,29 @@ router.route('/api/vote').post(function(req, res) {
         }
 
     });
+});
 
-})
+router.post('/api/signup', function(req, res) {
+    if (!req.body.username || !req.body.password) {
+        res.json({success: false, msg: 'Please enter a username and a password'});
+    } else {
+        var newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+        });
+        newUser.setPassword(req.body.password);
+
+        // save the user
+        newUser.save(function(err) {
+            if (err) {
+                return res.json({success: false, msg: 'Username already exists'});
+            }
+            else {
+                res.json({success: true, msg: 'Successful created new user'});
+            }
+        });
+    }
+});
 
 router.route('/*').get(function(req, res) {
 
