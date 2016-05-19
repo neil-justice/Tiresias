@@ -8,6 +8,26 @@ homepageApp.factory('User', function($resource) {
      return $resource("/api/signup");
  });
 
+homepageApp.factory('authentication', function($http, $window) {
+    var saveToken = function (token) {
+        $window.localStorage['token'] = token;
+    };
+
+    var getToken = function() {
+        return $window.localStorage['token'];
+    };
+
+    var logout = function() {
+        $window.localStorage.removeItem('token');
+    };
+
+    return {
+        saveToken: saveToken,
+        getToken: getToken,
+        logout: logout
+    };
+});
+
 homepageApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
     $routeProvider.
@@ -57,7 +77,7 @@ homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q)
 
 
 // Navbar stuff
-homepageApp.controller('navController', function($scope, Prediction, predictions, User, loadGoogleMapAPI, $http) {
+homepageApp.controller('navController', function($scope, Prediction, predictions, User, loadGoogleMapAPI, $http, authentication) {
 
     $scope.newPrediction = new Prediction();
     $scope.loginInfo = {};
@@ -196,6 +216,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 $scope.showLogin = false;
                 $scope.loginInfo = {};
                 closeLoginSlider();
+                authentication.saveToken(res.data.token);
             }, function errorCallback(res) {
                 $scope.addNotification("Error: Incorrect username or password!", 'failure-notification');
                 console.log(res.data.message);
