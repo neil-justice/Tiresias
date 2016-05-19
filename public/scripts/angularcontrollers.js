@@ -57,11 +57,10 @@ homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q)
 
 
 // Navbar stuff
-homepageApp.controller('navController', function($scope, Prediction, predictions, User, loadGoogleMapAPI) {
+homepageApp.controller('navController', function($scope, Prediction, predictions, User, loadGoogleMapAPI, $http) {
 
     $scope.newPrediction = new Prediction();
-    $scope.username = {};
-    $scope.password = {};
+    $scope.loginInfo = {};
 
     // Shows modal window (with ng-show)
     $scope.newPredictionWindow = function() {
@@ -184,9 +183,26 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         var isShowing = $scope.showLogin;
 
         if (isShowing === true) {
-            
-            $scope.showLogin = false;
-            closeLoginSlider();
+
+            console.log("username " + $scope.loginInfo.username);
+            console.log("password: " + $scope.loginInfo.password);
+           
+            $http({
+                method: 'POST',
+                url: '/api/login',
+                data: {
+                    username: $scope.loginInfo.username,
+                    password: $scope.loginInfo.password
+                }
+            }).then(function successCallback(res) {
+                $scope.addNotification("Success!!!!!!!!!!!!", 'success-notification');
+                $scope.showLogin = false;
+                closeLoginSlider();
+            }, function errorCallback(res) {
+                $scope.addNotification("Error: Incorrect username or password!", 'failure-notification');
+                console.log(res.data.message);
+            });
+
         }
         else {
             setupPositioning();

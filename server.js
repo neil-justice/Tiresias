@@ -193,24 +193,32 @@ router.post('/api/signup', function(req, res) {
 });
 
 router.post('/api/login', function(req, res) {
-    var userLogin = new User();
-    userLogin.findOne({
-        username: $scope.username
+
+    console.log(req.body.password);
+    console.log(req.body.username);
+
+    if (!req.body.username || !req.body.password) {
+        return res.json({success: false, message: "nice try hacker"});
+    }
+
+    User.findOne({
+        username: req.body.username
     }, function(err, user) {
         if (err) {
             throw err;
         }
         if (!user) {
-            $scope.addNotification("Error: username or password incorrect", 'failure-notification');
+            return res.json({success: false, message: "invalid user"});
         }
-        else if (!isValidPassword($scope.password)) {
-            $scope.addNotification("Error: username or password incorrect", 'failure-notification');
+        else if (!user.isValidPassword(req.body.password)) {
+            return res.json({success: false, message: "Incorrect password"});
         }
         else {
-            $scope.addNotification("Successful login!!!!!!!", 'success-notification');
+            var token = user.generateJwt();
+            return res.json({success: true, token: 'JWT ' + token});
         }
     });
-}
+});
 
 router.route('/*').get(function(req, res) {
 
