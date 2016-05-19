@@ -170,9 +170,29 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         });
     }
     
-    // Stops ng-click from being inherited by child nodes
+    // Can be set as an ng-click event to stop other ng-clicks from being 
+    // inherited by child nodes
     $scope.stopPropagation = function($event) {
         $event.stopPropagation();
+    }
+    
+    $scope.loginButton = function() {
+        var isShowing = $scope.showLogin;
+        
+        if (isShowing === true) {
+            // login stuff
+            $scope.showLogin = false;
+            closeLoginSlider();
+        }
+        else {
+            setupPositioning();
+            $scope.showLogin = true;
+        }
+    }
+    
+    $scope.hideLoginSlider = function() {
+        closeLoginSlider();
+        $scope.showLogin = false;
     }
 });
 
