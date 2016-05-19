@@ -195,7 +195,7 @@ router.post('/api/signup', function(req, res) {
 router.post('/api/login', function(req, res) {
 
     if (!req.body.username || !req.body.password) {
-        return res.sendStatus(400);
+        return res.status(400).json({success: false, message: 'no undefined allowed'});
     }
 
     User.findOne({
@@ -205,14 +205,14 @@ router.post('/api/login', function(req, res) {
             throw err;
         }
         if (!user) {
-            return res.sendStatus(400);
+            return res.status(400).json({success: false, message: 'no such user'});;
         }
         else if (!user.isValidPassword(req.body.password)) {
-            return res.sendStatus(400);
+            return res.status(400).json({success: false, message: 'incorrect password'});;
         }
         else {
             var token = user.generateJwt();
-            return res.json({token: token});
+            return res.status(200).json({token: token});
         }
     });
 });
