@@ -105,6 +105,8 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                     delete $scope.newPrediction.location;
                 }
 
+                $scope.newPrediction.votes = 0;
+
                 $scope.newPrediction.dateAdded = new Date();
                 var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
 
@@ -251,8 +253,8 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
 }]);
 
 // Single prediction page
-homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI',
-    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI) {
+homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', '$http',
+    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI, $http) {
 
     // Gets the prediction's _id value from the url
     var pId = $routeParams.pid;
@@ -263,7 +265,11 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         $scope.link = $scope.entry['link'];
         $scope.description = $scope.entry['description'];
         $scope.tags = $scope.entry['tags'];
+        $scope.votes = $scope.entry['votes'];
 
+        if (!$scope.votes) {
+            $scope.votes = 0;
+        }
 
         // Load google maps API and if successful, create map with location details of the prediction.
         loadGoogleMapAPI.then(function success() {
@@ -288,4 +294,19 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
     }, function error(res) {
         $location.path('/').replace();
     });
+
+    $scope.sendVote = function(vote) {
+        $http({
+            method: 'POST',
+            url: '/api/vote',
+            data: { 
+                vote: vote,
+                _id: pId
+            }
+        }).then(function successCallback(res) {
+            console.log('Vote successfully counted ' + res.status);
+        }, function errorCallback(res) {
+            console.log('Failed to vote' + res.status);
+        });
+    }
 }]);

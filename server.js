@@ -116,7 +116,6 @@ router.route('/api/predictions/').post(function(req, res) {
             res.json(result.ops[0]);
         }
     });
-
 });
 
 // router.route('/predictions/:pid').get(function(req, res, next) {
@@ -145,6 +144,29 @@ router.route('/api/predictions/:pid')
                 else
                     res.send(data[0]);
             }
+        });
+});
+
+router.route('/api/vote').post(function(req, res) {
+    var data = req.body;
+    var vote = data.vote;
+    var id = data._id;
+
+    console.log(id);
+
+    if (!id || !vote) {
+    }
+
+    var inc = vote ? 1 : -1;
+
+    collection.update({ _id: new ObjectID(id) }, { $inc: { votes: inc} }, function(err, result) {
+
+        if (err) {
+            res.sendStatus(500);
+        } else {
+            res.json(result);
+        }
+
     });
 });
 
@@ -167,9 +189,8 @@ router.post('/api/signup', function(req, res) {
                 res.json({success: true, msg: 'Successful created new user'});
             }
         });
-
     }
-})
+});
 
 router.route('/*').get(function(req, res) {
 
