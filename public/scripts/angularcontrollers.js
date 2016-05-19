@@ -180,7 +180,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         var isShowing = $scope.showLogin;
         
         if (isShowing === true) {
-            // login stuff
+            // login stuff here
             $scope.showLogin = false;
             closeLoginSlider();
         }

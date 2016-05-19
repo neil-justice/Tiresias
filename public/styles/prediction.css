@@ -28,10 +28,6 @@ aside#side-buttons {
   margin-top: 0.3em;
 }
 
-.vote-up {
-  margin-bottom: 0.3em;
-}
-
 .vote-down:hover {
   background-color: rgb(161,57,69);
 }
