@@ -245,7 +245,7 @@ router.post('/api/decode', function(req, res) {
             return res.status(200).json({username: user.username,
                                          email: user.email,
                                          successCount: user.successCount,
-                                         failureCount: user.failCount });
+                                         failCount: user.failCount });
         }
     });        
 });

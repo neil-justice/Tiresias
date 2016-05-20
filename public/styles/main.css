@@ -8,6 +8,7 @@ body {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 /* Disables blue border outline on image links in IE8/9/10: */

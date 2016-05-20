@@ -261,8 +261,8 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 $scope.isLoggedIn = true;
                 $scope.currentUser = {username:     res.data.username,
                                       email:        res.data.email,
-                                      successCount: res.data.successCount,
-                                      failureCount: res.data.failCount };
+                                      successCount: 0,
+                                      failCount: 0 };
             }, function errorCallback(res) {
                 console.log('not logged in: ' + res.data.message);
                 $scope.currentUser = {};

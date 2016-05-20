@@ -177,3 +177,43 @@ nav input:focus, nav textarea:focus {
 .hidden-button {
   display:none;
 }
+
+nav .user-info-panel {
+  color: white;
+  width: 15%;
+  float: right;
+  overflow:hidden;
+  height:99%;
+}
+
+nav .user-info {
+  font-size: 80%;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  width:50%;
+  float:left;
+  padding-top:5px;
+}
+
+nav .user-info-panel p {
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+
+nav .user-image {
+  padding:5px;
+  float:left;
+}
+
+nav .user-image > img {
+  height: 2em;
+}
+
+nav .user-success-count {
+  color: green;
+}
+
+nav .user-fail-count {
+  color: red;
+}
