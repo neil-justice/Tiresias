@@ -37,7 +37,7 @@
     <script src="/angular-growl-notifications/dist/angular-growl-notifications.js"></script>
 </head>
 <body>
-  <nav ng-controller="navController">
+  <nav ng-controller="navController as nav">
 
     <growl-notifications>
 
@@ -52,7 +52,7 @@
 
 
     <div id="login-modal" ng-include="'login.html'">
-    
+
     </div>
     <div class="nav-link-list">
       <ul>
@@ -70,16 +70,34 @@
 
       <div class="nav-button-container">
         <div class="nav-button-padding"></div>
-        <a class="button" ng-click="newUserWindow()">REGISTER</a>
+        <a class="button" ng-click="newUserWindow()" ng-hide="isLoggedIn">REGISTER</a>
         <div class="nav-button-padding"></div>
       </div>
 
       <div class="nav-button-container">
         <div class="nav-button-padding"></div>
-        <a class="button login-button" ng-click="loginButton()">LOGIN</a>
+        <a class="button login-button" ng-click="loginButton()" ng-hide="isLoggedIn">LOGIN</a>
         <div class="nav-button-padding"></div>
       </div>
+      
     </div>
+    
+    <div class="user-info-panel" ng-show="isLoggedIn">
+      <div class="user-image" >
+        <img src="/images/avatar.png" />
+      </div>
+      <div class="user-info">
+        <span>{{currentUser.username}}</span>
+        <a ng-click="logout()">(logout)</a>
+        <p>
+          <span class="user-success-count">{{currentUser.successCount}}</span>
+          <span> / </span>
+          <span class="user-fail-count">{{currentUser.failCount}}</span>
+        </p>
+      </div>
+    
+    </div>
+    
     <div id="new-modal" ng-include="'new.html'" ng-show="showModal"></div>
     <div id="new-user-modal" ng-include="'newUser.html'" ng-show="showUserModal"></div>
   </nav>

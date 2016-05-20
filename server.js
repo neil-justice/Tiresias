@@ -192,6 +192,64 @@ router.post('/api/signup', function(req, res) {
     }
 });
 
+router.post('/api/login', function(req, res) {
+
+    if (!req.body.username || !req.body.password) {
+        return res.status(403).json({success: false, message: 'no data provided'});
+    }
+
+    User.findOne({
+        username: req.body.username
+    }, function(err, user) {
+        if (err) {
+            throw err;
+        }
+        if (!user) {
+            return res.status(400).json({success: false, message: 'no such user'});;
+        }
+        else if (!user.isValidPassword(req.body.password)) {
+            return res.status(400).json({success: false, message: 'incorrect password'});;
+        }
+        else {
+            var token = user.generateJwt();
+            return res.status(200).json({token: token});
+        }
+    });
+});
+
+router.post('/api/decode', function(req, res) {
+  
+    if (!req.body.token) {
+        return res.status(403).json({success: false, msg: 'No token provided.'});
+    }
+    
+    var decodedToken = jwt.decode(req.body.token, fs.readFileSync('config/secret.txt'));
+    
+    if (!decodedToken.username) {
+        return res.status(403).json({success: false, msg: 'No user found in token'});
+    }    
+    
+    User.findOne({
+        username: decodedToken.username
+    }, function(err, user) {
+        if (err) {
+            throw err;
+        }
+        if (!user) {
+            return res.status(400).json({success: false, message: 'no such user'});;
+        }
+        else if (decodedToken.exp < Date.now() / 1000) {
+            return res.status(400).json({success: false, message: 'token expired'});;
+        }
+        else {
+            return res.status(200).json({username: user.username,
+                                         email: user.email,
+                                         successCount: user.successCount,
+                                         failCount: user.failCount });
+        }
+    });        
+});
+
 router.route('/*').get(function(req, res) {
 
     var options = {

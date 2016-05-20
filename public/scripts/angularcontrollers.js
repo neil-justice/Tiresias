@@ -8,6 +8,26 @@ homepageApp.factory('User', function($resource) {
      return $resource("/api/signup");
  });
 
+homepageApp.factory('authentication', function($http, $window) {
+    var saveToken = function (token) {
+        $window.localStorage['token'] = token;
+    };
+
+    var getToken = function() {
+        return $window.localStorage['token'];
+    };
+
+    var logout = function() {
+        $window.localStorage.removeItem('token');
+    };
+
+    return {
+        saveToken: saveToken,
+        getToken: getToken,
+        logout: logout
+    };
+});
+
 homepageApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
     $routeProvider.
@@ -57,9 +77,10 @@ homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q)
 
 
 // Navbar stuff
-homepageApp.controller('navController', function($scope, Prediction, predictions, User, loadGoogleMapAPI) {
+homepageApp.controller('navController', function($scope, Prediction, predictions, User, loadGoogleMapAPI, $http, authentication) {
 
     $scope.newPrediction = new Prediction();
+    $scope.loginInfo = {};
 
     // Shows modal window (with ng-show)
     $scope.newPredictionWindow = function() {
@@ -182,9 +203,27 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         var isShowing = $scope.showLogin;
 
         if (isShowing === true) {
-            // login stuff here
-            $scope.showLogin = false;
-            closeLoginSlider();
+
+            $http({
+                method: 'POST',
+                url: '/api/login',
+                data: {
+                    username: $scope.loginInfo.username,
+                    password: $scope.loginInfo.password
+                }
+            }).then(function successCallback(res) {
+                $scope.addNotification("Logged in successfully", 'success-notification');
+                $scope.showLogin = false;
+                $scope.loginInfo = {};
+                closeLoginSlider();
+                authentication.saveToken(res.data.token);
+                $scope.verifyUser();
+            }, function errorCallback(res) {
+                $scope.addNotification("Error: Incorrect username or password!", 'failure-notification');
+                console.log(res.data.message);
+                $scope.loginInfo.password = "";
+            });
+
         }
         else {
             setupPositioning();
@@ -196,6 +235,43 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         closeLoginSlider();
         $scope.showLogin = false;
     }
+    
+    $scope.logout = function() {
+        authentication.logout();
+        $scope.isLoggedIn = false;
+    }
+    
+    $scope.isLoggedIn = false;
+    $scope.currentUser = {};
+    
+    // Should be called whenever a user is logged out, in order to recalculate
+    // what buttons (e.g. login button) to show
+    $scope.verifyUser = function() {
+            $http({
+                method: 'POST',
+                url: '/api/decode',
+                data: {
+                    token: authentication.getToken()
+                }
+            }).then(function successCallback(res) {
+                console.log('logged in as: ' + res.data.username + 
+                            ' email: ' + res.data.email + 
+                            ' successes: ' + res.data.successCount + 
+                            ' fails: ' + res.data.failCount);
+                $scope.isLoggedIn = true;
+                $scope.currentUser = {username:     res.data.username,
+                                      email:        res.data.email,
+                                      successCount: 0,
+                                      failCount: 0 };
+            }, function errorCallback(res) {
+                console.log('not logged in: ' + res.data.message);
+                $scope.currentUser = {};
+                $scope.isLoggedIn = false;
+            });
+    }
+    
+    // checks user JWT token on page loaf
+    $scope.verifyUser();
 });
 
 homepageApp.controller('homepageController', ['$scope','Prediction', 'predictions', function($scope, Prediction, predictions) {
@@ -299,7 +375,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         $http({
             method: 'POST',
             url: '/api/vote',
-            data: { 
+            data: {
                 vote: vote,
                 _id: pId
             }
