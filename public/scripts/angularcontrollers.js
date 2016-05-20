@@ -277,9 +277,6 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         $scope.currentUser = {};
     }
 
-    $scope.isLoggedIn = false;
-    $scope.currentUser = {};
-
     // checks user JWT token on page loaf
     $scope.verifyUser = function() {
         var userInfo = authentication.verifyUser().then(function(data) {
@@ -287,7 +284,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
             $scope.currentUser = data.currentUser;
         });
     }
-    
+
     $scope.verifyUser();
 
 });
