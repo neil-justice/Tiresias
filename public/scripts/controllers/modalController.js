@@ -24,6 +24,10 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
 
     $scope.submitPrediction = function(form) {
 
+        authentication.verifyUser().then(function successCallback(data) {
+            $scope.currentUser = data.currentUser;
+        });
+
         loadGoogleMapAPI.then(function success() {
 
             // For coordinate lookup
@@ -41,6 +45,7 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
                 }
 
                 $scope.newPrediction.votes = 0;
+                $scope.newPrediction.user = $scope.currentUser.username;
 
                 $scope.newPrediction.dateAdded = new Date();
                 var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());

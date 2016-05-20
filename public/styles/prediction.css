@@ -126,3 +126,11 @@ input:focus, textarea:focus {
   margin-left: -1em;
   content: url('/images/comSide.png');
 }
+
+.prediction-creator {
+  float: right;
+  font-size: 80%;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  padding-top:5px;
+}
