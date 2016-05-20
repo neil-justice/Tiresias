@@ -12,7 +12,7 @@ function setNavElementHeights()
 
 function setNavButtonVertAlign(navHeight)
 {
-  var btnHeight = document.querySelector("nav .login-button").clientHeight;
+  var btnHeight = document.querySelector(".nav-button-section .button").clientHeight;
   var height = (navHeight - btnHeight) / 2;
   var newHeight = height.toString() + "px";
 

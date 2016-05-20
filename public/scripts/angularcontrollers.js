@@ -217,6 +217,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 $scope.loginInfo = {};
                 closeLoginSlider();
                 authentication.saveToken(res.data.token);
+                $scope.isLoggedIn();
             }, function errorCallback(res) {
                 $scope.addNotification("Error: Incorrect username or password!", 'failure-notification');
                 console.log(res.data.message);
@@ -234,6 +235,31 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         closeLoginSlider();
         $scope.showLogin = false;
     }
+    
+    $scope.logoutButton = function() {
+        authentication.logout();
+        $scope.isLoggedIn();
+    }
+    
+    $scope.showuserInfo = false;
+    
+    $scope.isLoggedIn = function() {
+            $http({
+                method: 'POST',
+                url: '/api/decode',
+                data: {
+                    token: authentication.getToken()
+                }
+            }).then(function successCallback(res) {
+                console.log('logged in as: ' + res.data.token.username);
+                $scope.showuserInfo = true;
+            }, function errorCallback(res) {
+                console.log('not logged in: ' + res.data.message);
+                $scope.showuserInfo = false;
+            });
+    }
+    
+    $scope.isLoggedIn();
 });
 
 homepageApp.controller('homepageController', ['$scope','Prediction', 'predictions', function($scope, Prediction, predictions) {
