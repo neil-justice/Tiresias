@@ -217,7 +217,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                 $scope.loginInfo = {};
                 closeLoginSlider();
                 authentication.saveToken(res.data.token);
-                $scope.isLoggedIn();
+                $scope.verifyUser();
             }, function errorCallback(res) {
                 $scope.addNotification("Error: Incorrect username or password!", 'failure-notification');
                 console.log(res.data.message);
@@ -236,14 +236,17 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         $scope.showLogin = false;
     }
     
-    $scope.logoutButton = function() {
+    $scope.logout = function() {
         authentication.logout();
-        $scope.isLoggedIn();
+        $scope.isLoggedIn = false;
     }
     
-    $scope.showuserInfo = false;
+    $scope.isLoggedIn = false;
+    $scope.currentUser = {};
     
-    $scope.isLoggedIn = function() {
+    // Should be called whenever a user is logged out, in order to recalculate
+    // what buttons (e.g. login button) to show
+    $scope.verifyUser = function() {
             $http({
                 method: 'POST',
                 url: '/api/decode',
@@ -251,15 +254,24 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                     token: authentication.getToken()
                 }
             }).then(function successCallback(res) {
-                console.log('logged in as: ' + res.data.token.username);
-                $scope.showuserInfo = true;
+                console.log('logged in as: ' + res.data.username + 
+                            ' email: ' + res.data.email + 
+                            ' successes: ' + res.data.successCount + 
+                            ' fails: ' + res.data.failCount);
+                $scope.isLoggedIn = true;
+                $scope.currentUser = {username:     res.data.username,
+                                      email:        res.data.email,
+                                      successCount: res.data.successCount,
+                                      failureCount: res.data.failCount };
             }, function errorCallback(res) {
                 console.log('not logged in: ' + res.data.message);
-                $scope.showuserInfo = false;
+                $scope.currentUser = {};
+                $scope.isLoggedIn = false;
             });
     }
     
-    $scope.isLoggedIn();
+    // checks user JWT token on page loaf
+    $scope.verifyUser();
 });
 
 homepageApp.controller('homepageController', ['$scope','Prediction', 'predictions', function($scope, Prediction, predictions) {

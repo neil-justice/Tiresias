@@ -221,9 +221,14 @@ router.post('/api/decode', function(req, res) {
   
     if (!req.body.token) {
         return res.status(403).json({success: false, msg: 'No token provided.'});
- 
     }
+    
     var decodedToken = jwt.decode(req.body.token, fs.readFileSync('config/secret.txt'));
+    
+    if (!decodedToken.username) {
+        return res.status(403).json({success: false, msg: 'No user found in token'});
+    }    
+    
     User.findOne({
         username: decodedToken.username
     }, function(err, user) {
@@ -237,7 +242,10 @@ router.post('/api/decode', function(req, res) {
             return res.status(400).json({success: false, message: 'token expired'});;
         }
         else {
-            return res.status(200).json({token: decodedToken });
+            return res.status(200).json({username: user.username,
+                                         email: user.email,
+                                         successCount: user.successCount,
+                                         failureCount: user.failCount });
         }
     });        
 });
