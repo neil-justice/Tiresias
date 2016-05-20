@@ -32,6 +32,7 @@ homepageApp.controller('navController', function($scope, User, $http, authentica
         }
         else {
             setupPositioning();
+            autoFocusUsernameField();
             $scope.showLogin = true;
         }
     }
