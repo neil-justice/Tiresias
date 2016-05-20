@@ -12,6 +12,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         $scope.description = $scope.entry['description'];
         $scope.tags = $scope.entry['tags'];
         $scope.votes = $scope.entry['votes'];
+        $scope.user = $scope.entry['user'];
 
         if (!$scope.votes) {
             $scope.votes = 0;
