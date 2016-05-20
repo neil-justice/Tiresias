@@ -10,6 +10,8 @@ function calcProgress(start, end)
   var daysPassed = now.diff(startDay, 'days');
 
   setProgress((daysPassed*100) / totalTime);
+  
+  return endDay.diff(now, 'days');
 }
 
 function setProgress(percent)
