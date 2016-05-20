@@ -212,7 +212,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
                     password: $scope.loginInfo.password
                 }
             }).then(function successCallback(res) {
-                $scope.addNotification("Success!!!!!!!!!!!!", 'success-notification');
+                $scope.addNotification("Logged in successfully", 'success-notification');
                 $scope.showLogin = false;
                 $scope.loginInfo = {};
                 closeLoginSlider();
