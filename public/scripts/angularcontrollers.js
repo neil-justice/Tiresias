@@ -262,6 +262,7 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         }
         else {
             setupPositioning();
+            autoFocusUsernameField();
             $scope.showLogin = true;
         }
     }

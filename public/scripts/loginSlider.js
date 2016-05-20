@@ -60,8 +60,13 @@ function setupPositioning()
   // Position the cancel button next to the login button
   cbutton.style.left = bcoords.right + "px";
   cbutton.style.top = vOffset + "px";
+
+
 }
 
+function autoFocusUsernameField() {
+  document.querySelector(".autofocusInput").focus();
+}
 // Setup the cancel button
 // function initCloseLoginSlider()
 // {
