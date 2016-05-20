@@ -25,10 +25,10 @@
 </section>
 
 <section id="timer">
-  <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="50" width="95%" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="50" width="100%" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
    <g>
-    <rect id="svg-bg" height="51.318" width="95%" y="-1.1506" x="0.98327" fill="#FFF"/>
-    <rect id="svg-border" height="30" width="95%" y="10.983" x="12.134" fill="#CCC"/>
+    <rect id="svg-bg" height="51.318" width="100%" y="-1.1506" x="0.98327" fill="#FFF"/>
+    <rect id="svg-border" height="30" width="100%" y="10.983" x="1%" fill="#CCC"/>
     <rect id="svg-bar" height="17.485" y="16.889" x="17.669" fill="#0F0">
       <animate id="svg-animate"
         attributeName="width"
@@ -51,7 +51,11 @@
     </rect>
    </g>
   </svg>
-  <p>{{daysLeft}} Days left</p>
+  <p class="date-wrapper">
+      <span class="date-col date-start">Started: {{dateStrings.startDay}}</span>
+      <span class="date-col days-left">{{dateStrings.daysLeft}} Days left</span>
+      <span class="date-col date-end">Finishes: {{dateStrings.endDay}}</span>
+  </p>
 </section>
 
 <section id="stats">

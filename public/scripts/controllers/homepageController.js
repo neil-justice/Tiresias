@@ -33,9 +33,11 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
             predictions.list.push(prediction);
 
             // Date formatting
-            if (prediction.date !== undefined) {
-                prediction.date = new Date(prediction.date).toLocaleString();
-            }
+            // if (prediction.date !== undefined) {
+            //     prediction.date = new Date(prediction.date).toLocaleString();
+            // }
+            console.log(prediction.dateAdded);
+            prediction.dateAdded = moment(prediction.dateAdded).format("Do MMM YYYY");
 
             // Number of comments
             if (prediction.comments === undefined) {

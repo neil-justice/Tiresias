@@ -126,3 +126,22 @@ input:focus, textarea:focus {
   margin-left: -1em;
   content: url('/images/comSide.png');
 }
+
+.date-wrapper {
+  display:table;
+  width:100%;
+}
+
+.date-col {
+  display: table-cell;
+}
+
+.date-start {
+    text-align: left;
+}
+.days-left {
+    text-align: center;
+}
+.date-end {
+    text-align: right;
+}

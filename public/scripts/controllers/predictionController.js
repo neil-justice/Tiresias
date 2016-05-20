@@ -36,7 +36,7 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         $scope.endDate = $scope.entry['endDate'];
         var start = $scope.startDate;
         var end = $scope.endDate;
-        calcProgress(start, end);
+        $scope.dateStrings = calcProgress(start, end);
     }, function error(res) {
         $location.path('/').replace();
     });

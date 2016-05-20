@@ -218,17 +218,17 @@ router.post('/api/login', function(req, res) {
 });
 
 router.post('/api/decode', function(req, res) {
-  
+
     if (!req.body.token) {
         return res.status(403).json({success: false, msg: 'No token provided.'});
     }
-    
+
     var decodedToken = jwt.decode(req.body.token, fs.readFileSync('config/secret.txt'));
-    
+
     if (!decodedToken.username) {
         return res.status(403).json({success: false, msg: 'No user found in token'});
-    }    
-    
+    }
+
     User.findOne({
         username: decodedToken.username
     }, function(err, user) {
@@ -247,7 +247,7 @@ router.post('/api/decode', function(req, res) {
                                          successCount: user.successCount,
                                          failCount: user.failCount });
         }
-    });        
+    });
 });
 
 router.route('/*').get(function(req, res) {
