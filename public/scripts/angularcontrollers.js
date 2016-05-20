@@ -21,10 +21,45 @@ homepageApp.factory('authentication', function($http, $window) {
         $window.localStorage.removeItem('token');
     };
 
+    var verifyUser = function() {
+            return $http({
+                method: 'POST',
+                url: '/api/decode',
+                data: {
+                    token: getToken()
+                }
+            }).then(function successCallback(res) {
+                console.log('logged in as: ' + res.data.username +
+                            ' email: ' + res.data.email +
+                            ' successes: ' + res.data.successCount +
+                            ' fails: ' + res.data.failCount);
+                return { isLoggedIn: true,
+                         currentUser: { username: res.data.username,
+                                        email: res.data.email,
+                                        successCount: 0,
+                                        failCount: 0 }
+                        };
+                // $scope.isLoggedIn = true;
+                // $scope.currentUser = {username:     res.data.username,
+                //                       email:        res.data.email,
+                //                       successCount: 0,
+                //                       failCount: 0 };
+            }, function errorCallback(res) {
+                console.log('not logged in: ' + res.data.message);
+                return {
+                        isLoggedIn: false,
+                        currentUser: {}
+                        }
+                // $scope.currentUser = {};
+                // $scope.isLoggedIn = false;
+            });
+    }
+
     return {
         saveToken: saveToken,
         getToken: getToken,
-        logout: logout
+        logout: logout,
+        verifyUser: verifyUser
     };
 });
 
@@ -235,43 +270,23 @@ homepageApp.controller('navController', function($scope, Prediction, predictions
         closeLoginSlider();
         $scope.showLogin = false;
     }
-    
+
     $scope.logout = function() {
         authentication.logout();
         $scope.isLoggedIn = false;
+        $scope.currentUser = {};
     }
-    
-    $scope.isLoggedIn = false;
-    $scope.currentUser = {};
-    
-    // Should be called whenever a user is logged out, in order to recalculate
-    // what buttons (e.g. login button) to show
-    $scope.verifyUser = function() {
-            $http({
-                method: 'POST',
-                url: '/api/decode',
-                data: {
-                    token: authentication.getToken()
-                }
-            }).then(function successCallback(res) {
-                console.log('logged in as: ' + res.data.username + 
-                            ' email: ' + res.data.email + 
-                            ' successes: ' + res.data.successCount + 
-                            ' fails: ' + res.data.failCount);
-                $scope.isLoggedIn = true;
-                $scope.currentUser = {username:     res.data.username,
-                                      email:        res.data.email,
-                                      successCount: 0,
-                                      failCount: 0 };
-            }, function errorCallback(res) {
-                console.log('not logged in: ' + res.data.message);
-                $scope.currentUser = {};
-                $scope.isLoggedIn = false;
-            });
-    }
-    
+
     // checks user JWT token on page loaf
+    $scope.verifyUser = function() {
+        var userInfo = authentication.verifyUser().then(function(data) {
+            $scope.isLoggedIn = data.isLoggedIn;
+            $scope.currentUser = data.currentUser;
+        });
+    }
+
     $scope.verifyUser();
+
 });
 
 homepageApp.controller('homepageController', ['$scope','Prediction', 'predictions', function($scope, Prediction, predictions) {
