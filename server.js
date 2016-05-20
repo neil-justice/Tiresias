@@ -166,7 +166,6 @@ router.route('/api/vote').post(function(req, res) {
         } else {
             res.json(result);
         }
-
     });
 });
 

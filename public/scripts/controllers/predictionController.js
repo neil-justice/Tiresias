@@ -1,6 +1,6 @@
 // Single prediction page
-homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', '$http',
-    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI, $http) {
+homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', '$http', 'authentication', 'notifications',
+    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI, $http, authentication, notifications) {
 
     // Gets the prediction's _id value from the url
     var pId = $routeParams.pid;
@@ -43,19 +43,28 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
     });
 
     $scope.sendVote = function(vote) {
-        $http({
-            method: 'POST',
-            url: '/api/vote',
-            data: {
-                vote: vote,
-                _id: pId
+
+        authentication.verifyUser().then(function (data) {
+
+            if (data.isLoggedIn) {  
+                $http({
+                    method: 'POST',
+                    url: '/api/vote',
+                    data: {
+                        vote: vote,
+                        _id: pId
+                    }
+                }).then(function successCallback(res) {
+                    console.log('Vote successfully counted ' + res.status);
+                    $scope.votes += vote ? 1 : -1;
+                }, function errorCallback(res) {
+                    console.log('Failed to vote' + res.status);
+                });
+            } else {
+                console.log("Log in to vote!");
             }
-        }).then(function successCallback(res) {
-            console.log('Vote successfully counted ' + res.status);
-            $scope.votes += vote ? 1 : -1;
             
-        }, function errorCallback(res) {
-            console.log('Failed to vote' + res.status);
         });
+
     }
 }]);
