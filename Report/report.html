@@ -7,29 +7,47 @@
 </head>
 <body>
     <main>
-    <h1>Web Tech Project Interim Report</h1>
+    <h1>Web Tech Project Final Report</h1>
     <p>By bm15048 and nj15347.</p>
-    <p>This is our interim report for our prediction tracking website.</p>
+    <p>This is our final report for our prediction tracking website.</p>
     <h3>Website</h3>
     <p>Our website aims to track predictions and claims made for the future, ranging from promises made by politicians, to a simple bet made between two friends. It gives users the chance to track predictions made within the categories that interest them, vote on whether they think the prediction will come true, see success/failure stats for categories, users and popular figures, and add their own claims to the site should they wish to have a public record of it.</p>
-    <h3>Prediction Page</h3>
-    <p>The biggest chunk of our effort has gone towards making the prediction page. This page includes information about a single prediction, including its title, description, a link to the source, a map showing the area(s) affected, a timer/progress bar showing the time left, tags, comments, and it gives the users the ability to upvote/downvote a prediction. <br/>
-    
+
+    <h3>Usage</h3>
+    <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json.  To run, the mongo server ("mongod") must be running, as well as the node server.<br/>  To populate the database with our dummy data, the command  "mongorestore --collection predictions --db tiresias mongobackup/tiresias/predictions.bson" can be run.</p>
 
     <!-- Our HTML and CSS is IE8 compatible, but not all our JavaScript scripts are yet.</p> -->
     <h3>Homepage</h3>
-    <p>We've also started work on a home page, which for now will be a list of 10 or so predictions, ordered by most recent (though it could have other options). We thought that this would be a good place to learn and test Angular, and make use of its templating, loop constructs and its ability to dynamically update the page, giving our web page a modern feel while also making it easy to provide such interactivity.</p>
-    <p>We have made a start on the server-side as part of the experiments with the home page, and we have managed to get Angular communicating with Express, which then accesses a MongoDB database in order to fetch a dummy list of predictions, and display them on the homepage. </p>
-    <p>We have also implemented fetching of data from the MongoDB database for individual predictions, and we are injecting that data into the prediction page template using Angular, and these can be accessed by following links from the homepage.</p>
-    <p>Unfortunately in order to use express we have had to replace server.js with a barebones version which is currently lacking any security features.</p>
+    <p>The homepage displays a list of all the predictions, ordered by most recent. We thought that this would be a good place to learn and test Angular, and make use of its templating, loop constructs and its ability to dynamically update the page, giving our web page a modern feel while also making it easy to provide such interactivity.</p>
+    Each prediction has its own box, showing its title, the description, date added, the creator, and tags about the prediction. <br/>
+    Since we are using angular, this page is also dynamic. If a new prediction is added, the list of predictions is updated automatically and displays the newly added prediction at the top of the list (as it is the most recent). Clicking on the title of a prediction takes the user to the prediction page.
+
+    <h3>Prediction Page</h3>
+    <p>The biggest chunk of our effort has gone towards making the prediction page. This page includes information about a single prediction, including its title, description, a link to the source, a map showing the area(s) affected, a timer/progress bar showing the time left, tags, comments, and it gives the users the ability to upvote/downvote a prediction. <br/>
+
+
 
     <h3>Navigation Bar</h3>
+    <h4>New prediction button</h4>
     Our 'New Prediction' button also uses JavaScript to inject a modal window containing a form into the page. This form gathers the data input by the user and creates a new prediction in the database. Form validation is done through Angular using a variety of directives. The fields with the red stars indicate required items, and if the user highlights one of these and switches away while it's still blank, a red error message indicating that the field is required will appear. This is done using ng-messages. The 'Submit' button will appear greyed out until the required fields are filled in. This is achieved using the ng-disabled directive, which checks if the expression passed to it (in this case it's the $invalid boolean of the form) is true or false, and disables the element it's placed on accordingly. <br/>
     Completing the form and pressing the 'Submit' button will call the submitPrediction method inside the 'modalController'. It will first verify that the user exists, ask Google Maps to find the location that was given in the form, and following this, will proceed to save the object into the database. This process of collecting data and sending it uses the $resource service in Angular, that creates an object that is able to interact with a specific REST api endpoint (that is specified in its factory method - in our project this can be found in the angularModule.js file.)<br/>
-    The login button injects a login form which slides down at the top of the page.  Clicking the button again submits the username and password.<br/>
+    <h4>Register button</h4>
+
+    <h4>Login/Cancel button</h4>
+    The login button injects a login form which slides down at the top of the page. Clicking the button again submits the username and password.
+    Once the user is logged in, the login and register buttons are hidden, and a small dashboard showing basic info about the user appears in their place. Ng-hide and ng-show directives are used to hide and show the different elements depending on whether the user is logged in or not.<br/>
     We have also implemented a variety of useful JavaScript functions for common tasks, such as inserting and deleting elements, getting element coordinates, and adding and removing event listeners.<br/>
-    <h3>Usage</h3>
-    <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json.  To run, the mongo server ("mongod") must be running, as well as the node server.<br/>  To populate the database with our dummy data, the command  "mongorestore --collection predictions --db tiresias mongobackup/tiresias/predictions.bson" can be run.</p>
+
+    <h3>Server</h3>
+    <p>The server uses Express.js to handle routing, and we have managed to get Angular communicating with Express, which then accesses a MongoDB database in order to fetch the list of predictions, and display them on the homepage. </p>
+    <p>We have also implemented fetching of data from the MongoDB database for individual predictions, and we are injecting that data into the prediction page template using Angular, and these can be accessed by following links from the homepage.</p>
+    <p>Because we are using Angular, the server is mainly used to handle REST api endpoints, rather than for serving different html pages. It serves index.html on the general route ('/*'), and the other page changes are handled by routing in Angular, which then allows you to specify a template file and a controller for each route that you wish to have on your site. This can be seen in the 'angularModule.js' file. It's worth noting that the html is sent as xhtml by setting its headers in the sendAsXHTML function inside server.js</p>
+    <p>The server also handles token generation, salting/hashing passwords, and verifying passwords. <br/>
+    The JWT (JSON Web Token) package is used to create a token when a user logs in successfully, which is then sent back to the client and stored in 'localstorage' in their browser. The user is then allowed to stay logged in until the token expiry date, as authenticated routes will send this token alongside other data so that it can be verified.
+
+    </p>
+    <p>Unfortunately in order to use express we have had to replace server.js with a barebones version which is currently lacking any security features.</p>
+
     </main>
 </body>
 </html>
