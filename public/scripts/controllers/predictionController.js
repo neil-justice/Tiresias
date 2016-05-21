@@ -44,7 +44,8 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
 
     $scope.sendVote = function(vote) {
 
-        authentication.verifyUser().then(function (data) {
+        // Verify logged in user first. If it's a real user, then send vote.
+        authentication.verifyUser().then(function success(data) {
 
             if (data.isLoggedIn) {  
                 $http({
@@ -52,16 +53,18 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
                     url: '/api/vote',
                     data: {
                         vote: vote,
-                        _id: pId
+                        _id: pId,
+                        currentUser: data.currentUser
                     }
                 }).then(function successCallback(res) {
                     console.log('Vote successfully counted ' + res.status);
-                    $scope.votes += vote ? 1 : -1;
+                    console.log(res.data);
+                    $scope.votes += res.data.inc; 
                 }, function errorCallback(res) {
                     console.log('Failed to vote' + res.status);
                 });
             } else {
-                console.log("Log in to vote!");
+                notifications.addNotification('Please log in to vote!', 'failure-notification');
             }
             
         });

@@ -151,22 +151,57 @@ router.route('/api/vote').post(function(req, res) {
     var data = req.body;
     var vote = data.vote;
     var id = data._id;
+    var currentUser = data.currentUser;
 
-    console.log(id);
-
-    if (!id || !vote) {
+    if (!id) {
+        res.sendStatus(400);
     }
 
     var inc = vote ? 1 : -1;
+    var hasVoted;
 
-    collection.update({ _id: new ObjectID(id) }, { $inc: { votes: inc} }, function(err, result) {
-
+    collection.findOne({_id: new ObjectID(id), usersVoted: {$in: [currentUser.username]}}, function(err, result) {
         if (err) {
             res.sendStatus(500);
-        } else {
-            res.json(result);
         }
+
+        var updateParams = {};
+
+        // If user has not voted on this before
+        if (result === null) {
+            // Update vote and add their username to usersVoted array inside prediction
+            updateParams = 
+                { 
+                    $inc: {votes: inc}, 
+                    $addToSet: {usersVoted: currentUser.username}
+                };
+            hasVoted = true;
+        } else {    // If they have
+            // Reverse the vote (there's no $dec in mongodb so had to use this trick)
+            // Remove their username from the usersVoted array
+            inc *= -1;
+            updateParams = 
+                { 
+                    $inc: {votes: inc}, 
+                    $pull: {usersVoted: currentUser.username}
+                };
+
+            hasVoted = false;
+        }
+
+        // Do the update
+        collection.update({ _id: new ObjectID(id) }, updateParams, function(err, result) {
+            if (err) {
+                res.sendStatus(500);
+            } else {
+                var returnObj = {inc: inc, hasVoted: hasVoted};
+                res.json(returnObj);
+            }
+        });
+
     });
+
+
 });
 
 router.post('/api/signup', function(req, res) {
