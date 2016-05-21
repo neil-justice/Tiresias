@@ -54,11 +54,15 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
                     data: {
                         vote: vote,
                         _id: pId,
-                        currentUser: data.currentUser
+                        currentUser: data.currentUser,
+                        hasVoted: $scope.hasVoted,
+                        inc: $scope.inc
                     }
                 }).then(function successCallback(res) {
                     console.log('Vote successfully counted ' + res.status);
                     console.log(res.data);
+                    $scope.inc = res.data.inc;
+                    $scope.hasVoted = res.data.hasVoted;
                     $scope.votes += res.data.inc; 
                 }, function errorCallback(res) {
                     console.log('Failed to vote' + res.status);

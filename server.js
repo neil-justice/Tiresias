@@ -186,7 +186,7 @@ router.route('/api/vote').post(function(req, res) {
                     $pull: {usersVoted: currentUser.username}
                 };
 
-            hasVoted = false;
+                hasVoted = false;
         }
 
         // Do the update
@@ -200,8 +200,6 @@ router.route('/api/vote').post(function(req, res) {
         });
 
     });
-
-
 });
 
 router.post('/api/signup', function(req, res) {

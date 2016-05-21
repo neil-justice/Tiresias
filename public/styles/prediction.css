@@ -44,6 +44,13 @@ aside#side-buttons {
   background-color: rgb(164,215,190);
 }
 
+.downVotePressed {
+  background-color: rgb(181,77,89);
+}
+
+.upVotePressed {
+  background-color: rgb(144,195,170);
+}
 #map {
   margin-top: 2em;
   height: 15em;
