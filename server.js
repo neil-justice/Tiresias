@@ -12,9 +12,6 @@ var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
 var crypto = require('crypto');
 
-
-
-
 // MongoDB setup
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/tiresias';
@@ -71,9 +68,6 @@ userSchema.methods.generateJwt = function() {
 
 var User = mongoose.model('User', userSchema);
 
-
-
-
 // Express setup
 var express = require('express');
 var app = express();
@@ -118,11 +112,6 @@ router.route('/api/predictions/').post(function(req, res) {
     });
 });
 
-// router.route('/predictions/:pid').get(function(req, res, next) {
-//     //res.setHeader('Content-Type', 'application/xhtml+xml');
-//     res.sendFile('/views/homepage.html', {root: __dirname});
-// });
-
 router.route('/api/predictions/:pid')
     .get(function(req, res) {
 
@@ -151,8 +140,6 @@ router.route('/api/vote').post(function(req, res) {
     var data = req.body;
     var vote = data.vote;
     var id = data._id;
-
-    console.log(id);
 
     if (!id || !vote) {
     }
@@ -198,6 +185,7 @@ router.post('/api/login', function(req, res) {
         return res.status(403).json({success: false, message: 'no data provided'});
     }
 
+    // Check to see if the user trying to login exists.
     User.findOne({
         username: req.body.username
     }, function(err, user) {
@@ -210,7 +198,8 @@ router.post('/api/login', function(req, res) {
         else if (!user.isValidPassword(req.body.password)) {
             return res.status(400).json({success: false, message: 'incorrect password'});;
         }
-        else {
+        else { // User exists
+            // Generate token and send it back
             var token = user.generateJwt();
             return res.status(200).json({token: token});
         }
@@ -223,6 +212,7 @@ router.post('/api/decode', function(req, res) {
         return res.status(403).json({success: false, msg: 'No token provided.'});
     }
 
+    // Get user information from the token (needs secret code that we generated randomly to decode it)
     var decodedToken = jwt.decode(req.body.token, fs.readFileSync('config/secret.txt'));
 
     if (!decodedToken.username) {
