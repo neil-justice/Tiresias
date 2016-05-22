@@ -1,5 +1,5 @@
 // Single prediction page
-homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', '$http', 'authentication', 'notifications',
+homepageApp.controller('predictionsController',
     function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI, $http, authentication, notifications) {
 
     // Gets the prediction's _id value from the url
@@ -95,4 +95,4 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
 
     }
 
-}]);
+});

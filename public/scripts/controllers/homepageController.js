@@ -1,5 +1,5 @@
 // controller for the front page view
-homepageApp.controller('homepageController', ['$scope','Prediction', 'predictions', function($scope, Prediction, predictions) {
+homepageApp.controller('homepageController', function($scope, Prediction, predictions) {
 
     // $http({method: 'GET',
     //     url:'/predictions',
@@ -53,4 +53,4 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
         console.log('Error: ' + res);
     } );
 
-}]);
+});
