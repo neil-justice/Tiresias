@@ -32,7 +32,7 @@
             <span class="required-field">*</span>
             <span class="new-error" ng-message="required" ng-show="predictionForm.newDateStart.$touched">Start date is required</span>
           </label>
-          <input type="date" name="newDateStart" ng-model="newPrediction.startDate" required=""/>
+          <input date-time name="newDateStart" ng-model="newPrediction.startDate" required=""/>
         </section>
 
         <section class="new new-date-end">

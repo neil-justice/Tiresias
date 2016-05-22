@@ -26,9 +26,11 @@
     "angular-messages": "^1.5.3",
     "angular-animate": "^1.5.3",
     "angular-growl-notifications": "^2.3.0",
-    "moment": "momentjs#^2.13.0"
+    "moment": "momentjs#^2.13.0",
+    "angular-datepicker": "^2.0.3"
   },
   "resolutions": {
-    "angular": "^1.5.0"
+    "angular": "^1.5.0",
+    "moment": "^2.13.0"
   }
 }
