@@ -49,10 +49,6 @@
   background-color: rgba(0,0,0,0.7);
 }
 
-.form-div .input-fields {
-  overflow: hidden;
-}
-
 .form-div .new {
   padding-top:0.3em;
   padding-bottom: 0.3em;
@@ -62,20 +58,30 @@
   display:block;
 }
 
+.form-div .cols {
+    display: table;
+    width: 100%;
+}
+
 .form-div .col-left {
   width:49%;
-  float:left;
-  overflow: visible;
+  display: table-cell;
 }
 
 .form-div .col-right {
   width:49%;
-  float:right;
+  display: table-cell;
 }
 
 .form-div .new input {
   width:97%;
   height: 1.2em;
+  display:block;
+  float:none;
+}
+
+datepicker {
+  float:none;
 }
 
 .form-div .new textarea,
@@ -124,7 +130,7 @@
   cursor: not-allowed;
 }
 
-.form-div  input:focus, 
+.form-div  input:focus,
 .form-div  textarea:focus {
   background-color: #ffff8d;
 }
