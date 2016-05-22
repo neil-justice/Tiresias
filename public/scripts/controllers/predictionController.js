@@ -52,6 +52,8 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
             }
         }).then(function successCallback(res) {
             console.log('Vote successfully counted ' + res.status);
+            $scope.votes += vote ? 1 : -1;
+            
         }, function errorCallback(res) {
             console.log('Failed to vote' + res.status);
         });
