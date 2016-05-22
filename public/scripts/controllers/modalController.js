@@ -94,7 +94,7 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
     };
 
     $scope.passwordsDontMatch = function(pass1, pass2) {
-        return pass1 != pass2;
+        return pass1 !== pass2;
     }
 
     $scope.submitUser = function(form) {

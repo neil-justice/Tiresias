@@ -245,8 +245,8 @@ router.route('/api/comment').post(function(req, res) {
     var id = data._id;
     var token = data.token // for authentication
 
-    if (!id || !text || !currentUser || !token) {
-        res.sendStatus(400);
+    if (!id || !text || text == "" || !currentUser || !token) {
+        return res.status(400);
     }
 
     // Get user information from the token (needs secret code that we generated randomly to decode it)

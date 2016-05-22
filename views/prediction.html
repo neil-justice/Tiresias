@@ -84,12 +84,14 @@
 
 <form class="new-comment" name="commentForm">
     <section class="new-comment-text-section">
-      <label>New Comment</label>
-      <textarea name="newText" rows="5" class="new-comment-text" ng-model="comment.text"></textarea>
+      <label ng-messages="commentForm.newText.$error">New Comment
+        <span class="new-error" ng-message="minlength">Comment too short (should be 20 or more characters)</span>
+      </label>
+      <textarea name="newText" rows="5" class="new-comment-text" ng-model="comment.text" ng-minlength="20" ></textarea>
     </section>
 
     <section class="new-comment-submit">
-    <input type="submit" value="SUBMIT" class="button" ng-click="sendComment()"/>
+    <input type="submit" value="SUBMIT" class="button" ng-disabled="commentForm.$invalid" ng-click="sendComment()"/>
     </section>
 </form>
 
