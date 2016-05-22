@@ -69,6 +69,7 @@ homepageApp.factory('notifications', function() {
     }
 });
 
+
 homepageApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
     $routeProvider.
@@ -113,3 +114,23 @@ homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q)
 
         return deferred.promise;
 }]);
+
+var compareTo = function() {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=compareTo"
+        },
+        link: function(scope, element, attributes, ngModel) {
+
+            ngModel.$validators.compareTo = function(modelValue) {
+                return modelValue == scope.otherModelValue;
+            };
+
+            scope.$watch("otherModelValue", function() {
+                ngModel.$validate();
+            });
+        }
+    };
+};
+homepageApp.directive("compareTo", compareTo);
