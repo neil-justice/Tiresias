@@ -4,9 +4,16 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
     $scope.newUser = new User();
     $scope.notifications = notifications.notifications;
 
-    // Shows modal window (with ng-show)
+    // Shows modal window (with ng-show) - but only if someone is logged in
     $scope.newPredictionWindow = function() {
-        $scope.showModal = true;
+        authentication.verifyUser().then(function(data) {
+            if (data.isLoggedIn == true) {
+                $scope.showModal = true;              
+            }
+            else {
+                notifications.addNotification('Please log in or register to add a prediction', 'failure-notification')
+            }
+        });
     };
 
     // Hides modal window
