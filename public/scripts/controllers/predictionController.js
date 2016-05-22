@@ -1,7 +1,8 @@
 // Single prediction page
 homepageApp.controller('predictionsController',
-    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI, $http, authentication, notifications) {
+    function($scope, $routeParams, $location, $window, Prediction, loadGoogleMapAPI, $http, authentication, notifications) {
 
+    $window.scrollTo(0, 0);
     // Gets the prediction's _id value from the url
     var pId = $routeParams.pid;
 
