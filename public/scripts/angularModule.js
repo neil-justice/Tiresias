@@ -1,4 +1,4 @@
-var homepageApp = angular.module('homepageApp', ['ngResource', 'ngRoute', 'ngMessages', 'growlNotifications', 'ngAnimate']);
+var homepageApp = angular.module('homepageApp', ['ngResource', 'ngRoute', 'ngMessages', 'growlNotifications', 'ngAnimate', 'ngTagsInput']);
 
 homepageApp.factory('Prediction', function($resource) {
      return $resource("/api/predictions/:pid");

@@ -26,7 +26,8 @@
     "angular-messages": "^1.5.3",
     "angular-animate": "^1.5.3",
     "angular-growl-notifications": "^2.3.0",
-    "moment": "momentjs#^2.13.0"
+    "moment": "momentjs#^2.13.0",
+    "ng-tags-input": "^3.0.0"
   },
   "resolutions": {
     "angular": "^1.5.0"
