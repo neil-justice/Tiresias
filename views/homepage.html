@@ -11,7 +11,7 @@
         <p class="prediction-description">{{prediction.description}}</p>
        <div class="prediction-links">
           <a class="prediction-comments-link" href="">{{prediction.noOfComments}} comments</a>
-          <a class="tag prediction-tag" href="#" ng-repeat="tag in prediction.tags">{{tag}}</a>
+          <a class="tag prediction-tag" href="#" ng-repeat="tag in prediction.tags">{{tag.text}}</a>
           <a href="">{{prediction.dateAdded}}</a>
           <a href="" class="post-creator">Created by: {{prediction.user}}</a>
         </div> 

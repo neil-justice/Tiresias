@@ -257,7 +257,7 @@ router.route('/*').get(function(req, res) {
       dotfiles: 'deny',
       headers: {}
     };
-    sendAsXHTML(req, options);
+    // sendAsXHTML(req, options);
 
     res.sendFile('/views/index.html', options);
 });

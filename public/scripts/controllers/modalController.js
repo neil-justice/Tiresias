@@ -4,6 +4,8 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
     $scope.newUser = new User();
     $scope.notifications = notifications.notifications;
 
+    $scope.tags = [];
+
     // Shows modal window (with ng-show)
     $scope.newPredictionWindow = function() {
         $scope.showModal = true;
@@ -46,6 +48,7 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
 
                 $scope.newPrediction.votes = 0;
                 $scope.newPrediction.user = $scope.currentUser.username;
+                $scope.newPrediction.tags = $scope.tags;
 
                 $scope.newPrediction.dateAdded = new Date();
                 var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
