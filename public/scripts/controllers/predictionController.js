@@ -75,12 +75,11 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
                         token: authentication.getToken()
                     }
                 }).then(function successCallback(res) {
-                    console.log('comment added ' + res.status);
                     if ($scope.comments === undefined) {
                         $scope.comments = [];
                     }
-
                     $scope.comments.push({username: currentUser, body: $scope.comment.text})
+                    $scope.comment.text = "";
                     notifications.addNotification('Comment added', 'success-notification');
 
                 }, function errorCallback(res) {
@@ -93,4 +92,5 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         });
 
     }
+
 }]);

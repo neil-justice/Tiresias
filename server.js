@@ -266,7 +266,7 @@ router.route('/api/comment').post(function(req, res) {
 
     if (!decodedToken.username || decodedToken.username !== currentUser) {
         console.log(currentUser + ' != ' + decodedToken.username);
-        return res.status(403).json({success: false, msg: 'auth failed'});
+        return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
     }
 
     var comment = { username: currentUser, body: text };

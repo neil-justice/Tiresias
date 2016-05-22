@@ -48,7 +48,7 @@ homepageApp.controller('navController', function($scope, User, $http, authentica
         $scope.currentUser = {};
     }
 
-    // checks user JWT token on page loaf
+    // checks user JWT token on page load
     $scope.verifyUser = function() {
         var userInfo = authentication.verifyUser().then(function(data) {
             $scope.isLoggedIn = data.isLoggedIn;

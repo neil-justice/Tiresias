@@ -9,6 +9,7 @@ homepageApp.factory('User', function($resource) {
  });
 
 homepageApp.factory('authentication', function($http, $window) {
+
     var saveToken = function (token) {
         $window.localStorage['token'] = token;
     };
@@ -29,10 +30,7 @@ homepageApp.factory('authentication', function($http, $window) {
                     token: getToken()
                 }
             }).then(function successCallback(res) {
-                console.log('logged in as: ' + res.data.username +
-                            ' email: ' + res.data.email +
-                            ' successes: ' + res.data.successCount +
-                            ' fails: ' + res.data.failCount);
+                console.log('logged in as: ' + res.data.username);
                 return { isLoggedIn: true,
                          currentUser: { username: res.data.username,
                                         email: res.data.email,
