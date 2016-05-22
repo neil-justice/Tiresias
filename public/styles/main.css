@@ -64,6 +64,16 @@ form label {
   color: #FFFFFF;
 }
 
+.new-error {
+  font-weight: bold;
+  font-size: 11px;
+  color: red;
+  margin: 0;
+  margin-top:0.35em;
+  padding-right: 2em;
+  float: right;
+}
+
 growl-notifications {
     position: fixed;
     top: 40px;
