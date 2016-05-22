@@ -223,7 +223,7 @@ router.post('/api/decode', function(req, res) {
         return res.status(403).json({success: false, msg: 'No token provided.'});
     }
 
-    var decodedToken = jwt.decode(req.body.token, fs.readFileSync('config/secret.txt'));
+    var decodedToken = decodeJWT(req.body.token);
 
     if (!decodedToken.username) {
         return res.status(403).json({success: false, msg: 'No user found in token'});
@@ -250,6 +250,38 @@ router.post('/api/decode', function(req, res) {
     });
 });
 
+// post a comment on a prediction.  has server-side verification.
+router.route('/api/comment').post(function(req, res) {
+    var data = req.body;
+    var text = data.text;
+    var currentUser = data.currentUser;
+    var id = data._id;
+    var token = data.token // for authentication
+
+    if (!id || !text || !currentUser || !token) {
+        res.sendStatus(400);
+    }
+
+    var decodedToken = decodeJWT(token);
+
+    if (!decodedToken.username || decodedToken.username !== currentUser) {
+        console.log(currentUser + ' != ' + decodedToken.username);
+        return res.status(403).json({success: false, msg: 'auth failed'});
+    }
+
+    var comment = { username: currentUser, body: text };
+
+    collection.update({ _id: new ObjectID(id) }, { $addToSet: { comments: comment} }, function(err, result) {
+
+        if (err) {
+            res.sendStatus(500);
+        } else {
+            res.json(result);
+        }
+
+    });
+});
+
 router.route('/*').get(function(req, res) {
 
     var options = {
@@ -273,6 +305,12 @@ function sendAsXHTML(req, options) {
     else {
        options.headers = { 'Content-Type': 'text/html' };
     }
+}
+
+function decodeJWT(token) {
+    if (!token) throw err;
+
+    return jwt.decode(token, fs.readFileSync('config/secret.txt'));
 }
 
 // // The default port numbers are the standard ones [80,443] for convenience.

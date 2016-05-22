@@ -137,13 +137,13 @@ input:focus, textarea:focus {
 }
 
 .date-start {
-    text-align: left;
+  text-align: left;
 }
 .days-left {
-    text-align: center;
+  text-align: center;
 }
 .date-end {
-    text-align: right;
+  text-align: right;
 }
 
 .prediction-creator {
@@ -152,4 +152,22 @@ input:focus, textarea:focus {
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   padding-top:5px;
+}
+
+.new-comment-text {
+  width:100%;
+  display:block;
+  border-radius:5px;
+}
+
+.new-comment .button {
+  margin-top: 1em;
+}
+
+.new-comment .button:focus {
+  background-color:#1570A5;
+}
+
+.new-comment {
+    padding-bottom: 10em;
 }

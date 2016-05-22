@@ -64,7 +64,6 @@
 <section id="tags">
   <span ng-repeat="tag in tags"><a class="tag" href="#">{{tag}}</a>
   </span>
-  <span class="prediction-creator">Created by: {{user}}</span>
 </section>
 
 <section id="map"></section>
@@ -83,4 +82,15 @@
   </li>
 </ul>
 
-      </section>
+<form class="new-comment" name="commentForm" ng-show="isLoggedIn">
+    <section class="new-comment-text-section">
+      <label>New Comment</label>
+      <textarea name="newText" rows="5" class="new-comment-text" ng-model="comment.text"></textarea>
+    </section>
+
+    <section class="new-comment-submit">
+    <input type="submit" value="SUBMIT" class="button" ng-click="sendComment()"/>
+    </section>
+</form>
+
+</section>

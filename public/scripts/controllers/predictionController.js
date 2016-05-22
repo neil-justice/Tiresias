@@ -1,6 +1,6 @@
 // Single prediction page
-homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', '$http',
-    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI, $http) {
+homepageApp.controller('predictionsController', ['$scope', '$window', '$routeParams', '$location', 'Prediction', 'loadGoogleMapAPI', '$http', 'authentication', 'notifications',
+    function($scope, $window, $routeParams, $location, Prediction, loadGoogleMapAPI, $http, authentication, notifications) {
 
     // Gets the prediction's _id value from the url
     var pId = $routeParams.pid;
@@ -55,5 +55,42 @@ homepageApp.controller('predictionsController', ['$scope', '$window', '$routePar
         }, function errorCallback(res) {
             console.log('Failed to vote' + res.status);
         });
+    }
+
+    $scope.sendComment = function() {
+
+        // Verify logged in user first. If it's a real user, then send comment.
+        authentication.verifyUser().then(function success(data) {
+
+            if (data.isLoggedIn) {
+
+                var currentUser = data.currentUser.username;
+                $http({
+                    method: 'POST',
+                    url: '/api/comment',
+                    data: {
+                        _id: pId,
+                        text: $scope.comment.text,
+                        currentUser: currentUser,
+                        token: authentication.getToken()
+                    }
+                }).then(function successCallback(res) {
+                    console.log('comment added ' + res.status);
+                    if ($scope.comments === undefined) {
+                        $scope.comments = [];
+                    }
+
+                    $scope.comments.push({username: currentUser, body: $scope.comment.text})
+                    notifications.addNotification('Comment added', 'success-notification');
+
+                }, function errorCallback(res) {
+                    notifications.addNotification('Comment failed', 'failure-notification');
+                });
+            } else {
+                notifications.addNotification('Please log in to comment!', 'failure-notification');
+            }
+
+        });
+
     }
 }]);

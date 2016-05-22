@@ -1,4 +1,4 @@
-// Navbar controller handles all angular in the navbar, as well
+// Navbar controller handles all angular in the navbar
 homepageApp.controller('navController', function($scope, User, $http, authentication, notifications) {
 
     $scope.loginInfo = {};
