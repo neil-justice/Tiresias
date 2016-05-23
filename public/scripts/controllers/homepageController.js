@@ -1,29 +1,7 @@
 // controller for the front page view
-homepageApp.controller('homepageController', function($scope, $window, Prediction, predictions) {
+homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction', 'predictions', function($scope, $window, Prediction, predictions) {
 
-    
-    // $http({method: 'GET',
-    //     url:'/predictions',
-    //     headers: {
-    //         accept:'application/json'
-    //     }
-    //     })
-    //     .then(function successCallback(res) {
-
-    //         if (res.status === 200) {
-
-    //             $scope.predictions = res.data;
-
-    //             // Turn ISODate back into normal date object ready to display
-    //             angular.forEach($scope.predictions, function(prediction) {
-    //                 if (prediction.date !== undefined) {
-    //                     prediction.date = new Date(prediction.date).toLocaleString();
-    //                 }
-    //             });
-    //         }
-    //     }, function errorCallback(res) {
-    //         console.log('Error: ' + res);
-    //     });
+    $scope.tagFilters = {};
 
     Prediction.query({}, function(data) {
 
@@ -33,11 +11,6 @@ homepageApp.controller('homepageController', function($scope, $window, Predictio
             var prediction = predictionResource.toJSON();
             predictions.list.push(prediction);
 
-            // Date formatting
-            // if (prediction.date !== undefined) {
-            //     prediction.date = new Date(prediction.date).toLocaleString();
-            // }
-            console.log(prediction.dateAdded);
             prediction.dateAdded = moment(prediction.dateAdded).format("Do MMM YYYY");
 
             // Number of comments
@@ -53,14 +26,24 @@ homepageApp.controller('homepageController', function($scope, $window, Predictio
     }, function error(res) {
         console.log('Error: ' + res);
     });
-    
+
     angular.element($window).on('scroll', function() {
         var banner = document.querySelector("#banner");
-        var navHeight = document.querySelector(".nav-button-section").clientHeight;
-        
-        var offset = Math.max(navHeight - $window.pageYOffset, -200);
-        banner.style.top = offset + "px";
-        
+
+        if (banner !== null) {
+            var navHeight = document.querySelector(".nav-button-section").clientHeight;
+
+            var offset = Math.max(navHeight - $window.pageYOffset, -200);
+            banner.style.top = offset + "px";
+        }
     });
 
-});
+    $scope.tagsAreEmpty = function() {
+        return angular.equals({}, $scope.tagFilters);
+    }
+
+    $scope.clearTagFilters = function() {
+        $scope.tagFilters = {};
+    }
+
+}]);
