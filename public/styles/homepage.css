@@ -7,7 +7,6 @@
     border-width: 0.5px;
     box-shadow: #e9ebec 0 3px 3px;
     border-color: #808080;
-    /*min-height: 8em;*/
     position: relative;
 }
 
@@ -68,6 +67,7 @@
     width: 90%;
     margin-left: 10%;
     margin-top: 18em;
+    position: relative;
 }
 
 .post-creator {
@@ -102,16 +102,31 @@
   text-align:left;
 }
 
-#banner h1 {
-  
-}
-
-#banner p {
-
-}
-
 #banner .banner-title {
   margin-top: 0.5em;
   padding-bottom: 0;
   margin-bottom: 0.6em;
+}
+
+.clear-filters {
+  font-family: 'Lato', sans-serif;
+  font-size: small;
+  display: inline;
+}
+
+.clear-filters:visited {
+  color: white;
+}
+
+.filter-container {
+  position: absolute;
+  left: 80%;
+  top: 5%;
+  width: 45%;
+}
+
+.filter-tag {
+  font-family: 'Lato', sans-serif;
+  font-size: x-small;
+  display: inline;
 }
