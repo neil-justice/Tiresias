@@ -158,7 +158,6 @@ router.route('/api/vote').post(function(req, res) {
     }
 
     var inc = vote ? 1 : -1;
-    var hasVoted;
 
     collection.findOne({_id: new ObjectID(id), usersVoted: {$in: [currentUser.username]}}, function(err, result) {
         if (err) {
@@ -170,41 +169,32 @@ router.route('/api/vote').post(function(req, res) {
         // If user has not voted on this before
         if (result === null) {
             // Update vote and add their username to usersVoted array inside prediction
-            updateParams = 
-                { 
-                    $inc: {votes: inc}, 
+            updateParams =
+                {
+                    $inc: {votes: inc},
                     $addToSet: {usersVoted: currentUser.username}
                 };
-            hasVoted = true;
-        } else {    // If they have
-            // Reverse the vote (there's no $dec in mongodb so had to use this trick)
-            // Remove their username from the usersVoted array
-            inc *= -1;
-            updateParams = 
-                { 
-                    $inc: {votes: inc}, 
-                    $pull: {usersVoted: currentUser.username}
-                };
 
-                hasVoted = false;
+            // Do the update
+            collection.update({ _id: new ObjectID(id) }, updateParams, function(err, result) {
+                if (err) {
+                    res.sendStatus(500);
+                } else {
+                    var returnObj = {inc: inc, hasVoted: true};
+                    res.json(returnObj);
+                }
+            });
         }
-
-        // Do the update
-        collection.update({ _id: new ObjectID(id) }, updateParams, function(err, result) {
-            if (err) {
-                res.sendStatus(500);
-            } else {
-                var returnObj = {inc: inc, hasVoted: hasVoted};
-                res.json(returnObj);
-            }
-        });
+        else {
+            res.status(403).json({inc:0, hasVoted: true})
+        }
 
     });
 });
 
 router.post('/api/signup', function(req, res) {
     if (!req.body.username || !req.body.password) {
-        res.json({success: false, msg: 'Please enter a username and a password'});
+        res.json({success: false, message: 'Please enter a username and a password'});
     } else {
         var newUser = new User({
             username: req.body.username,
@@ -215,10 +205,10 @@ router.post('/api/signup', function(req, res) {
         // save the user
         newUser.save(function(err) {
             if (err) {
-                return res.json({success: false, msg: 'Username already exists'});
+                return res.json({success: false, message: 'Username already exists'});
             }
             else {
-                res.json({success: true, msg: 'Successful created new user'});
+                res.json({success: true, message: 'Successful created new user'});
             }
         });
     }
@@ -250,17 +240,17 @@ router.post('/api/login', function(req, res) {
 });
 
 router.post('/api/decode', function(req, res) {
-  
+
     if (!req.body.token) {
-        return res.status(403).json({success: false, msg: 'No token provided.'});
+        return res.status(403).json({success: false, message: 'No token provided.'});
     }
-    
+
     var decodedToken = jwt.decode(req.body.token, fs.readFileSync('config/secret.txt'));
-    
+
     if (!decodedToken.username) {
-        return res.status(403).json({success: false, msg: 'No user found in token'});
-    }    
-    
+        return res.status(403).json({success: false, message: 'No user found in token'});
+    }
+
     User.findOne({
         username: decodedToken.username
     }, function(err, user) {
@@ -279,7 +269,7 @@ router.post('/api/decode', function(req, res) {
                                          successCount: user.successCount,
                                          failCount: user.failCount });
         }
-    });        
+    });
 });
 
 router.route('/*').get(function(req, res) {
