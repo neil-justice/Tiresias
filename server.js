@@ -155,7 +155,7 @@ router.route('/api/vote').post(function(req, res) {
     // Increment by 1 or -1 depending on whether it was an upvote or a downvote
     var inc = vote ? 1 : -1;
 
-    // Update correct field based on whether it was an upvote or a downvote
+    // Find whether that user has upvoted or downvoted this prediction before
     var findParams = {
         _id: new ObjectID(id), 
         $or: [
