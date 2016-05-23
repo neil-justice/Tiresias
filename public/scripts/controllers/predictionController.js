@@ -57,7 +57,8 @@ homepageApp.controller('predictionsController',
                         _id: pId,
                         currentUser: data.currentUser,
                         hasVoted: $scope.hasVoted,
-                        inc: $scope.inc
+                        inc: $scope.inc,
+                        token: authentication.getToken()
                     }
                 }).then(function successCallback(res) {
                     $scope.inc = res.data.inc;

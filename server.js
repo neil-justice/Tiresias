@@ -138,10 +138,15 @@ router.route('/api/vote').post(function(req, res) {
     var vote = data.vote;
     var id = data._id;
     var currentUser = data.currentUser;
+    var token = data.token;
 
-
-    if (!id) {
+    if (!data || !id || !vote || !token || !currentUser) {
         res.sendStatus(400);
+    }
+
+    // Get user information from the token (needs secret code that we generated randomly to decode it)
+    if (!verifyUser(token, currentUser.username)) { 
+        return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
     }
 
     var inc = vote ? 1 : -1;
@@ -275,10 +280,7 @@ router.route('/api/comment').post(function(req, res) {
     }
 
     // Get user information from the token (needs secret code that we generated randomly to decode it)
-    var decodedToken = decodeJWT(token);
-
-    if (!decodedToken.username || decodedToken.username !== currentUser) {
-        console.log(currentUser + ' != ' + decodedToken.username);
+    if (!verifyUser(token, currentUser)) {
         return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
     }
 
@@ -324,4 +326,17 @@ function decodeJWT(token) {
     if (!token) throw err;
 
     return jwt.decode(token, fs.readFileSync('config/secret.txt'));
+}
+
+function verifyUser(token, username) {
+    // Get user information from the token (needs secret code that we generated randomly to decode it)
+    var decodedToken = decodeJWT(token);
+
+    if (!decodedToken.username || decodedToken.username !== username) {
+        console.log(username + ' != ' + decodedToken.username);
+        return false;
+    }
+    else {
+        return true;
+    }
 }
