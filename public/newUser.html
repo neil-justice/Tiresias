@@ -40,7 +40,7 @@
           <span class="new-error" ng-message="minlength" ng-show="userForm.newConfirmPassword.$touched">Password must be 8 or more characters!</span>
           <span class="new-error" ng-show="passwordsDontMatch(newUser.password, newUser.confirmPassword)">Passwords don't match</span>
         </label>
-        <input type="password" name="newConfirmPassword" ng-model="newUser.confirmPassword" ng-minlength="8" required=""/>
+        <input type="password" name="newConfirmPassword" ng-model="newUser.confirmPassword" ng-minlength="8" required="" same-as="newUser.password"/>
       </section>
 
 
