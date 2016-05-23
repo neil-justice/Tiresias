@@ -10,11 +10,12 @@
 
 <section id="search" >
   <input type="text" name="" class="searchBar" ng-model="searchQuery"/>
-  <div class="clear-filters" ng-show="!tagsAreEmpty()"><a href="" ng-click="clearTagFilters()">
+  <div class="clear-filters" ng-show="!tagsAreEmpty()"><a href="" class="button" ng-click="clearTagFilters()">
   Clear filters
     </a>
-</div>
+  </div>
 </section>
+
 <section>
   <ul>
     <li class="prediction" ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:tagFilters.tag | orderBy : 'prediction.dateAdded' : true ">
@@ -30,7 +31,6 @@
           <a href="" class="post-creator">Created by: {{prediction.user}}</a>
         </div> 
       </div>
-
     </li>
   </ul>
 </section>

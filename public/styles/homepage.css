@@ -68,6 +68,7 @@
     width: 90%;
     margin-left: 10%;
     margin-top: 18em;
+    position: relative;
 }
 
 .post-creator {
@@ -102,16 +103,19 @@
   text-align:left;
 }
 
-#banner h1 {
-  
-}
-
-#banner p {
-
-}
-
 #banner .banner-title {
   margin-top: 0.5em;
   padding-bottom: 0;
   margin-bottom: 0.6em;
+}
+
+.clear-filters {
+  position: absolute;
+  font-family: 'Lato', sans-serif;
+  left: 85%;
+  top: 0%;
+}
+
+.clear-filters:visited {
+  color: white;
 }

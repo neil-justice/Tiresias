@@ -1,5 +1,5 @@
 // controller for the front page view
-homepageApp.controller('homepageController', function($scope, $window, Prediction, predictions) {
+homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction', 'predictions', function($scope, $window, Prediction, predictions) {
 
     $scope.tagFilters = {};
 
@@ -44,4 +44,4 @@ homepageApp.controller('homepageController', function($scope, $window, Predictio
         $scope.tagFilters = {};
     }
 
-});
+}]);
