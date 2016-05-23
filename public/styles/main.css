@@ -67,6 +67,15 @@ form label {
 .footer {
   height:15em;
   background-color:#282222;
+  
+.new-error {
+  font-weight: bold;
+  font-size: 11px;
+  color: red;
+  margin: 0;
+  margin-top:0.35em;
+  padding-right: 2em;
+  float: right;
 }
 
 growl-notifications {
