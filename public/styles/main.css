@@ -68,7 +68,7 @@ form label {
   height:15em;
   background-color:#282222;
 }
-  
+
 .new-error {
   font-weight: bold;
   font-size: 11px;
@@ -97,14 +97,14 @@ growl-notifications growl-notification {
 }
 
 .success-notification {
-  color: #52A060;
-  background-color: #DFF0D8;
-  
+  color: #FFF;
+  background-color: #52A060;
+
 }
 
 .failure-notification {
-  color: #A50000;
-  background-color: #FFDDDD;
+  color: #FFF;
+  background-color: #A50000;
 }
 
 .close-notification {
