@@ -143,7 +143,7 @@ router.route('/api/vote').post(function(req, res) {
     var currentUser = data.currentUser;
     var token = data.token;
 
-    if (!data || !id || !vote || !token || !currentUser) {
+    if (!data || !id || !token || !currentUser) {
         return res.sendStatus(400);
     }
 
