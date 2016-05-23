@@ -1,6 +1,7 @@
 // controller for the front page view
-homepageApp.controller('homepageController', ['$scope','Prediction', 'predictions', function($scope, Prediction, predictions) {
+homepageApp.controller('homepageController', function($scope, $window, Prediction, predictions) {
 
+    
     // $http({method: 'GET',
     //     url:'/predictions',
     //     headers: {
@@ -33,9 +34,11 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
             predictions.list.push(prediction);
 
             // Date formatting
-            if (prediction.date !== undefined) {
-                prediction.date = new Date(prediction.date).toLocaleString();
-            }
+            // if (prediction.date !== undefined) {
+            //     prediction.date = new Date(prediction.date).toLocaleString();
+            // }
+            console.log(prediction.dateAdded);
+            prediction.dateAdded = moment(prediction.dateAdded).format("Do MMM YYYY");
 
             // Number of comments
             if (prediction.comments === undefined) {
@@ -49,6 +52,15 @@ homepageApp.controller('homepageController', ['$scope','Prediction', 'prediction
         $scope.predictions = predictions.list;
     }, function error(res) {
         console.log('Error: ' + res);
-    } );
+    });
+    
+    angular.element($window).on('scroll', function() {
+        var banner = document.querySelector("#banner");
+        var navHeight = document.querySelector(".nav-button-section").clientHeight;
+        
+        var offset = Math.max(navHeight - $window.pageYOffset, -200);
+        banner.style.top = offset + "px";
+        
+    });
 
-}]);
+});

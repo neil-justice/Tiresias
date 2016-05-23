@@ -1,3 +1,4 @@
+// Here we define the main angular module, as well as services and directives.
 var homepageApp = angular.module('homepageApp', ['ngResource', 'ngRoute', 'ngMessages', 'growlNotifications', 'ngAnimate']);
 
 homepageApp.factory('Prediction', function($resource) {
@@ -8,7 +9,9 @@ homepageApp.factory('User', function($resource) {
      return $resource("/api/signup");
  });
 
+ // Authentication functions used by several controllers.
 homepageApp.factory('authentication', function($http, $window) {
+
     var saveToken = function (token) {
         $window.localStorage['token'] = token;
     };
@@ -29,10 +32,7 @@ homepageApp.factory('authentication', function($http, $window) {
                     token: getToken()
                 }
             }).then(function successCallback(res) {
-                console.log('logged in as: ' + res.data.username +
-                            ' email: ' + res.data.email +
-                            ' successes: ' + res.data.successCount +
-                            ' fails: ' + res.data.failCount);
+                console.log('logged in as: ' + res.data.username);
                 return { isLoggedIn: true,
                          currentUser: { username: res.data.username,
                                         email: res.data.email,
@@ -56,6 +56,7 @@ homepageApp.factory('authentication', function($http, $window) {
     };
 });
 
+// soft popup notification functions used by several controllers
 homepageApp.factory('notifications', function() {
     var notificationIndex = 0; //ID for notifications
     var notifications = {}; // list of notifications
@@ -71,6 +72,7 @@ homepageApp.factory('notifications', function() {
     }
 });
 
+// Specifies controllers for views
 homepageApp.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
 
     $routeProvider.
@@ -115,3 +117,21 @@ homepageApp.factory('loadGoogleMapAPI', ['$window', '$q', function ($window, $q)
 
         return deferred.promise;
 }]);
+
+// Used to compare passwords in the registration form
+homepageApp.directive('sameAs', function() {
+    return {
+        require: 'ngModel',
+        scope: { otherValue: '=sameAs' },
+        link: function(scope, element, attributes, ngModel) {
+
+            ngModel.$validators.sameAs = function(value) {
+                return value === scope.otherValue;
+            };
+
+            scope.$watch('otherValue', function() {
+                ngModel.$validate();
+            });
+        }
+    };
+});

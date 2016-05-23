@@ -87,16 +87,6 @@
   margin-top:2em;
 }
 
-.form-div .new-error {
-  font-weight: bold;
-  font-size: 11px;
-  color: red;
-  margin: 0;
-  margin-top:0.35em;
-  padding-right: 2em;
-  float: right;
-}
-
 .form-div .required-field {
   color:red;
 }
