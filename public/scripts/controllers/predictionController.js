@@ -14,6 +14,32 @@ homepageApp.controller('predictionsController',
         $scope.tags = $scope.entry['tags'];
         $scope.votes = $scope.entry['votes'];
         $scope.user = $scope.entry['user'];
+        $scope.downvotes = $scope.entry['downvotes'];
+        $scope.upvotes = $scope.entry['upvotes'];
+
+        if ($scope.upvotes === undefined) {
+            $scope.upvotes = [];
+        }
+        if ($scope.downvotes === undefined) {
+            $scope.downvotes = [];
+        }
+
+        authentication.verifyUser().then(function successCallback(data) {
+            if (data.isLoggedIn) {
+                if ($scope.upvotes.indexOf(data.currentUser.username) !== -1) {
+
+                    $scope.hasVoted = true;
+                    $scope.upvote = true;
+                }
+                else if ($scope.downvotes.indexOf(data.currentUser.username) !== -1) {
+                    $scope.hasVoted = true;
+                    $scope.downvote = true;
+                }
+                else {
+                    $scope.hasVoted = false;
+                }
+            } 
+        });
 
         if (!$scope.votes) {
             $scope.votes = 0;
@@ -64,6 +90,11 @@ homepageApp.controller('predictionsController',
                     $scope.inc = res.data.inc;
                     $scope.hasVoted = res.data.hasVoted;
                     $scope.votes += res.data.inc;
+                    if ($scope.inc === 1) {
+                        $scope.upvote = true;
+                    } else {
+                        $scope.downvote = true;
+                    }
                 }, function errorCallback(res) {
                     notifications.addNotification('You have already voted', 'failure-notification');
                 });

@@ -152,9 +152,22 @@ router.route('/api/vote').post(function(req, res) {
         return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
     }
 
+    // Increment by 1 or -1 depending on whether it was an upvote or a downvote
     var inc = vote ? 1 : -1;
 
-    collection.findOne({_id: new ObjectID(id), usersVoted: {$in: [currentUser.username]}}, function(err, result) {
+    // Update correct field based on whether it was an upvote or a downvote
+    var findParams = {
+        _id: new ObjectID(id), 
+        $or: [
+            {
+                upvotes: {$in: [currentUser.username]}
+            },
+            {
+                downvotes: {$in: [currentUser.username]}
+            }]
+    };
+
+    collection.findOne(findParams, function(err, result) {
         if (err) {
             return res.sendStatus(500);
         }
@@ -163,12 +176,15 @@ router.route('/api/vote').post(function(req, res) {
 
         // If user has not voted on this before
         if (result === null) {
-            // Update vote and add their username to usersVoted array inside prediction
-            updateParams =
-                {
-                    $inc: {votes: inc},
-                    $addToSet: {usersVoted: currentUser.username}
-                };
+            
+            // Update vote and add their username to upvotes or downvotes array inside prediction
+            updateParams ={$inc: {votes: inc}};
+
+            if (vote) {
+                updateParams.$addToSet = {upvotes: currentUser.username};
+            } else {
+                updateParams.$addToSet = {downvotes: currentUser.username};
+            }
 
             // Do the update
             collection.update({ _id: new ObjectID(id) }, updateParams, function(err, result) {
