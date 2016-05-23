@@ -44,20 +44,35 @@ homepageApp.controller('predictionsController',
     });
 
     $scope.sendVote = function(vote) {
-        $http({
-            method: 'POST',
-            url: '/api/vote',
-            data: {
-                vote: vote,
-                _id: pId
+
+        // Verify logged in user first. If it's a real user, then send vote.
+        authentication.verifyUser().then(function success(data) {
+
+            if (data.isLoggedIn) {
+                $http({
+                    method: 'POST',
+                    url: '/api/vote',
+                    data: {
+                        vote: vote,
+                        _id: pId,
+                        currentUser: data.currentUser,
+                        hasVoted: $scope.hasVoted,
+                        inc: $scope.inc,
+                        token: authentication.getToken()
+                    }
+                }).then(function successCallback(res) {
+                    $scope.inc = res.data.inc;
+                    $scope.hasVoted = res.data.hasVoted;
+                    $scope.votes += res.data.inc;
+                }, function errorCallback(res) {
+                    notifications.addNotification('You have already voted', 'failure-notification');
+                });
+            } else {
+                notifications.addNotification('Please log in to vote!', 'failure-notification');
             }
-        }).then(function successCallback(res) {
-            console.log('Vote successfully counted ' + res.status);
-            $scope.votes += vote ? 1 : -1;
-            
-        }, function errorCallback(res) {
-            console.log('Failed to vote' + res.status);
+
         });
+
     }
 
     $scope.sendComment = function() {

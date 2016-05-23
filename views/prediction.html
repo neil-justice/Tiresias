@@ -5,12 +5,14 @@
 <aside id="side-buttons">
   <a ng-click="sendVote(true)">
     <img  class="vote-button vote-up"
+          ng-class="{upVotePressed: hasVoted &amp;&amp; inc == 1}"
           src="/images/Upvote.png"
           alt="Upvote button"/>
   </a>
   <span class="vote-number">{{votes}}</span>
   <a ng-click="sendVote(false)">
     <img  class="vote-button vote-down"
+          ng-class="{downVotePressed: hasVoted &amp;&amp; inc == -1}"
           src="/images/Downvote.png"
           alt="Downvote button"/>
   </a>
@@ -66,7 +68,7 @@
   </span>
 </section>
 
-<section id="map"></section>
+<section id="map" ng-show="entry['location'] !== undefined"></section>
 
 <section id="comments">
 <h1 style="font-size: large">Comments:</h1>

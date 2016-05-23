@@ -26,14 +26,16 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
     }, function error(res) {
         console.log('Error: ' + res);
     });
-    
+
     angular.element($window).on('scroll', function() {
         var banner = document.querySelector("#banner");
-        var navHeight = document.querySelector(".nav-button-section").clientHeight;
-        
-        var offset = Math.max(navHeight - $window.pageYOffset, -200);
-        banner.style.top = offset + "px";
-        
+
+        if (banner !== null) {
+            var navHeight = document.querySelector(".nav-button-section").clientHeight;
+
+            var offset = Math.max(navHeight - $window.pageYOffset, -200);
+            banner.style.top = offset + "px";
+        }
     });
 
     $scope.tagsAreEmpty = function() {

@@ -137,18 +137,48 @@ router.route('/api/vote').post(function(req, res) {
     var data = req.body;
     var vote = data.vote;
     var id = data._id;
+    var currentUser = data.currentUser;
+    var token = data.token;
 
-    if (!id || !vote) {
+    if (!data || !id || !vote || !token || !currentUser) {
+        res.sendStatus(400);
+    }
+
+    // Get user information from the token (needs secret code that we generated randomly to decode it)
+    if (!verifyUser(token, currentUser.username)) { 
+        return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
     }
 
     var inc = vote ? 1 : -1;
 
-    collection.update({ _id: new ObjectID(id) }, { $inc: { votes: inc} }, function(err, result) {
-
+    collection.findOne({_id: new ObjectID(id), usersVoted: {$in: [currentUser.username]}}, function(err, result) {
         if (err) {
             res.sendStatus(500);
-        } else {
-            res.json(result);
+        }
+
+        var updateParams = {};
+
+        // If user has not voted on this before
+        if (result === null) {
+            // Update vote and add their username to usersVoted array inside prediction
+            updateParams =
+                {
+                    $inc: {votes: inc},
+                    $addToSet: {usersVoted: currentUser.username}
+                };
+
+            // Do the update
+            collection.update({ _id: new ObjectID(id) }, updateParams, function(err, result) {
+                if (err) {
+                    res.sendStatus(500);
+                } else {
+                    var returnObj = {inc: inc, hasVoted: true};
+                    res.json(returnObj);
+                }
+            });
+        }
+        else {
+            res.status(403).json({inc:0, hasVoted: true})
         }
 
     });
@@ -156,7 +186,7 @@ router.route('/api/vote').post(function(req, res) {
 
 router.post('/api/signup', function(req, res) {
     if (!req.body.username || !req.body.password) {
-        res.json({success: false, msg: 'Please enter a username and a password'});
+        res.json({success: false, message: 'Please enter a username and a password'});
     } else {
         var newUser = new User({
             username: req.body.username,
@@ -167,10 +197,10 @@ router.post('/api/signup', function(req, res) {
         // save the user
         newUser.save(function(err) {
             if (err) {
-                return res.json({success: false, msg: 'Username already exists'});
+                return res.json({success: false, message: 'Username already exists'});
             }
             else {
-                res.json({success: true, msg: 'Successful created new user'});
+                res.json({success: true, message: 'Successful created new user'});
             }
         });
     }
@@ -206,7 +236,7 @@ router.post('/api/login', function(req, res) {
 router.post('/api/decode', function(req, res) {
 
     if (!req.body.token) {
-        return res.status(403).json({success: false, msg: 'No token provided.'});
+        return res.status(403).json({success: false, message: 'No token provided.'});
     }
 
     // Get user information from the token (needs secret code that we generated randomly to decode it)
@@ -250,10 +280,7 @@ router.route('/api/comment').post(function(req, res) {
     }
 
     // Get user information from the token (needs secret code that we generated randomly to decode it)
-    var decodedToken = decodeJWT(token);
-
-    if (!decodedToken.username || decodedToken.username !== currentUser) {
-        console.log(currentUser + ' != ' + decodedToken.username);
+    if (!verifyUser(token, currentUser)) {
         return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
     }
 
@@ -299,4 +326,17 @@ function decodeJWT(token) {
     if (!token) throw err;
 
     return jwt.decode(token, fs.readFileSync('config/secret.txt'));
+}
+
+function verifyUser(token, username) {
+    // Get user information from the token (needs secret code that we generated randomly to decode it)
+    var decodedToken = decodeJWT(token);
+
+    if (!decodedToken.username || decodedToken.username !== username) {
+        console.log(username + ' != ' + decodedToken.username);
+        return false;
+    }
+    else {
+        return true;
+    }
 }
