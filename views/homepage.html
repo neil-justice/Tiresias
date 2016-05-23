@@ -10,9 +10,12 @@
 
 <section id="search" >
   <input type="text" name="" class="searchBar" ng-model="searchQuery"/>
+  <div class="filter-container">
+  <span class="tag filter-tag" ng-show="!tagsAreEmpty()">{{tagFilters.tag}}</span>
   <div class="clear-filters" ng-show="!tagsAreEmpty()"><a href="" class="button" ng-click="clearTagFilters()">
-  Clear filters
+  Clear filter
     </a>
+  </div>
   </div>
 </section>
 
