@@ -141,11 +141,11 @@ router.route('/api/vote').post(function(req, res) {
     var token = data.token;
 
     if (!data || !id || !vote || !token || !currentUser) {
-        res.sendStatus(400);
+        return res.sendStatus(400);
     }
 
     // Get user information from the token (needs secret code that we generated randomly to decode it)
-    if (!verifyUser(token, currentUser.username)) { 
+    if (!verifyUser(token, currentUser.username)) {
         return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
     }
 
@@ -153,7 +153,7 @@ router.route('/api/vote').post(function(req, res) {
 
     collection.findOne({_id: new ObjectID(id), usersVoted: {$in: [currentUser.username]}}, function(err, result) {
         if (err) {
-            res.sendStatus(500);
+            return res.sendStatus(500);
         }
 
         var updateParams = {};
@@ -170,15 +170,15 @@ router.route('/api/vote').post(function(req, res) {
             // Do the update
             collection.update({ _id: new ObjectID(id) }, updateParams, function(err, result) {
                 if (err) {
-                    res.sendStatus(500);
+                    return res.sendStatus(500);
                 } else {
                     var returnObj = {inc: inc, hasVoted: true};
-                    res.json(returnObj);
+                    return res.json(returnObj);
                 }
             });
         }
         else {
-            res.status(403).json({inc:0, hasVoted: true})
+            return res.status(403).json({inc:0, hasVoted: true})
         }
 
     });
@@ -289,9 +289,9 @@ router.route('/api/comment').post(function(req, res) {
     collection.update({ _id: new ObjectID(id) }, { $addToSet: { comments: comment} }, function(err, result) {
 
         if (err) {
-            res.sendStatus(500);
+            return res.sendStatus(500);
         } else {
-            res.json(result);
+            return res.json(result);
         }
 
     });
