@@ -1,40 +1,4 @@
 "use strict";
-
-// eventListener('load', initLoginSlider, window);
-
-// Setup the login button
-// function initLoginSlider()
-// {
-//   var button = document.querySelector(".login-button");
-//   var insert = document.querySelector("#login-modal");
-//   if (button  != null) {
-//     eventListener("click", loginSlider, button);
-//     observeMutation(postSliderLoading,insert);
-//   }
-// }
-
-// When slider is hidden, show slider; otherwise submit form
-// function loginSlider()
-// {
-//   if (document.querySelector(".login-slider-wrapper")) {
-//     document.querySelector("#login-form").submit();
-//   }
-//   else {
-//     insertElement("/login.html", "#login-modal");
-//   }
-// }
-
-// Activated after the slider has loaded, allowing for asynchronous AJAX
-// The if statement stops it trying to act when nodes are removed
-// function postSliderLoading()
-// {
-//   if (document.querySelector(".login-slider-wrapper"))
-//   {
-//     setupPositioning();
-//     initCloseLoginSlider();
-//   }
-// }
-
 // Function now called from angularcontroller.js
 function setupPositioning()
 {
@@ -50,7 +14,7 @@ function setupPositioning()
 
   // Lower the navbar and main section
   document.querySelector("nav").style.top = sliderHeight - 1 + "px";
-  document.querySelector("main").style.paddingTop = sliderHeight + "px";
+  document.querySelector("#banner").style.marginTop = -500 + "px";
 
   // Set login form position
   wrapper.style.top = -sliderHeight + 1 + "px";
@@ -93,5 +57,5 @@ function closeLoginSlider()
 {
   // Move the navbar and main section back up to top
   document.querySelector("nav").style.top = 0;
-  document.querySelector("main").style.paddingTop = 0;
+  document.querySelector("#banner").style.marginTop = 0;
 }
