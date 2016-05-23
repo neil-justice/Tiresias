@@ -1,7 +1,7 @@
 // controller for the front page view
 homepageApp.controller('homepageController', function($scope, $window, Prediction, predictions) {
 
-    
+
     // $http({method: 'GET',
     //     url:'/predictions',
     //     headers: {
@@ -53,14 +53,16 @@ homepageApp.controller('homepageController', function($scope, $window, Predictio
     }, function error(res) {
         console.log('Error: ' + res);
     });
-    
+
     angular.element($window).on('scroll', function() {
         var banner = document.querySelector("#banner");
-        var navHeight = document.querySelector(".nav-button-section").clientHeight;
-        
-        var offset = Math.max(navHeight - $window.pageYOffset, -200);
-        banner.style.top = offset + "px";
-        
+
+        if (banner !== null) {
+            var navHeight = document.querySelector(".nav-button-section").clientHeight;
+
+            var offset = Math.max(navHeight - $window.pageYOffset, -200);
+            banner.style.top = offset + "px";
+        }
     });
 
 });
