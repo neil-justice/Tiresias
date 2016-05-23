@@ -19,7 +19,7 @@
 
     <h3>Usage</h3>
 
-    <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json.  To run, the mongo server ("mongod") must be running, as well as the node server.</p>
+    <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json. To run, the mongo server ("mongod") must be running, as well as the node server.</p>
 
     <p>  To populate the database with our dummy data, the command  "mongorestore --collection predictions --db tiresias mongobackup/tiresias/predictions.bson" can be run.</p>
 
@@ -31,9 +31,13 @@
     <p>Each prediction has its own box, showing its title, the description, date added, the creator, and tags about the prediction.</p>
     <p>Since we are using angular, this page is also dynamic. If a new prediction is added, the list of predictions is updated automatically and displays the newly added prediction at the top of the list (as it is the most recent). Clicking on the title of a prediction takes the user to the prediction page.</p>
 
+    <h4>
+        The homepage contains a banner, that contains the name of the site, a basic summary of the function of the site, and a drawing of an Ancient Greek prophet. As the user scrolls down, the banner disappears, leaving space for the predictions. If the login button is clicked, the banner, again, disappears upwards so that it doesn't get in the way.
+    </h4>
+
     <h3>Prediction Page</h3>
 
-    <p>The biggest chunk of our effort has gone towards making the prediction page. This page includes information about a single prediction, including its title, description, a link to the source, a map showing the area(s) affected, a timer/progress bar showing the time left, tags, comments, and it gives the users the ability to upvote/downvote a prediction.  If the user is logged in they may add comments, which appear instantly, and have both server-side and client-side validation.<\p>
+    <p>The biggest chunk of our effort has gone towards making the prediction page. This page includes information about a single prediction, including its title, description, a link to the source, a map showing the area(s) affected, a timer/progress bar showing the time left, tags, comments, and it gives the users the ability to upvote/downvote a prediction.  If the user is logged in they may add comments, which appear instantly, and have both server-side and client-side validation. Voting also requires a login, and the user will get a pop-up notification telling them to log in if they try to vote while not logged in.</p>
 
 
     <h3>Navigation Bar</h3>
@@ -46,6 +50,11 @@
 
     <h4>Register button</h4>
 
+    <p>The register button, like the 'New Prediction' button, injects a modal form into the webpage that allows new users to register by filling in a username, email address and password. Form validation is done via Angular once again. All fields are required and the form cannot be submitted until these are all filled, the email address format is correct, and the password is 8 or more characters in length (and the two passwords match). </p>
+    <p>
+        Once the form is submitted, a new User is created in the 'users' collection in the MongoDB database. This user can then log in using their username and password through the login form.
+    </p>
+
     <h4>Login/Cancel button</h4>
 
     <p>The login button reveals a login form which slides down at the top of the page. Clicking the button again submits the username and password.</p>
@@ -56,23 +65,23 @@
 
     <h3>SVG</h3>
 
-    <p>Each prediction has a start date - the date the prediction was made - and an end date - the date it was meant to come true.  An SVG progress bar displays the time passed.  The progress bar is controlled by javascript, which injects values into the SVG to change both the length of the bar and the colour - from green to red.  Making this taught us a lot about SVG and vector graphics, and it took some time to get the animation right and correctly calculate the size of the bar based on the dates.</p>
+    <p>Each prediction has a start date - the date the prediction was made - and an end date - the date it was meant to come true.  An SVG progress bar displays the time passed.  The progress bar is controlled by Javascript, which injects values into the SVG to change both the length of the bar and the colour - from green to red.  Making this taught us a lot about SVG and vector graphics, and it took some time to get the animation right and correctly calculate the size of the bar based on the dates.</p>
 
-    <p>The SVG was initially created in inkscape, but heavily edited by hand afterwards to make it fit with our overall design.</p>
+    <p>The SVG was initially created in Inkscape, but heavily edited by hand afterwards to make it fit with our overall design.</p>
 
     <h3>Images</h3>
 
-    <p>We have designed several images, including the vote up and down buttons, the close button used by modal windows and soft popup notifications, the home and stats icons on the navbar, and the main banner on the homepage.  This last one was the most difficult, and was done by tracing an image found via Google Image search for 'prophet' and running the result through several different filters.  This was a few hours worth of work.</p>
+    <p>We have designed several images, including the vote up and down buttons, the close button used by modal windows and soft pop-up notifications, the home and stats icons on the navbar, and the main banner on the homepage.  This last one was the most difficult, and was done by tracing an image found via Google Image search for 'prophet' and running the result through several different filters.  This was a few hours worth of work.</p>
 
     <h3>CSS</h3>
 
-    <p>We have split our CSS into several different files in an attempt to keep it modular, and avoid the problem which is often seen in web development where there is a single CSS file with several thousand lines in it.  Strict specification of selectors means that the style definitions from one file do not accidentally bleed over and affect elements which they were not intended to, and the main.css file holds style definitions which are meant to apply globally, such as some basic normalisations and conventions about linking.</p>
+    <p>We have split our CSS into several different files in an attempt to keep it modular, and avoid the problem which is often seen in web development where there is a single CSS file with several thousand lines in it.  Strict specification of selectors means that the style definitions from one file do not accidentally bleed over and affect elements which they were not intended to, and the main.css file holds style definitions which are meant to apply globally, such as some basic normalisations and conventions about linking. We did not use libraries such as Bootstrap and designed (almost) everything ourselves.</p>
 
-    <h3>Javacript and Angular</h3>
+    <h3>Javascript and Angular</h3>
 
     <p>We have learnt a lot about both these languages, not having worked with them before.  In particular, learning to think asynchronously was a challenge but we think we have been successful here.  For example, the Google maps API was often loading before other parts of the page it was depending on, so we have changed it to be injected after they have loaded.</p>
 
-    <p>We have also learned a lot about callback functions, promises, and so on.</p>
+    <p>We have also learned a lot about callback functions, promises, and so on. We tried to use a variety of Angular services and directives across our website. For example, a single prediction on the prediction page (predictionController.js) is fetched using a $resource that we named 'Prediction' - which aims to wrap HTTP requests to simplify the process - and the data is filled in inside the success callback function. In other places we used the slightly lower-level $http service itself to make requests, in order to get familiar with both methods.</p>
 
     <h1>Server</h1>
 
@@ -88,7 +97,7 @@
 
     <p>The JWT (JSON Web Token) package is used to create a token when a user logs in successfully, which is then sent back to the client and stored in 'localstorage' in their browser. The user is then allowed to stay logged in until the token expiry date, as authenticated routes will send this token alongside other data so that it can be verified.</p>
 
-    <p>In the part of the module we learnt a lot about creating and working with an API, and connecting server, database and frontend.  Creating the user system was particularly challenging and we are quite proud of what we have achieved there.</p>
+    <p>In the part of the module we learnt a lot about creating and working with an API, and connecting server, database and front-end. Creating the user system was particularly challenging and we are quite proud of what we have achieved there.</p>
 
     </main>
 </body>
