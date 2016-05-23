@@ -8,7 +8,7 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
     $scope.newPredictionWindow = function() {
         authentication.verifyUser().then(function(data) {
             if (data.isLoggedIn == true) {
-                $scope.showModal = true;              
+                $scope.showModal = true;
             }
             else {
                 notifications.addNotification('Please log in or register to add a prediction', 'failure-notification')
@@ -53,6 +53,7 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
 
                 $scope.newPrediction.votes = 0;
                 $scope.newPrediction.user = $scope.currentUser.username;
+                $scope.newPrediction.token = authentication.getToken();
 
                 $scope.newPrediction.dateAdded = new Date();
                 var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());

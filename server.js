@@ -96,6 +96,9 @@ router.route('/api/predictions').get(function(req, res, next) {
 
 router.route('/api/predictions/').post(function(req, res) {
 
+    if (!verifyUser(req.body.token, req.body.user)) {
+        return res.status(403).json({success: false, message: 'authorisation failed - please log in'});
+    }
     // Insert the body of the request into the db as a new document
     collection.insertOne(req.body, function(err, result) {
 
