@@ -25,33 +25,11 @@ function setupPositioning()
   cbutton.style.left = bcoords.right + "px";
   cbutton.style.top = vOffset + "px";
 
-
 }
 
 function autoFocusUsernameField() {
   document.querySelector(".autofocusInput").focus();
 }
-// Setup the cancel button
-// function initCloseLoginSlider()
-// {
-//   var button = document.querySelector(".login-close-button");
-//   if (button  != null) {
-//     eventListener("click", closeLoginSlider, button);
-//   }
-// }
-
-// Function attached to the close button
-// function closeLoginSlider()
-// {
-//   // Move the navbar and main section back up to top
-//   document.querySelector("nav").style.top = 0;
-//   document.querySelector("main").style.paddingTop = 0;
-// 
-//   // Finally, remove the HTML after a timeout to allow for animation
-//   setTimeout(function() {
-//     removeElement("#login-modal", ".login-slider-wrapper");
-//   }, 400);
-// }
 
 function closeLoginSlider()
 {
