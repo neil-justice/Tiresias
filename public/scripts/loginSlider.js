@@ -14,7 +14,12 @@ function setupPositioning()
 
   // Lower the navbar and main section
   document.querySelector("nav").style.top = sliderHeight - 1 + "px";
-  document.querySelector("#banner").style.marginTop = -500 + "px";
+
+  var banner = document.querySelector("#banner");
+
+  if (banner) {
+    banner.style.marginTop = -500 + "px";
+  }
 
   // Set login form position
   wrapper.style.top = -sliderHeight + 1 + "px";
@@ -35,5 +40,9 @@ function closeLoginSlider()
 {
   // Move the navbar and main section back up to top
   document.querySelector("nav").style.top = 0;
-  document.querySelector("#banner").style.marginTop = 0;
+
+  var banner = document.querySelector("#banner");
+  if (banner) {
+    banner.style.marginTop = 0;
+  }
 }
