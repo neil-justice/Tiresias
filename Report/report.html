@@ -13,11 +13,11 @@
     <p>By bm15048 and nj15347.</p>
 
     <p>This is our final report for our prediction tracking website.</p>
-    <h3>Website</h3>
+    <h2>Website</h2>
 
     <p>Our website aims to track predictions and claims made for the future, ranging from promises made by politicians, to a simple bet made between two friends. It gives users the chance to track predictions made within the categories that interest them, vote on whether they think the prediction will come true, see success/failure stats for categories, users and popular figures, and add their own claims to the site should they wish to have a public record of it.</p>
 
-    <h3>Usage</h3>
+    <h2>Usage</h2>
 
     <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json. To run, the mongo server ("mongod") must be running, as well as the node server.</p>
 
@@ -25,22 +25,24 @@
 
     <h1>Client</h1>
 
-    <h3>Homepage</h3>
+    <h2>Homepage</h2>
 
     <p>The homepage displays a list of all the predictions, ordered by most recent. We thought that this would be a good place to learn and test Angular, and make use of its templating, loop constructs and its ability to dynamically update the page, giving our web page a modern feel while also making it easy to provide such interactivity.</p>
     <p>Each prediction has its own box, showing its title, the description, date added, the creator, and tags about the prediction.</p>
     <p>Since we are using angular, this page is also dynamic. If a new prediction is added, the list of predictions is updated automatically and displays the newly added prediction at the top of the list (as it is the most recent). Clicking on the title of a prediction takes the user to the prediction page.</p>
 
-    <h4>
-        The homepage contains a banner, that contains the name of the site, a basic summary of the function of the site, and a drawing of an Ancient Greek prophet. As the user scrolls down, the banner disappears, leaving space for the predictions. If the login button is clicked, the banner, again, disappears upwards so that it doesn't get in the way.
-    </h4>
+    <h4>Banner</h4>
+    <p> The homepage contains a banner, that contains the name of the site, a basic summary of the function of the site, and a drawing of an Ancient Greek prophet. As the user scrolls down, the banner disappears, leaving space for the predictions. If the login button is clicked, the banner, again, disappears upwards so that it doesn't get in the way. It reappears once the user has logged in or pressed the 'Cancel' button.</p>
 
-    <h3>Prediction Page</h3>
+    <h4>Tag Category Filter</h4>
+    <p>If the user clicks on one of the tags that appear inside one of the prediction boxes, the list of predictions will be filtered using that category and only predictions that contain that tag will be visible on the page. The category used to filter, as well as a button to clear the filter appear next to the search bar when this happens, so that the user can see what they're filtering by, and remove the filter should they wish to.</p>
+    
+    <h2>Prediction Page</h2>
 
     <p>The biggest chunk of our effort has gone towards making the prediction page. This page includes information about a single prediction, including its title, description, a link to the source, a map showing the area(s) affected, a timer/progress bar showing the time left, tags, comments, and it gives the users the ability to upvote/downvote a prediction.  If the user is logged in they may add comments, which appear instantly, and have both server-side and client-side validation. Voting also requires a login, and the user will get a pop-up notification telling them to log in if they try to vote while not logged in.</p>
 
 
-    <h3>Navigation Bar</h3>
+    <h2>Navigation Bar</h2>
 
     <h4>New prediction button</h4>
 
@@ -63,21 +65,24 @@
 
     <p>We have also implemented a variety of useful JavaScript functions for common tasks, such as inserting and deleting elements, getting element coordinates, and adding and removing event listeners.</p>
 
-    <h3>SVG</h3>
+    <h4>Home and Stats buttons</h4>
+    <p>On the far left are the 'Home' button and the 'Stats' buttons. The home button is fairly explanatory - it takes the user back to the homepage. The 'Stats' button is currently not being used as we did not manage to implement a 'Stats' page, as this would have required a way of moderating predictions and deciding which ones have come true and which ones have not. It would have also required an implementation of different styles for the prediction page of predictions that have ended, based on whether they came true or not. Unfortunately, we didn't have time to implement these and therefore haven't included a stats page, but it would likely be the next step were we to continue the project.</p>
+
+    <h2>SVG</h2>
 
     <p>Each prediction has a start date - the date the prediction was made - and an end date - the date it was meant to come true.  An SVG progress bar displays the time passed.  The progress bar is controlled by Javascript, which injects values into the SVG to change both the length of the bar and the colour - from green to red.  Making this taught us a lot about SVG and vector graphics, and it took some time to get the animation right and correctly calculate the size of the bar based on the dates.</p>
 
     <p>The SVG was initially created in Inkscape, but heavily edited by hand afterwards to make it fit with our overall design.</p>
 
-    <h3>Images</h3>
+    <h2>Images</h2>
 
     <p>We have designed several images, including the vote up and down buttons, the close button used by modal windows and soft pop-up notifications, the home and stats icons on the navbar, and the main banner on the homepage.  This last one was the most difficult, and was done by tracing an image found via Google Image search for 'prophet' and running the result through several different filters.  This was a few hours worth of work.</p>
 
-    <h3>CSS</h3>
+    <h2>CSS</h2>
 
     <p>We have split our CSS into several different files in an attempt to keep it modular, and avoid the problem which is often seen in web development where there is a single CSS file with several thousand lines in it.  Strict specification of selectors means that the style definitions from one file do not accidentally bleed over and affect elements which they were not intended to, and the main.css file holds style definitions which are meant to apply globally, such as some basic normalisations and conventions about linking. We did not use libraries such as Bootstrap and designed (almost) everything ourselves.</p>
 
-    <h3>Javascript and Angular</h3>
+    <h2>Javascript and Angular</h2>
 
     <p>We have learnt a lot about both these languages, not having worked with them before.  In particular, learning to think asynchronously was a challenge but we think we have been successful here.  For example, the Google maps API was often loading before other parts of the page it was depending on, so we have changed it to be injected after they have loaded.</p>
 
