@@ -212,7 +212,8 @@ router.post('/api/signup', function(req, res) {
             username: req.body.username,
             email: req.body.email,
             successCount: 0,
-            failCount: 0
+            failCount: 0,
+            admin: false
         });
         newUser.setPassword(req.body.password);
 
