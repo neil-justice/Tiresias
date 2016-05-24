@@ -12,13 +12,13 @@ var crypto = require('crypto');
 // MongoDB setup
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/tiresias';
-var database, collection;
+var database, predictions;
 
 ObjectID = require('mongodb').ObjectID;
 
 MongoClient.connect(url, function(err, db) {
     database=db;
-    collection = database.collection('predictions');
+    predictions = database.collection('predictions');
     console.log("Connected correctly to server.");
 });
 
@@ -83,7 +83,7 @@ app.use(bodyParser.json());
 router.route('/api/predictions').get(function(req, res, next) {
 
         // Get all the documents in the collection
-    collection.find().toArray(function(err, data) {
+    predictions.find().toArray(function(err, data) {
         if (err) {
             console.log(err);
         }
@@ -100,7 +100,7 @@ router.route('/api/predictions/').post(function(req, res) {
         return res.status(403).json({success: false, message: 'authorisation failed - please log in'});
     }
     // Insert the body of the request into the db as a new document
-    collection.insertOne(req.body, function(err, result) {
+    predictions.insertOne(req.body, function(err, result) {
 
         if (err) {
             res.json({message: "Failure"});
@@ -120,7 +120,7 @@ router.route('/api/predictions/:pid')
             res.sendStatus(404);
         }
 
-        collection.find({"_id": new ObjectID(req.params['pid'])}).toArray(function(err, data) {
+        predictions.find({"_id": new ObjectID(req.params['pid'])}).toArray(function(err, data) {
             if (err) {
                 console.log(err);
             }
@@ -157,7 +157,7 @@ router.route('/api/vote').post(function(req, res) {
 
     // Find whether that user has upvoted or downvoted this prediction before
     var findParams = {
-        _id: new ObjectID(id), 
+        _id: new ObjectID(id),
         $or: [
             {
                 upvotes: {$in: [currentUser.username]}
@@ -167,7 +167,7 @@ router.route('/api/vote').post(function(req, res) {
             }]
     };
 
-    collection.findOne(findParams, function(err, result) {
+    predictions.predictionsne(findParams, function(err, result) {
         if (err) {
             return res.sendStatus(500);
         }
@@ -176,7 +176,7 @@ router.route('/api/vote').post(function(req, res) {
 
         // If user has not voted on this before
         if (result === null) {
-            
+
             // Update vote and add their username to upvotes or downvotes array inside prediction
             updateParams ={$inc: {votes: inc}};
 
@@ -187,7 +187,7 @@ router.route('/api/vote').post(function(req, res) {
             }
 
             // Do the update
-            collection.update({ _id: new ObjectID(id) }, updateParams, function(err, result) {
+            predictions.update({ _id: new ObjectID(id) }, updateParams, function(err, result) {
                 if (err) {
                     return res.sendStatus(500);
                 } else {
@@ -305,7 +305,7 @@ router.route('/api/comment').post(function(req, res) {
 
     var comment = { username: currentUser, body: text };
 
-    collection.update({ _id: new ObjectID(id) }, { $addToSet: { comments: comment} }, function(err, result) {
+    predictions.update({ _id: new ObjectID(id) }, { $addToSet: { comments: comment} }, function(err, result) {
 
         if (err) {
             return res.sendStatus(500);
@@ -333,12 +333,13 @@ router.route('/api/setFinishedState').post(function(req, res) {
         return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
     }
 
-    collection.update({ _id: new ObjectID(id) }, { $set: { finishedState: state} }, function(err, result) {
+    predictions.update({ _id: new ObjectID(id) }, { $set: { finishedState: state} }, function(err, result) {
 
         if (err) {
             return res.sendStatus(500);
         } else {
             return res.json(result);
+
         }
 
     });

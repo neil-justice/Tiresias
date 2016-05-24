@@ -55,10 +55,10 @@
   </svg>
   <p class="date-wrapper">
       <span class="date-col date-start">Start: {{dateStrings.startDay}}</span>
-      <span class="date-col centre-col" ng-show="daysLeft >= 0">{{dateStrings.daysLeft}} Days left</span>
+      <span class="date-col centre-col" ng-show="dateStrings.daysLeft > 0">{{dateStrings.daysLeft}} Days left</span>
       <span class="date-col centre-col prediction-page-true-label" ng-show="finishedState === true">SUCCEEDED</span>
       <span class="date-col centre-col prediction-page-false-label" ng-show="finishedState === false">FAILED</span>
-      <span class="date-col centre-col prediction-page-pending-label" ng-show="finishedState === undefined">FINISHED - DECISION PENDING</span>
+      <span class="date-col centre-col prediction-page-pending-label" ng-show="dateStrings.daysLeft &lt;= 0">FINISHED - DECISION PENDING</span>
       <span class="date-col date-end">Finish: {{dateStrings.endDay}}</span>
   </p>
 </section>

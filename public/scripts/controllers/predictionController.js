@@ -46,6 +46,10 @@ homepageApp.controller('predictionsController',
 
     $scope.sendVote = function(vote) {
 
+        if ($scope.dateStrings.daysLeft <= 0) {
+            notifications.addNotification('Too late to vote!', 'failure-notification');
+            return;
+        }
         // Verify logged in user first. If it's a real user, then send vote.
         authentication.verifyUser().then(function success(data) {
 
