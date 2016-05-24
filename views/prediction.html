@@ -58,7 +58,7 @@
       <span class="date-col centre-col" ng-show="dateStrings.daysLeft > 0">{{dateStrings.daysLeft}} Days left</span>
       <span class="date-col centre-col prediction-page-true-label" ng-show="finishedState === true">SUCCEEDED</span>
       <span class="date-col centre-col prediction-page-false-label" ng-show="finishedState === false">FAILED</span>
-      <span class="date-col centre-col prediction-page-pending-label" ng-show="dateStrings.daysLeft &lt;= 0">FINISHED - DECISION PENDING</span>
+      <span class="date-col centre-col prediction-page-pending-label" ng-show="dateStrings.daysLeft &lt;= 0 &amp;&amp; finishedState === undefined">FINISHED - DECISION PENDING</span>
       <span class="date-col date-end">Finish: {{dateStrings.endDay}}</span>
   </p>
 </section>

@@ -38,7 +38,8 @@ var userSchema = new mongoose.Schema( {
     hash: String,
     salt: String,
     successCount: Number,
-    failCount: Number
+    failCount: Number,
+    admin: Boolean
 });
 
 userSchema.methods.setPassword = function(password) {
@@ -210,6 +211,8 @@ router.post('/api/signup', function(req, res) {
         var newUser = new User({
             username: req.body.username,
             email: req.body.email,
+            successCount: 0,
+            failCount: 0
         });
         newUser.setPassword(req.body.password);
 
@@ -281,7 +284,8 @@ router.post('/api/decode', function(req, res) {
             return res.status(200).json({username: user.username,
                                          email: user.email,
                                          successCount: user.successCount,
-                                         failCount: user.failCount });
+                                         failCount: user.failCount,
+                                         admin: user.admin });
         }
     });
 });
@@ -338,8 +342,23 @@ router.route('/api/setFinishedState').post(function(req, res) {
         if (err) {
             return res.sendStatus(500);
         } else {
-            return res.json(result);
 
+            var upvotes, downvotes;
+
+            collection.findOne({_id: new ObjectID(id)}, function(err, prediction) {
+
+                if (err) {
+                    throw err;
+                }
+
+                upvotes = prediction.upvotes;
+                downvotes = prediction.downvotes;
+
+                updateStats(upvotes, downvotes, state);
+            });
+
+
+            return res.json();
         }
 
     });
@@ -387,4 +406,33 @@ function verifyUser(token, username) {
     else {
         return true;
     }
+}
+
+function updateStats(upvotes, downvotes, success) {
+    var filter, updateParams;
+
+    if (success) {
+        filter = {username: {$in: upvotes}};
+        updateParams = {$inc: {successCount: 1}};
+    } else {
+        filter = {username: {$in: downvotes}};
+        updateParams = {$inc: {successCount: 1}};
+    }
+
+    User.update(filter, updateParams, function(err, result) {
+        if (err) {throw err;}
+    });
+
+    if (success) {
+        filter = {username: {$in: downvotes}};
+        updateParams = {$inc: {failCount: 1}};
+    }
+    else {
+        filter = {username: {$in: upvotes}};
+        updateParams = {$inc: {failCount: 1}};
+    }
+
+    User.update(filter, updateParams, function(err, result) {
+        if (err) {throw err;}
+    });
 }

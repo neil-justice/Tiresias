@@ -4,7 +4,7 @@ homepageApp.controller('adminController', function($scope, $window, $http, Predi
     $scope.tagFilters = {};
 
     authentication.verifyUser().then(function successCallback(data) {
-        if (!data.isLoggedIn || !data.currentUser.isAdmin) {
+        if (!data.isLoggedIn || !data.currentUser.admin) {
             $location.path('/').replace();
             notifications.addNotification('Log in as an admin to view this page', 'failure-notification');
         }
@@ -20,7 +20,7 @@ homepageApp.controller('adminController', function($scope, $window, $http, Predi
             var daysLeft = moment(prediction.endDate).diff(moment(), 'days');
             
             // Only finished predictions are added to the list.
-            if (daysLeft <= 0) {
+            if (daysLeft <= 0 && prediction.finishedState === undefined) {
                 predictions.list.push(prediction);
                 
                 prediction.dateAdded = moment(prediction.dateAdded).format("Do MMM YYYY");
@@ -73,6 +73,8 @@ homepageApp.controller('adminController', function($scope, $window, $http, Predi
                     }
                     notifications.addNotification('State set', style);
                     prediction.finishedState = state;
+                    var index = predictions.list.indexOf(prediction);
+                    predictions.list.splice(index, 1);
 
                 }, function errorCallback(res) {
                     notifications.addNotification('state set failed', 'failure-notification');
