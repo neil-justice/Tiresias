@@ -1,7 +1,14 @@
 // controller for the admin page view
-homepageApp.controller('adminController', function($scope, $window, $http, Prediction, predictions, authentication, notifications) {
+homepageApp.controller('adminController', function($scope, $window, $http, Prediction, predictions, authentication, notifications, $location) {
 
     $scope.tagFilters = {};
+
+    authentication.verifyUser().then(function successCallback(data) {
+        if (!data.isLoggedIn || !data.currentUser.isAdmin) {
+            $location.path('/').replace();
+            notifications.addNotification('Log in as an admin to view this page', 'failure-notification');
+        }
+    });
 
     Prediction.query({}, function(data) {
 
