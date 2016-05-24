@@ -10,8 +10,19 @@
     position: relative;
 }
 
+.prediction-true {
+  border: 10px solid #52A060;
+}
+
+.prediction-false {
+  border: 10px solid #A50000;
+}
+
+.prediction-pending {
+  border: 10px solid #CCC;
+}
+
 .prediction:hover {
-  background-color: #f0f8fa;
   box-shadow: #e9ebec 0 2px 2px inset;
 }
 

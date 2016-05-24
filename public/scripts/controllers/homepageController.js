@@ -12,7 +12,12 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
             predictions.list.push(prediction);
 
             prediction.dateAdded = moment(prediction.dateAdded).format("Do MMM YYYY");
-
+            
+            var daysLeft = moment(prediction.endDate).diff(moment(), 'days');
+            if (daysLeft >= 0) {
+                prediction.pending = true;
+            }
+            
             // Number of comments
             if (prediction.comments === undefined) {
                 prediction.noOfComments = 0;

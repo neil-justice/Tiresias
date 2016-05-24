@@ -58,7 +58,13 @@ homepageApp.controller('adminController', function($scope, $window, $http, Predi
                         token: authentication.getToken()
                     }
                 }).then(function successCallback(res) {
-                    notifications.addNotification('State set', 'success-notification');
+                    if (state == true) {
+                        var style = 'success-notification';
+                    }
+                    else {
+                        var style = 'failure-notification'
+                    }
+                    notifications.addNotification('State set', style);
 
                 }, function errorCallback(res) {
                     notifications.addNotification('state set failed', 'failure-notification');

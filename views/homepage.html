@@ -19,15 +19,19 @@
   </div>
 </section>
 
-<section>
+<section id="predictions">
   <ul>
-    <li class="prediction" ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:tagFilters.tag | orderBy : 'prediction.dateAdded' : true ">
+    <li class="prediction" 
+        ng-class="{'prediction-true':prediction.finishedState === true, 
+                   'prediction-pending':prediction.pending === true,
+                   'prediction-false':prediction.finishedState === false}"
+        ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:tagFilters.tag | orderBy : 'prediction.dateAdded':true ">
       <div class="prediction-image">
       </div>
       <div class="prediction-text">
         <a class="prediction-title" ng-href="#/predictions/{{prediction._id}}">{{prediction.title}}</a> <br/>
         <p class="prediction-description">{{prediction.description}}</p>
-       <div class="prediction-links">
+        <div class="prediction-links">
           <a class="prediction-comments-link" href="#/predictions/{{prediction._id}}#comments">{{prediction.noOfComments}} comments</a>
           <a class="tag prediction-tag" ng-repeat="tag in prediction.tags" ng-click="tagFilters.tag = tag">{{tag}}</a>
           <a href="">{{prediction.dateAdded}}</a>
