@@ -168,7 +168,7 @@ router.route('/api/vote').post(function(req, res) {
             }]
     };
 
-    predictions.predictionsne(findParams, function(err, result) {
+    predictions.findOne(findParams, function(err, result) {
         if (err) {
             return res.sendStatus(500);
         }
