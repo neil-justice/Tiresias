@@ -29,18 +29,7 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
         // Clear contents of newPrediction so that the form is not populated next time.
         $scope.newPrediction = new Prediction();
     };
-
-    $scope.checkErr = function(startDate, endDate) {
-        $scope.errMessage = '';
-        
-        if(new Date(startDate) > new Date(endDate)){
-          $scope.errMessage = 'End Date should be greater than start date';
-          return false;
-        }
-
-    }
-       
-
+    
     $scope.submitPrediction = function(form) {
 
         authentication.verifyUser().then(function successCallback(data) {

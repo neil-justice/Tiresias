@@ -157,20 +157,3 @@ homepageApp.directive('dateLaterThan', function() {
         }
     };
 });
-
-homepageApp.directive('dateEarlierThan', function() {
-    return {
-        require: 'ngModel',
-        scope: { otherValue: '=dateEarlierThan' },
-        link: function(scope, element, attributes, ngModel) {
-
-            ngModel.$validators.dateEarlierThan = function(value) {
-                return new Date(value) < new Date(scope.otherValue);
-            };
-
-            scope.$watch('otherValue', function() {
-                ngModel.$validate();
-            });
-        }
-    };
-});
