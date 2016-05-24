@@ -146,7 +146,7 @@ input:focus, textarea:focus {
 .date-start {
   text-align: left;
 }
-.days-left {
+.centre-col {
   text-align: center;
 }
 .date-end {
@@ -177,4 +177,26 @@ input:focus, textarea:focus {
 
 .new-comment {
     padding-bottom: 10em;
+}
+
+.prediction-page-true-label,
+.prediction-page-false-label,
+.prediction-page-pending-label {
+  padding: 0.2em;
+  color:white;
+  border-radius: 3px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.prediction-page-true-label {
+  background-color:#00A500;
+}
+
+.prediction-page-false-label {
+  background-color: #A50000;
+}
+
+.prediction-page-pending-label {
+  background-color: #CCC;
 }
