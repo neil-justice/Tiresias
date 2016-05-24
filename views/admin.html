@@ -1,0 +1,30 @@
+
+<section id="search" >
+  <input type="text" name="" class="searchBar" ng-model="searchQuery"/>
+  <div class="filter-container">
+  <span class="tag filter-tag" ng-show="!tagsAreEmpty()">{{tagFilters.tag}}</span>
+  <div class="clear-filters" ng-show="!tagsAreEmpty()"><a href="" class="button" ng-click="clearTagFilters()">
+  Clear filter
+    </a>
+  </div>
+  </div>
+</section>
+
+<section>
+  <ul>
+    <li class="prediction" ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:tagFilters.tag | orderBy : 'prediction.dateAdded' : true ">
+      <div class="prediction-image">
+      </div>
+      <div class="prediction-text">
+        <a class="prediction-title" ng-href="#/predictions/{{prediction._id}}">{{prediction.title}}</a> <br/>
+        <p class="prediction-description">{{prediction.description}}</p>
+       <div class="prediction-links">
+          <a class="prediction-comments-link" href="#/predictions/{{prediction._id}}#comments">{{prediction.noOfComments}} comments</a>
+          <a class="tag prediction-tag" ng-repeat="tag in prediction.tags" ng-click="tagFilters.tag = tag">{{tag}}</a>
+          <a href="">{{prediction.dateAdded}}</a>
+          <a href="" class="post-creator">Created by: {{prediction.user}}</a>
+        </div> 
+      </div>
+    </li>
+  </ul>
+</section>
