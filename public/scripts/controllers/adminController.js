@@ -1,5 +1,5 @@
 // controller for the front page view
-homepageApp.controller('adminController', function($scope, $window, Prediction, predictions) {
+homepageApp.controller('adminController', function($scope, $window, $http, Prediction, predictions, authentication, notifications) {
 
     $scope.tagFilters = {};
 
@@ -38,6 +38,37 @@ homepageApp.controller('adminController', function($scope, $window, Prediction, 
 
     $scope.clearTagFilters = function() {
         $scope.tagFilters = {};
+    }
+    
+    $scope.setState = function(state, pId) {
+
+        // Verify logged in user first. If it's a real user, then send comment.
+        authentication.verifyUser().then(function success(data) {
+
+            if (data.isLoggedIn) {
+
+                var username = data.currentUser.username;
+                $http({
+                    method: 'POST',
+                    url: '/api/setFinishedState',
+                    data: {
+                        _id: pId,
+                        finishedState: state,
+                        username: username,
+                        token: authentication.getToken()
+                    }
+                }).then(function successCallback(res) {
+                    notifications.addNotification('State set', 'success-notification');
+
+                }, function errorCallback(res) {
+                    notifications.addNotification('state set failed', 'failure-notification');
+                });
+            } else {
+                notifications.addNotification('Please log in to set state!', 'failure-notification');
+            }
+
+        });
+
     }
 
 });

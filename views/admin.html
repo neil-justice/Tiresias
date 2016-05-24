@@ -25,6 +25,8 @@
           <a href="" class="post-creator">Created by: {{prediction.user}}</a>
         </div> 
       </div>
+      <a class="button" ng-click="setState(true, prediction._id)">CAME TRUE</a>
+      <a class="button" ng-click="setState(false, prediction._id)">CAME FALSE</a>
     </li>
   </ul>
 </section>
