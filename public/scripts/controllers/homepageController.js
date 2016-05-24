@@ -34,18 +34,13 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
 
     angular.element($window).on('scroll', function() {
         var banner = document.querySelector("#banner");
-        var bannersrc = "/images/banner.png";
+    
         
         if (banner !== null) {
             var navHeight = document.querySelector(".nav-button-section").clientHeight;
 
             var offset = Math.max(navHeight - $window.pageYOffset, -200);
             banner.style.top = offset + "px";
-            
-            var scale = ~~((offset + 50) / 20);
-            if (scale > 0) {
-                console.log("/images/banner" + scale + ".png");
-            }
         }
     });
 
