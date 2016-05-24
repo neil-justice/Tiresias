@@ -39,7 +39,7 @@ homepageApp.controller('predictionsController',
                 else {
                     $scope.hasVoted = false;
                 }
-            } 
+            }
         });
 
         if (!$scope.votes) {
