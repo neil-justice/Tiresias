@@ -1,0 +1,25 @@
+#admin .button {
+  font-size: 0.7em;
+  position:absolute;
+  left: 103%;
+  width:6em;
+  text-align: center;
+}
+
+#admin .button-prediction-false {
+  background-color: #A50000;
+  top: 2.7em;
+}
+
+#admin .button-prediction-false:hover {
+  background-color: #B51010;
+}
+
+#admin .button-prediction-true {
+  background-color: #52A060;
+  top: 0;
+}
+
+#admin .button-prediction-true:hover {
+  background-color: #62B070
+}

@@ -1,13 +1,4 @@
 
-<section id="banner">
-  <div class="banner-text">
-    <h1 class="banner-title">Tiresias</h1>
-    <p>A reference site for claims made about the future.</p>
-    <p>Tiresias, ancient Greek prophet of Apollo, has been reborn as a crowdsourced online prediction tracker and verifier.</p>
-  </div>
-  <img src="/images/banner.png" alt="banner"/>
-</section>
-
 <section id="search" >
   <input type="text" name="" class="searchBar" ng-model="searchQuery"/>
   <div class="filter-container">
@@ -19,13 +10,12 @@
   </div>
 </section>
 
-<section id="predictions">
+<section id="admin">
   <ul>
-    <li class="prediction" 
-        ng-class="{'prediction-pending':prediction.finished === true,
-                   'prediction-true':prediction.finishedState === true, 
-                   'prediction-false':prediction.finishedState === false}"
-        ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:tagFilters.tag | orderBy : 'prediction.dateAdded':true ">
+    <li class="prediction"  
+        ng-class="{'prediction-true':prediction.finishedState === true, 
+                   'prediction-false':prediction.finishedState === false}" 
+        ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:tagFilters.tag | orderBy : 'prediction.dateAdded' : true ">
       <div class="prediction-image">
       </div>
       <div class="prediction-text">
@@ -38,6 +28,8 @@
           <a href="" class="post-creator">Created by: {{prediction.user}}</a>
         </div> 
       </div>
+      <a class="button button-prediction-true" ng-click="setState(true, prediction)">TRUE</a>
+      <a class="button button-prediction-false" ng-click="setState(false, prediction)">FALSE</a>
     </li>
   </ul>
 </section>

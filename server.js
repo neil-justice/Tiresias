@@ -292,7 +292,7 @@ router.route('/api/comment').post(function(req, res) {
     var text = data.text;
     var currentUser = data.currentUser;
     var id = data._id;
-    var token = data.token // for authentication
+    var token = data.token; // for authentication
 
     if (!id || !text || text == "" || !currentUser || !token) {
         return res.status(400);
@@ -306,6 +306,34 @@ router.route('/api/comment').post(function(req, res) {
     var comment = { username: currentUser, body: text };
 
     collection.update({ _id: new ObjectID(id) }, { $addToSet: { comments: comment} }, function(err, result) {
+
+        if (err) {
+            return res.sendStatus(500);
+        } else {
+            return res.json(result);
+        }
+
+    });
+});
+
+// Allows setting whether prediction came true or not
+router.route('/api/setFinishedState').post(function(req, res) {
+    var data = req.body;
+    var username = data.username;
+    var id = data._id;
+    var token = data.token; // for authentication
+    var state = data.finishedState;
+
+    if (!id || !username || !token) {
+        return res.status(400);
+    }
+
+    // Get user information from the token (needs secret code that we generated randomly to decode it)
+    if (!verifyUser(token, username)) {
+        return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
+    }
+
+    collection.update({ _id: new ObjectID(id) }, { $set: { finishedState: state} }, function(err, result) {
 
         if (err) {
             return res.sendStatus(500);

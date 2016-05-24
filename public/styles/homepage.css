@@ -10,8 +10,21 @@
     position: relative;
 }
 
+/*.prediction-pending {
+  border: 10px solid #CCC;
+}
+*/
+.prediction-true {
+  border: 0px solid #52A060;
+  background-color: #EEFFEE;
+}
+
+.prediction-false {
+  border: 0px solid #A05485;
+  background-color: #FFEEEE;
+}
+
 .prediction:hover {
-  background-color: #f0f8fa;
   box-shadow: #e9ebec 0 2px 2px inset;
 }
 
