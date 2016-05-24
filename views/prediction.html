@@ -5,14 +5,14 @@
 <aside id="side-buttons">
   <a ng-click="sendVote(true)">
     <img  class="vote-button vote-up"
-          ng-class="{upVotePressed: hasVoted &amp;&amp; inc == 1}"
+          ng-class="{upVotePressed: upvote}"
           src="/images/Upvote.png"
           alt="Upvote button"/>
   </a>
   <span class="vote-number">{{votes}}</span>
   <a ng-click="sendVote(false)">
     <img  class="vote-button vote-down"
-          ng-class="{downVotePressed: hasVoted &amp;&amp; inc == -1}"
+          ng-class="{downVotePressed: downvote}"
           src="/images/Downvote.png"
           alt="Downvote button"/>
   </a>
