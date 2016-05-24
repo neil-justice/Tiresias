@@ -36,8 +36,9 @@ homepageApp.factory('authentication', function($http, $window) {
                 return { isLoggedIn: true,
                          currentUser: { username: res.data.username,
                                         email: res.data.email,
-                                        successCount: 0,
-                                        failCount: 0 }
+                                        successCount: res.data.successCount,
+                                        failCount: res.data.failCount,
+                                        admin: res.data.admin}
                         };
             }, function errorCallback(res) {
                 console.log('not logged in: ' + res.data.message);
