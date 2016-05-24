@@ -28,19 +28,21 @@
       <div class="new col-left">
       
         <section class="new new-date-start">
-          <label  ng-messages="predictionForm.newDateStart.$error">Date made
+          <label  ng-messages="predictionForm.newDateStart.$error">Date made (YYYY-MM-DD)
             <span class="required-field">*</span>
             <span class="new-error" ng-message="required" ng-show="predictionForm.newDateStart.$touched">Start date is required</span>
+            <span class="new-error" ng-message="dateEarlierThan" ng-show="predictionForm.newDateEnd.$touched"> Start date must be earlier than today</span>
           </label>
           <input type="date" name="newDateStart" ng-model="newPrediction.startDate" required=""/>
         </section>
 
         <section class="new new-date-end">
-          <label ng-messages="predictionForm.newDateEnd.$error">End Date
+          <label ng-messages="predictionForm.newDateEnd.$error">End Date (YYYY-MM-DD)
             <span class="required-field">*</span>
             <span class="new-error" ng-message="required" ng-show="predictionForm.newDateEnd.$touched">End date is required</span>
+            <span class="new-error" ng-message="dateLaterThan" ng-show="predictionForm.newDateEnd.$touched">End date must be later than start date</span>
           </label>
-          <input type="date" name="newDateEnd" ng-model="newPrediction.endDate" required=""/>
+          <input type="date" name="newDateEnd" ng-model="newPrediction.endDate" required="" date-later-than="newPrediction.startDate"/>
         </section>
 
       </div>

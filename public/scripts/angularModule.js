@@ -140,3 +140,20 @@ homepageApp.directive('sameAs', function() {
         }
     };
 });
+
+homepageApp.directive('dateLaterThan', function() {
+    return {
+        require: 'ngModel',
+        scope: { otherValue: '=dateLaterThan' },
+        link: function(scope, element, attributes, ngModel) {
+
+            ngModel.$validators.dateLaterThan = function(value) {
+                return new Date(value) > new Date(scope.otherValue);
+            };
+
+            scope.$watch('otherValue', function() {
+                ngModel.$validate();
+            });
+        }
+    };
+});

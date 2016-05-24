@@ -3,6 +3,7 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
     $scope.newPrediction = new Prediction();
     $scope.newUser = new User();
     $scope.notifications = notifications.notifications;
+    $scope.todaysDate = new Date();
 
     // Shows modal window (with ng-show) - but only if someone is logged in
     $scope.newPredictionWindow = function() {
@@ -28,7 +29,7 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
         // Clear contents of newPrediction so that the form is not populated next time.
         $scope.newPrediction = new Prediction();
     };
-
+    
     $scope.submitPrediction = function(form) {
 
         authentication.verifyUser().then(function successCallback(data) {
