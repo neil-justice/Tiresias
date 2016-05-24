@@ -14,8 +14,8 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
             prediction.dateAdded = moment(prediction.dateAdded).format("Do MMM YYYY");
             
             var daysLeft = moment(prediction.endDate).diff(moment(), 'days');
-            if (daysLeft >= 0) {
-                prediction.pending = true;
+            if (daysLeft <= 0) {
+                prediction.finished = true;
             }
             
             // Number of comments

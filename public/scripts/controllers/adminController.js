@@ -1,4 +1,4 @@
-// controller for the front page view
+// controller for the admin page view
 homepageApp.controller('adminController', function($scope, $window, $http, Prediction, predictions, authentication, notifications) {
 
     $scope.tagFilters = {};
@@ -11,8 +11,8 @@ homepageApp.controller('adminController', function($scope, $window, $http, Predi
             var prediction = predictionResource.toJSON();
             
             var daysLeft = moment(prediction.endDate).diff(moment(), 'days');
-            console.log(prediction.title + ' ' + daysLeft);
             
+            // Only finished predictions are added to the list.
             if (daysLeft <= 0) {
                 predictions.list.push(prediction);
                 
@@ -40,19 +40,19 @@ homepageApp.controller('adminController', function($scope, $window, $http, Predi
         $scope.tagFilters = {};
     }
     
-    $scope.setState = function(state, pId) {
+    $scope.setState = function(state, prediction) {
 
-        // Verify logged in user first. If it's a real user, then send comment.
+        // Verify logged in user first. If it's a real user, then send state
         authentication.verifyUser().then(function success(data) {
 
             if (data.isLoggedIn) {
-
+                console.log(prediction);
                 var username = data.currentUser.username;
                 $http({
                     method: 'POST',
                     url: '/api/setFinishedState',
                     data: {
-                        _id: pId,
+                        _id: prediction._id,
                         finishedState: state,
                         username: username,
                         token: authentication.getToken()
@@ -65,6 +65,7 @@ homepageApp.controller('adminController', function($scope, $window, $http, Predi
                         var style = 'failure-notification'
                     }
                     notifications.addNotification('State set', style);
+                    prediction.finishedState = state;
 
                 }, function errorCallback(res) {
                     notifications.addNotification('state set failed', 'failure-notification');

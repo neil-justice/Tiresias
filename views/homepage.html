@@ -22,8 +22,8 @@
 <section id="predictions">
   <ul>
     <li class="prediction" 
-        ng-class="{'prediction-true':prediction.finishedState === true, 
-                   'prediction-pending':prediction.pending === true,
+        ng-class="{'prediction-pending':prediction.finished === true,
+                   'prediction-true':prediction.finishedState === true, 
                    'prediction-false':prediction.finishedState === false}"
         ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:tagFilters.tag | orderBy : 'prediction.dateAdded':true ">
       <div class="prediction-image">
