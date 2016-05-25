@@ -84,6 +84,14 @@ form label {
   float: right;
 }
 
+.empty-list {
+  text-align:center;
+  color: #CCC;
+  font-size:2em;
+  margin:auto;
+  width:100%;
+}
+
 growl-notifications {
     position: fixed;
     top: 40px;
