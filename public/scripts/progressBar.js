@@ -37,13 +37,8 @@ function setProgress(percent)
   var animate = document.querySelector("#svg-animate");
   var animateColor = document.querySelector("#svg-animate-color");
 
-  var cont = document.querySelector("#svg-border");
-  var rect = cont.getBoundingClientRect();
-  var contWidth = rect.right - rect.left;
+  console.log(percent);
 
-  var maxBarWidth = contWidth * 0.985;
-  var width = maxBarWidth / (100 / percent);
-
-  animate.setAttribute("to",  width + 'px');
+  animate.setAttribute("to",  (percent - 3) + '%');
   animateColor.setAttribute("to",  color[Math.floor(percent / 10)]);
 }
