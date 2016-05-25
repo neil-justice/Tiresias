@@ -212,7 +212,8 @@ router.post('/api/signup', function(req, res) {
             username: req.body.username,
             email: req.body.email,
             successCount: 0,
-            failCount: 0
+            failCount: 0,
+            admin: false
         });
         newUser.setPassword(req.body.password);
 
@@ -345,7 +346,7 @@ router.route('/api/setFinishedState').post(function(req, res) {
 
             var upvotes, downvotes;
 
-            collection.findOne({_id: new ObjectID(id)}, function(err, prediction) {
+            predictions.findOne({_id: new ObjectID(id)}, function(err, prediction) {
 
                 if (err) {
                     throw err;
