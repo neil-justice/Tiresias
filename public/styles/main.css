@@ -26,7 +26,7 @@ main {
   margin-top: 4em;
   display: block;
   transition: 200ms;
-  height:100%;
+  min-height:100%;
 }
 
 ul {
@@ -72,7 +72,20 @@ form label {
 .footer {
   height:15em;
   background-color:#282222;
+  clear:both !important;
 }
+/*
+.new-error {
+  padding:0.6em;
+  font-size:0.8em;
+  background-color: #a50000;
+  color:white;
+  position:absolute;
+  left:101%;
+  border-radius:3px;
+  display:block;
+}
+*/
 
 .new-error {
   font-weight: bold;

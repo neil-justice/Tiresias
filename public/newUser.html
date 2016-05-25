@@ -11,8 +11,9 @@
         <label ng-messages="userForm.newUser.$error">Username
           <span class="required-field">*</span>
           <span class="new-error" ng-message="required" ng-show="userForm.newUser.$touched">Username is required</span>
+          <span class="new-error" ng-message="maxlength" ng-show="userForm.newUser.$touched">Must be less than 20 characters</span>
         </label>
-        <input type="text" name="newUser" ng-model="newUser.username" required=""/>
+        <input type="text" name="newUser" ng-model="newUser.username" ng-maxlength="20" required=""/>
       </section>
 
       <section class="new new-email">

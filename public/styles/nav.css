@@ -24,7 +24,7 @@ nav a > .plussign {
 }
 
 nav > .nav-link-list {
-  width: 70%;
+  width: 25%;
   height:100%;
   float:left;
 }
@@ -127,7 +127,7 @@ nav .login-button {
 .nav-button {
   width: 3em;
   height: 3em;
-  left: 13%;
+  left: 33%;
   position: relative;
   display: inline-block;
   margin: 0;
@@ -180,17 +180,16 @@ nav input:focus, nav textarea:focus {
 
 nav .user-info-panel {
   color: white;
-  width: 15%;
   float: right;
   overflow:hidden;
   height:99%;
+  padding-right:2em;
 }
 
 nav .user-info {
   font-size: 80%;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
-  width:50%;
   float:left;
   padding-top:5px;
 }
