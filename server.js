@@ -346,7 +346,7 @@ router.route('/api/setFinishedState').post(function(req, res) {
 
             var upvotes, downvotes;
 
-            collection.findOne({_id: new ObjectID(id)}, function(err, prediction) {
+            predictions.findOne({_id: new ObjectID(id)}, function(err, prediction) {
 
                 if (err) {
                     throw err;
