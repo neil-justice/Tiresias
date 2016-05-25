@@ -88,6 +88,10 @@ homepageApp.config(['$locationProvider', '$routeProvider', function($locationPro
         when('/admin', {
             templateUrl: '/views/admin.html',
             controller: 'adminController'
+        }).
+        when('/stats', {
+            templateUrl: '/views/stats.html',
+            controller: 'statsController'
         }).        
         otherwise({
             redirectTo: '/'
