@@ -12,13 +12,19 @@
     position: relative;
 }
 
-#user-stats {
+#stats {
     width: 80%;
     display: block;
     margin: 0 auto;
     margin-left: 20%;
     position: relative;
     padding-top: 1em;
+}
+
+.user-stats, .global-stats {
+    border: 1px ridge;
+    padding: 2em;
+    margin: 1em;
 }
 
 .stats-text {
