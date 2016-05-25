@@ -152,7 +152,7 @@ homepageApp.directive('dateLaterThan', function() {
         link: function(scope, element, attributes, ngModel) {
 
             ngModel.$validators.dateLaterThan = function(value) {
-                return new Date(value) > new Date(scope.otherValue);
+                return new Date(value) >= new Date(scope.otherValue);
             };
 
             scope.$watch('otherValue', function() {

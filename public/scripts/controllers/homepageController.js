@@ -34,7 +34,8 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
 
     angular.element($window).on('scroll', function() {
         var banner = document.querySelector("#banner");
-
+    
+        
         if (banner !== null) {
             var navHeight = document.querySelector(".nav-button-section").clientHeight;
 

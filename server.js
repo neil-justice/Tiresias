@@ -222,19 +222,43 @@ router.post('/api/signup', function(req, res) {
             username: req.body.username,
             email: req.body.email,
             successCount: 0,
-            failCount: 0
+            failCount: 0,
+            admin: false
         });
         newUser.setPassword(req.body.password);
+        
+        // check for duplicates
+        User.findOne({
+            $or: [{username: req.body.username}, {email: req.body.email}]},
+            function(err, user) {
+                if (err) { throw err; }
+                
+                if (!user) {
+                    // if no duplicate found, save the user
+                    newUser.save(function(err) {
+                        if (err) {
+                            return res.status(400).json({success: false, message: 'error'});
+                        }
+                        else {
+                            return res.status(200).json({success: true, message: 'Successfully created new user'});
+                        }
+                    });
+                // duplicate email or username found:
+                } else {
+                    var duplicateEmail = false;
+                    var duplicateUsername = false;
+                    
+                    if (user.email == req.body.email) { duplicateEmail = true; }
+                    if (user.username == req.body.username) { duplicateUsername = true; }
+                    
+                    return res.status(400).json({ success: false, 
+                                                  message: 'duplicate forbidden', 
+                                                  duplicateEmail: duplicateEmail, 
+                                                  duplicateUsername: duplicateUsername});                      
+                }
+            });
 
-        // save the user
-        newUser.save(function(err) {
-            if (err) {
-                return res.json({success: false, message: 'Username already exists'});
-            }
-            else {
-                res.json({success: true, message: 'Successful created new user'});
-            }
-        });
+
     }
 });
 

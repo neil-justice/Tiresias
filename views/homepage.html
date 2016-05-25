@@ -21,12 +21,15 @@
 
 <section id="predictions">
   <ul>
-    <li class="prediction" 
+    <li class="prediction"
         ng-class="{'prediction-pending':prediction.finished === true,
-                   'prediction-true':prediction.finishedState === true, 
+                   'prediction-true':prediction.finishedState === true,
                    'prediction-false':prediction.finishedState === false}"
         ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:tagFilters.tag | orderBy : 'prediction.dateAdded':true ">
-      <div class="prediction-image">
+      <div class="prediction-image" ng-switch="prediction.finishedState">
+        <img ng-switch-when="false" src="/images/fail.png"/>
+        <img ng-switch-when="true" src="/images/succeed.png"/>
+        <img ng-switch-default="" src="/images/blank.png"/>
       </div>
       <div class="prediction-text">
         <a class="prediction-title" ng-href="#/predictions/{{prediction._id}}">{{prediction.title}}</a> <br/>
@@ -36,8 +39,9 @@
           <a class="tag prediction-tag" ng-repeat="tag in prediction.tags" ng-click="tagFilters.tag = tag">{{tag}}</a>
           <a href="">{{prediction.dateAdded}}</a>
           <a href="" class="post-creator">Created by: {{prediction.user}}</a>
-        </div> 
+        </div>
       </div>
     </li>
   </ul>
 </section>
+<p class="empty-list" ng-show="predictions.length == 0">No predictions!  Why not make one?</p>

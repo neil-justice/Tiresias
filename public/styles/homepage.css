@@ -48,6 +48,12 @@
     font-weight: 300;
 }
 
+.prediction-image {
+  position: absolute;
+  left:0;
+  top:0;
+}
+
 .prediction-links {
     font-size: 80%;
     bottom: 0;
