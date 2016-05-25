@@ -12,13 +12,14 @@ var crypto = require('crypto');
 // MongoDB setup
 var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/tiresias';
-var database, predictions;
+var database, predictions, stats;
 
 ObjectID = require('mongodb').ObjectID;
 
 MongoClient.connect(url, function(err, db) {
     database=db;
     predictions = database.collection('predictions');
+    stats = database.collection('stats');
     console.log("Connected correctly to server.");
 });
 
@@ -337,6 +338,7 @@ router.route('/api/setFinishedState').post(function(req, res) {
         return res.status(403).json({success: false, msg: 'authorisation failed - please log in'});
     }
 
+    // Set finished state of prediction
     predictions.update({ _id: new ObjectID(id) }, { $set: { finishedState: state} }, function(err, result) {
 
         if (err) {
@@ -345,7 +347,8 @@ router.route('/api/setFinishedState').post(function(req, res) {
 
             var upvotes, downvotes;
 
-            collection.findOne({_id: new ObjectID(id)}, function(err, prediction) {
+            // Retrieve prediction to get upvotes/downvotes
+            predictions.findOne({_id: new ObjectID(id)}, function(err, prediction) {
 
                 if (err) {
                     throw err;
@@ -354,7 +357,9 @@ router.route('/api/setFinishedState').post(function(req, res) {
                 upvotes = prediction.upvotes;
                 downvotes = prediction.downvotes;
 
-                updateStats(upvotes, downvotes, state);
+                updateUserStats(upvotes, downvotes, state);
+                updateGlobalStats(state, prediction);
+                
             });
 
 
@@ -362,6 +367,11 @@ router.route('/api/setFinishedState').post(function(req, res) {
         }
 
     });
+
+
+    
+
+
 });
 
 router.route('/*').get(function(req, res) {
@@ -408,7 +418,7 @@ function verifyUser(token, username) {
     }
 }
 
-function updateStats(upvotes, downvotes, success) {
+function updateUserStats(upvotes, downvotes, success) {
     var filter, updateParams;
 
     if (success) {
@@ -434,5 +444,22 @@ function updateStats(upvotes, downvotes, success) {
 
     User.update(filter, updateParams, function(err, result) {
         if (err) {throw err;}
+    });
+}
+
+function updateGlobalStats(state, prediction) {
+    var updateParams;
+
+    if (state) {
+        updateParams = {$addToSet: {success: prediction._id}};
+    } else {
+        updateParams = {$addToSet: {failure: prediction._id}};
+    }
+    
+    stats.findAndModify({name: 'stats'}, [], updateParams, {new: true, upsert: true}, function(err, obj) {
+        if (err) {throw err};
+
+        console.log(obj);
+    
     });
 }
