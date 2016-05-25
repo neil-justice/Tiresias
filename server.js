@@ -205,6 +205,15 @@ router.route('/api/vote').post(function(req, res) {
     });
 });
 
+router.get('/api/stats', function(req, res) {
+
+    stats.findOne({name: 'stats'}, function(err, obj) {
+        if (err) {throw err};
+
+        return res.json(obj);
+    })
+});
+
 router.post('/api/signup', function(req, res) {
     if (!req.body.username || !req.body.password) {
         res.json({success: false, message: 'Please enter a username and a password'});

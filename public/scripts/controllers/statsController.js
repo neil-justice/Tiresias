@@ -1,4 +1,4 @@
-homepageApp.controller('statsController', function($scope, $window, authentication, notifications) {
+homepageApp.controller('statsController', function($scope, $window, $http, authentication, notifications) {
 
     authentication.verifyUser().then(function successCallback(data) {
 
@@ -8,11 +8,37 @@ homepageApp.controller('statsController', function($scope, $window, authenticati
         }
 
         if (data.isLoggedIn) {
+            $http.get('/api/stats', {}).then(function successCallback(res) {
+
+                $scope.globalSuccessCount = handleUndefinedNumber(res.data.success.length);
+                $scope.globalFailCount = handleUndefinedNumber(res.data.failure.length);
+                $scope.globalSuccessPercentage = calculatePercentage($scope.globalSuccessCount, $scope.globalFailCount);
+
+            }, function errorCallback(res) {
+                console.log('Error: ' + res);
+            });
+
             $scope.username = data.currentUser.username;
-            $scope.successCount = data.currentUser.successCount;
-            $scope.failCount = data.currentUser.failCount;
-            $scope.successPercentage = Math.round(($scope.successCount * 100) / ($scope.successCount + $scope.failCount));
+            $scope.successCount = handleUndefinedNumber(data.currentUser.successCount);
+            $scope.failCount = handleUndefinedNumber(data.currentUser.failCount);
+            $scope.successPercentage = calculatePercentage($scope.successCount, $scope.failCount);
         }
     });
 
 });
+
+function calculatePercentage(successCount, failCount) {
+    if (successCount + failCount === 0 || successCount === undefined || failCount === undefined) {
+        return 0;
+    } else {
+        return Math.round((successCount * 100) / (successCount + failCount));
+    }
+}
+
+function handleUndefinedNumber(value) {
+    if (value === undefined) {
+        return 0;
+    } else {
+        return value;
+    }
+}
