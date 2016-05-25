@@ -74,6 +74,18 @@ form label {
   background-color:#282222;
   clear:both !important;
 }
+/*
+.new-error {
+  padding:0.6em;
+  font-size:0.8em;
+  background-color: #a50000;
+  color:white;
+  position:absolute;
+  left:101%;
+  border-radius:3px;
+  display:block;
+}
+*/
 
 .new-error {
   font-weight: bold;

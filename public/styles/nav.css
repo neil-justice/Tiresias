@@ -183,6 +183,7 @@ nav .user-info-panel {
   float: right;
   overflow:hidden;
   height:99%;
+  padding-right:2em;
 }
 
 nav .user-info {
