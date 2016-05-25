@@ -8,8 +8,9 @@ homepageApp.controller('predictionsController',
 
     // Request the prediction with that _id from the database
     $scope.entry = Prediction.get({ pid: pId }, function(data, headers) {
+        $scope.pId = $scope.entry['_id'];
         $scope.title = $scope.entry['title'];
-        $scope.link = $scope.entry['link'];
+        $scope.link = $scope.entry['link'] ? $scope.entry['link'] : '#/predictions/' + pId;
         $scope.description = $scope.entry['description'];
         $scope.tags = $scope.entry['tags'];
         $scope.votes = $scope.entry['votes'];
