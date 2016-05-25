@@ -110,10 +110,19 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
 
             $scope.closeUserWindow(form);
             notifications.addNotification("Account created!", 'success-notification');
-
+            console.log(res.data.message);
+            
         }, function errorCallback(res) {
-            console.log('Error: ' + res);
-            notifications.addNotification("Error: account could not be created!", 'failure-notification');
+            console.log(res.data.message);
+            if (res.data.duplicateEmail == true) {
+                notifications.addNotification("This email is already in use", 'failure-notification');
+            }
+            else if (res.data.duplicateUsername == true) {
+                notifications.addNotification("This username is taken", 'failure-notification');
+            }
+            else {
+                notifications.addNotification("Unable to create account", 'failure-notification');
+            }
         });
     }
 
