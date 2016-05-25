@@ -1,0 +1,36 @@
+#avatar {
+    margin: 0 auto;
+    margin-left: 20%;
+    width: 80%;
+    display: block;
+    position: relative;
+}
+
+.profile-pic {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+}
+
+#user-stats {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    margin-left: 20%;
+    position: relative;
+    padding-top: 1em;
+}
+
+.stats-text {
+    padding-top: 0.5em;
+    text-align: center;
+    margin: 0 auto;
+    font-family: 'Lato', sans-serif;
+}
+
+.username {
+    margin: 0 auto;
+    font-family: 'Lato', sans-serif;
+    text-align: center;
+    display: block;
+}
