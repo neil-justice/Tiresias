@@ -56,7 +56,7 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
                 $scope.newPrediction.user = $scope.currentUser.username;
                 $scope.newPrediction.token = authentication.getToken();
                 $scope.newPrediction.upvotes = [];
-                $scope.newPrediction.downVotes = [];
+                $scope.newPrediction.downvotes = [];
 
                 $scope.newPrediction.dateAdded = new Date();
                 var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
