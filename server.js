@@ -34,7 +34,8 @@ var userSchema = new mongoose.Schema( {
     },
     username: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 20
     },
     hash: String,
     salt: String,
