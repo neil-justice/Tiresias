@@ -10,10 +10,10 @@
     position: relative;
 }
 
-/*.prediction-pending {
-  border: 10px solid #CCC;
+.prediction-pending {
+  border: 10px solid #F7CA18;
 }
-*/
+
 .prediction-true {
   border: 0px solid #52A060;
   background-color: #EEFFEE;

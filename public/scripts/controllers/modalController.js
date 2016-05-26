@@ -60,6 +60,9 @@ homepageApp.controller('modalController', function($scope, Prediction, predictio
 
                 $scope.newPrediction.dateAdded = new Date();
                 var dataBeforeSave = angular.copy($scope.newPrediction.toJSON());
+                dataBeforeSave.dateAdded = moment($scope.newPrediction.dateAdded).format("Do MMM YYYY");
+                dataBeforeSave.endDate = moment($scope.newPrediction.endDate).format("Do MMM YYYY");
+                dataBeforeSave.noOfComments = 0;
 
                 // Save new prediction data
                 $scope.newPrediction.$save(function successCallback(res) {
