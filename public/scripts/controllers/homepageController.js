@@ -6,13 +6,17 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
     Prediction.query({}, function(data) {
 
         predictions.list = [];
+        $scope.order = '-orderEndDate';
 
         angular.forEach(data, function(predictionResource) {
             var prediction = predictionResource.toJSON();
             predictions.list.push(prediction);
 
+            prediction.orderDateAdded = new Date(prediction.dateAdded);
+            prediction.orderEndDate = new Date(prediction.endDate);
             prediction.dateAdded = moment(prediction.dateAdded).format("Do MMM YYYY");
-            
+            prediction.endDate = moment(prediction.endDate).format("Do MMM YYYY");
+
             var daysLeft = moment(prediction.endDate).diff(moment(), 'days');
             if (daysLeft <= 0) {
                 prediction.finished = true;
@@ -50,6 +54,16 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
 
     $scope.clearTagFilters = function() {
         $scope.tagFilters = {};
+    }
+
+    $scope.setOrder = function(order) {
+        if ($scope.order === order) {
+            $scope.order = '-' + order;
+        } else if ($scope.order === '-' + order) {
+            $scope.order = order;
+        } else {
+            $scope.order = order;
+        }
     }
 
 }]);

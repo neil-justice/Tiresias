@@ -166,3 +166,7 @@
   font-size: x-small;
   display: inline;
 }
+
+.end-date {
+  padding-left: 3em;
+}

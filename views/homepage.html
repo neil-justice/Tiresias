@@ -25,7 +25,7 @@
         ng-class="{'prediction-pending':prediction.finished === true,
                    'prediction-true':prediction.finishedState === true,
                    'prediction-false':prediction.finishedState === false}"
-        ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:{tags: tagFilters.tag} | orderBy : 'prediction.dateAdded':true ">
+        ng-repeat="prediction in predictions | filter:searchQuery:strict | filter:{tags: tagFilters.tag} | orderBy : order :true ">
       <div class="prediction-image" ng-switch="prediction.finishedState">
         <img ng-switch-when="false" src="/images/fail.png"/>
         <img ng-switch-when="true" src="/images/succeed.png"/>
@@ -36,7 +36,8 @@
         <p class="prediction-description">{{prediction.description}}</p>
         <div class="prediction-links">
           <a class="prediction-comments-link prediction-info" href="#/predictions/{{prediction._id}}#comments">{{prediction.noOfComments}} comments</a>
-          <a href="" class="prediction-info">{{prediction.dateAdded}}</a>
+          <a href="" ng-click="setOrder('orderDateAdded')" class="prediction-info">{{prediction.dateAdded}}</a>
+          <a href="" ng-click="setOrder('-orderEndDate')"  class="prediction-info end-date">   Ends: {{prediction.endDate}}</a>
           <a href="" class="prediction-info">Created by: {{prediction.user}}</a>
           <p class="tag-wrapper">
             <a class="tag prediction-tag" ng-repeat="tag in prediction.tags" ng-click="tagFilters.tag = tag">{{tag}}</a>
