@@ -67,6 +67,12 @@
     float: right;
 }
 
+.prediction-votes {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  width: 100%;
+}
+
 .searchBar {
     display: block;
     height: 35px;
