@@ -15,21 +15,21 @@
     <p>This is our final report for our prediction tracking website.</p>
     <h2>Website</h2>
 
-    <p>Our website aims to track predictions and claims made for the future, ranging from promises made by politicians, to a simple bet made between two friends. It gives users the chance to track predictions made within the categories that interest them, vote on whether they think the prediction will come true, see success/failure stats for categories, users and popular figures, and add their own claims to the site should they wish to have a public record of it.</p>
+    <p>Our website aims to track predictions and claims made for the future, ranging from promises made by politicians, to a simple bet made between two friends. It gives users the chance to track predictions made within the categories that interest them, vote on whether they think the prediction will come true, see their own success/failure stats as well as site-wide success percentages, and add their own claims to the site should they wish to have a public record of it.</p>
 
     <h2>Usage</h2>
 
     <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json. To run, the mongo server ("mongod") must be running, as well as the node server.</p>
 
-    <p>  To populate the database with our dummy data, the command  "mongorestore --collection predictions --db tiresias mongobackup/tiresias/predictions.bson" can be run.</p>
+    <p>  To populate the database with our dummy data, the bash script 'import.sh', situated in the root folder can be run. </p>
 
     <h1>Client</h1>
 
     <h2>Homepage</h2>
 
     <p>The homepage displays a list of all the predictions, ordered by most recent. We thought that this would be a good place to learn and test Angular, and make use of its templating, loop constructs and its ability to dynamically update the page, giving our web page a modern feel while also making it easy to provide such interactivity.</p>
-    <p>Each prediction has its own box, showing its title, the description, date added, the creator, and tags about the prediction.</p>
-    <p>Since we are using angular, this page is also dynamic. If a new prediction is added, the list of predictions is updated automatically and displays the newly added prediction at the top of the list (as it is the most recent). Clicking on the title of a prediction takes the user to the prediction page.</p>
+    <p>Each prediction has its own box, showing its title, the description, date added, the current net number of votes, the creator, and tags about the prediction.</p>
+    <p>Since we are using angular, this page is also dynamic. If a new prediction is added, the list of predictions is updated automatically and displays the newly added prediction at the top of the list (as it is the most recent). Sort order can be changed by clicking on the end date, and clicking it again will reverse the ordering. The date added will also lead to the same behaviour, but for date added instead. Clicking on the title of a prediction takes the user to the prediction page.</p>
 
     <h4>Banner</h4>
     <p> The homepage contains a banner, that contains the name of the site, a basic summary of the function of the site, and a drawing of an Ancient Greek prophet. As the user scrolls down, the banner disappears, leaving space for the predictions. If the login button is clicked, the banner, again, disappears upwards so that it doesn't get in the way. It reappears once the user has logged in or pressed the 'Cancel' button.</p>
