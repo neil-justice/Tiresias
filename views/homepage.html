@@ -30,6 +30,9 @@
         <img ng-switch-when="false" src="/images/fail.png"/>
         <img ng-switch-when="true" src="/images/succeed.png"/>
         <img ng-switch-default="" src="/images/blank.png"/>
+        <div class="prediction-votes">
+          <span>{{prediction.votes}}</span>
+        </div>
       </div>
       <div class="prediction-text">
         <a class="prediction-title" ng-href="#/predictions/{{prediction._id}}">{{prediction.title}}</a> <br/>
