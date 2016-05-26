@@ -35,10 +35,10 @@
         <a class="prediction-title" ng-href="#/predictions/{{prediction._id}}">{{prediction.title}}</a> <br/>
         <p class="prediction-description">{{prediction.description}}</p>
         <div class="prediction-links">
-          <a class="prediction-comments-link" href="#/predictions/{{prediction._id}}#comments">{{prediction.noOfComments}} comments</a>
+          <a class="prediction-comments-link prediction-info" href="#/predictions/{{prediction._id}}#comments">{{prediction.noOfComments}} comments</a>
+          <a href="" class="prediction-info">{{prediction.dateAdded}}</a>
+          <a href="" class="prediction-info">Created by: {{prediction.user}}</a>
           <a class="tag prediction-tag" ng-repeat="tag in prediction.tags" ng-click="tagFilters.tag = tag">{{tag}}</a>
-          <a href="">{{prediction.dateAdded}}</a>
-          <a href="" class="post-creator">Created by: {{prediction.user}}</a>
         </div>
       </div>
     </li>
