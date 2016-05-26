@@ -61,7 +61,7 @@
 
     <h4>Register button</h4>
 
-    <p>The register button, like the 'New Prediction' button, injects a modal form into the webpage that allows new users to register by filling in a username, email address and password. Form validation is done via Angular once again. All fields are required and the form cannot be submitted until these are all filled, the email address format is correct, and the password is 8 or more characters in length (and the two passwords match). </p>
+    <p>The register button, like the 'New Prediction' button, injects a modal form into the web page that allows new users to register by filling in a username, email address and password. Form validation is done via Angular once again. All fields are required and the form cannot be submitted until these are all filled, the email address format is correct, and the password is 8 or more characters in length (and the two passwords match). </p>
     <p>
         Once the form is submitted, a new User is created in the 'users' collection in the MongoDB database. This user can then log in using their username and password through the login form.
     </p>
@@ -79,6 +79,10 @@
 
     <h2>Stats Page</h2>
     <p>The stats page is a simple page showing some very basic stats for the currently-logged in user. It shows the number of successful and unsuccessful predictions that they have voted on (if the prediction itself was unsuccessful and they downvoted it, it counts as successful on their page). It also calculates and shows the percentage of successful votes that they have placed. Aside from this, there are also global stats for the site that are displayed here.</p>
+
+    <h4>Admin page</h4>
+    <p>The admin page can be accessed at '#/admin' by an account that has admin privileges. As mentioned in the 'Usage' section of the report, this is only the account with username 'admin' at the moment. The admin page shows the predictions that have been marked as 'finished' based on their end date and the current date, but haven't yet been marked as coming true or not. Each prediction has a 'TRUE' and a 'FALSE' button next to them, and the admin can research whether the prediction has come true or not and mark the prediction accordingly (or just play God, if they wish). </br>
+    When they mark a prediction, this will update the stats for the user (success/fail counts) as well as the global stats, so that the stats page will show the correct user and site-wide stats next time the user navigates there. It will also remove that prediction from the admin page dynamically, since it has now been marked. The admin can search within the predictions using the search bar. Once all finished predictions have been marked, a message stating that there are no more predictions to mark will appear on the page. </p>
 
     <h2>SVG</h2>
 
@@ -99,6 +103,7 @@
     <p>We have learnt a lot about both these languages, not having worked with them before.  In particular, learning to think asynchronously was a challenge but we think we have been successful here.  For example, the Google maps API was often loading before other parts of the page it was depending on, so we have changed it to be injected after they have loaded.</p>
 
     <p>We have also learned a lot about callback functions, promises, and so on. We tried to use a variety of Angular services and directives across our website. For example, a single prediction on the prediction page (predictionController.js) is fetched using a $resource that we named 'Prediction' - which aims to wrap HTTP requests to simplify the process - and the data is filled in inside the success callback function. In other places we used the slightly lower-level $http service itself to make requests, in order to get familiar with both methods.</p>
+    <p>Another important service that we wrote was for authentication. If the route is authenticated, the 'authentication' service's verifyUser()' function is called, which attempts to take the token stored in the user's browsers's 'localstorage' and makes a http request to the '/decode' endpoint of our server. This endpoint takes the token, decodes it (retrieving the username and expiry date from it), attempts to find a user in the database with that username, and returns some information about the user if that user does exist (and the token is not expired). Of course, there is error-checking and errors are returned in a variety of situations, such as if the token doesn't exist, is expired, or if the user doesn't exist. Angular will then handle that error accordingly, which varies according to the route, but it normally displays a notification to the user stating what the error was.</p>
 
     <h1>Server</h1>
 
@@ -110,7 +115,7 @@
 
     <p>Only files in the public folder of the website are visible to users, and any attempt to browse directly to another file intercepted by the express routing and redirected to the main page.  This also stops any potential attacker going up the directory tree using the '/../' trick.</p>
 
-    <p>The server also handles token generation, salting/hashing passwords, and verifying passwords.  No passwords are stored directly.</p>
+    <p>The server also handles token generation, salting/hashing passwords, and verifying passwords. No passwords are stored directly.</p>
 
     <p>The JWT (JSON Web Token) package is used to create a token when a user logs in successfully, which is then sent back to the client and stored in 'localstorage' in their browser. The user is then allowed to stay logged in until the token expiry date, as authenticated routes will send this token alongside other data so that it can be verified. We have made sure that all routes that need the user to be logged in validate this when the user tries to navigate to them.</p>
 
