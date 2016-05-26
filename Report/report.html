@@ -61,7 +61,7 @@
 
     <h4>Register button</h4>
 
-    <p>The register button, like the 'New Prediction' button, injects a modal form into the web page that allows new users to register by filling in a username, email address and password. Form validation is done via Angular once again. All fields are required and the form cannot be submitted until these are all filled, the email address format is correct, and the password is 8 or more characters in length (and the two passwords match). </p>
+    <p>The register button, like the 'New Prediction' button, injects a modal form into the web page that allows new users to register by filling in a username, email address and password. Form validation is done via Angular once again. All fields are required and the form cannot be submitted until these are all filled, the email address format is correct, and the password is 8 or more characters in length (and the two passwords match). There is also client-side as well as server-side validation for usernames, which cannot be longer than 20 characters in length.</p>
     <p>
         Once the form is submitted, a new User is created in the 'users' collection in the MongoDB database. This user can then log in using their username and password through the login form.
     </p>
