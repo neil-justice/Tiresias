@@ -44,6 +44,10 @@
 
     <p>A large chunk of our effort has gone towards making the prediction page. This page includes information about a single prediction, including its title, description, a link to the source (if it exists), a map showing the area(s) affected (if a location has been given), a timer/progress bar showing the time left, tags, comments, and it gives the users the ability to upvote/downvote a prediction.  If the user is logged in they may add comments, which appear instantly, and have both server-side and client-side validation. Voting also requires a login, and the user will get a pop-up notification telling them to log in if they try to vote while not logged in.</p>
 
+    <p>If the prediction has finished, the number of days left is replaced by a sign saying 'FINISHED - DECISION PENDING' until an admin has marked this prediction as having come true or not having come true. When this happens, the sign is updated to either say 'SUCCEEDED' or 'FAILED'.</p>
+
+    <p>The buttons on the left-hand side of the page for voting will be highlighted if the user has already voted on the prediction (the bottom one will be highlighted if they have downvoted it, and the top one if they have upvoted it). Their vote is stored in the database so this information persists across sessions and also different users. Once they have voted, they cannot vote again, and a pop-up notification will appear telling them this if they try to vote on a prediction they have already voted on. </p>
+
     <h2>Navigation Bar</h2>
 
     <h4>New prediction button</h4>
@@ -68,7 +72,7 @@
     <p>We have also implemented a variety of useful JavaScript functions for common tasks, such as inserting and deleting elements, getting element coordinates, and adding and removing event listeners.</p>
 
     <h4>Home and Stats buttons</h4>
-    <p>On the far left are the 'Home' button and the 'Stats' buttons. The home button is fairly explanatory - it takes the user back to the homepage. The 'Stats' button is currently not being used as we did not manage to implement a 'Stats' page, as this would have required a way of moderating predictions and deciding which ones have come true and which ones have not. It would have also required an implementation of different styles for the prediction page of predictions that have ended, based on whether they came true or not. Unfortunately, we didn't have time to implement these and therefore haven't included a stats page, but it would likely be the next step were we to continue the project.</p>
+    <p>On the far left are the 'Home' button and the 'Stats' buttons. These are fairly self-explanatory - the home button takes the user back to the homepage and the stats button takes the user to the stats page, if they are logged in. A failure notification will appear if they try to access this page without being logged in.</p>
 
     <h2>SVG</h2>
 
@@ -98,7 +102,7 @@
 
     <p>Because we are using Angular, the server is mainly used to handle REST API endpoints, rather than for serving different html pages. It serves index.html on the general route ('/*'), and the other page changes are handled by routing in Angular, which then allows you to specify a template file and a controller for each route that you wish to have on your site. This can be seen in the 'angularModule.js' file. It's worth noting that the html is sent as xhtml by setting its headers in the sendAsXHTML function inside server.js, but only if the browser advertises itself as supporting it - otherwise it is sent as HTML.</p>
 
-    <p>Only files in the public folder of the website are visible to users, and any attempt to browse directly to another file intercepted by the express routing and redirected to the main page.  This also stops any potential attacker going up the directoy tree using the '/../' trick.</p>
+    <p>Only files in the public folder of the website are visible to users, and any attempt to browse directly to another file intercepted by the express routing and redirected to the main page.  This also stops any potential attacker going up the directory tree using the '/../' trick.</p>
 
     <p>The server also handles token generation, salting/hashing passwords, and verifying passwords.  No passwords are stored directly.</p>
 
