@@ -7,25 +7,123 @@
 </head>
 <body>
     <main>
-    <h1>Web Tech Project Interim Report</h1>
+
+    <h1>Web Tech Project Final Report</h1>
+
     <p>By bm15048 and nj15347.</p>
-    <p>This is our interim report for our prediction tracking website.</p>
-    <h3>Website</h3>
-    <p>Our website aims to track predictions and claims made for the future, ranging from promises made by politicians, to a simple bet made between two friends. It gives users the chance to track predictions made within the categories that interest them, vote on whether they think the prediction will come true, see success/failure stats for categories, users and popular figures, and add their own claims to the site should they wish to have a public record of it.</p>
-    <h3>Prediction Page</h3>
-    <p>The biggest chunk of our effort has gone towards making the prediction page. This page will include information about a single prediction, including its title, description, a link to the source, a map showing the area(s) affected, a timer/progress bar showing the time left, tags, comments, stats, and it will give the users the ability to upvote/downvote a prediction. <br/>
-    Currently, we have all the features with the exception of the comments and the stats, complete with CSS styling and a script to set the navigation bar item positioning (in case we ever need to change it).<br/>
-    Our 'New Prediction' button also uses JavaScript to inject a modal window containing a form into the page. This form doesn't submit data yet.<br/>
-    The login button injects a login form which slides down at the top of the page.  Clicking the button again submits the username and password.<br/>
-    We have also implemented a variety of useful JavaScript functions for common tasks, such as inserting and deleting elements, getting element coordinates, and adding and removing event listeners.<br/>
-    Our HTML and CSS is IE8 compatible, but not all our JavaScript scripts are yet.</p>
-    <h3>Homepage</h3>
-    <p>We've also started work on a home page, which for now will be a list of 10 or so predictions, ordered by most recent (though it could have other options). We thought that this would be a good place to learn and test Angular, and make use of its templating, loop constructs and its ability to dynamically update the page, giving our web page a modern feel while also making it easy to provide such interactivity.</p>
-    <p>We have made a start on the server-side as part of the experiments with the home page, and we have managed to get Angular communicating with Express, which then accesses a MongoDB database in order to fetch a dummy list of predictions, and display them on the homepage. </p>
-    <p>We have also implemented fetching of data from the MongoDB database for individual predictions, and we are injecting that data into the prediction page template using Angular, and these can be accessed by following links from the homepage.</p>
-    <p>Unfortunately in order to use express we have had to replace server.js with a barebones version which is currently lacking any security features.</p>
-    <h3>Usage</h3>
-    <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json.  To run, the mongo server ("mongod") must be running, as well as the node server.<br/>  To populate the database with our dummy data, the command  "mongorestore --collection predictions --db tiresias mongobackup/tiresias/predictions.bson" can be run.</p>
+
+    <p>This is our final report for our prediction tracking website.</p>
+    <h2>Website</h2>
+
+    <p>Our website aims to track predictions and claims made for the future, ranging from promises made by politicians, to a simple bet made between two friends. It gives users the chance to track predictions made within the categories that interest them, vote on whether they think the prediction will come true, see their own success/failure stats as well as site-wide success percentages, and add their own claims to the site should they wish to have a public record of it.</p>
+
+    <h2>Usage</h2>
+
+    <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json. To run, the mongo server ("mongod") must be running, as well as the node server.</p>
+
+    <p> To populate the database with our dummy data, the bash script 'import.sh', situated in the root folder can be run. We are using port 8081. </p>
+
+    <h4>User Accounts</h4>
+    <p>To make the most of the site, a user account is necessary, as there is token authentication on some of the routes. Additionally, an admin login is required to access the '/admin' page, as this has additional privileges over the user accounts. Currently, there are three accounts registered in our database, with usernames 'neil', 'berk', and 'admin', each with the very secure password 'password'. These can be used to try out the different features of the site. Or, a new user can be registered by pressing the 'Register' button in the navigation bar, though these users will not get admin privileges.</p>
+
+    <h1>Client</h1>
+
+    <h2>Homepage</h2>
+
+    <p>The homepage displays a list of all the predictions, ordered by most recent. We thought that this would be a good place to learn and test Angular, and make use of its templating, loop constructs and its ability to dynamically update the page, giving our web page a modern feel while also making it easy to provide such interactivity.</p>
+    <p>Each prediction has its own box, showing its title, the description, date added, the current net number of votes, the creator, and tags about the prediction. Predictions that have ended (current date is past their end date) appear as green if they were marked as having come true, red if they were marked as not having come true, and yellow if they are still waiting to be marked by an admin. Predictions that are ongoing appear neutral.</p>
+    <p>Since we are using Angular, this page is also dynamic. If a new prediction is added, the list of predictions is updated automatically and displays the newly added prediction at the top of the list (as it is the most recent). Clicking on the title of a prediction takes the user to the prediction page. Clicking on the comments link will take the user to the prediction page and scroll to the comments for that prediction.</p>
+
+    <h4>Banner</h4>
+    <p> The homepage contains a banner, that contains the name of the site, a basic summary of the function of the site, and a drawing of an Ancient Greek prophet. As the user scrolls down, the banner disappears, leaving space for the predictions. If the login button is clicked, the banner, again, disappears upwards so that it doesn't get in the way. It reappears once the user has logged in or pressed the 'Cancel' button.</p>
+
+    <h4>Tag Category Filter</h4>
+    <p>If the user clicks on one of the tags that appear inside one of the prediction boxes, the list of predictions will be filtered using that category and only predictions that contain that tag will be visible on the page. The category used to filter, as well as a button to clear the filter appear next to the search bar when this happens, so that the user can see what they're filtering by, and remove the filter should they wish to.</p>
+
+    <h4>Sorting</h4>
+    <p>As mentioned earlier, the default sort order is by date added, with the most recently added predictions at the top. Sort order can be changed by clicking on the end date, and clicking it again will reverse the ordering. Clicking on the date added will also lead to the same behaviour, but for date added instead. The user can also click on the votes for a prediction to sort by this property instead.</p>
+    
+    <h2>Prediction Page</h2>
+
+    <p>A large chunk of our effort has gone towards making the prediction page. This page includes information about a single prediction, including its title, description, a link to the source (if it exists), a map showing the area(s) affected (if a location has been given), a timer/progress bar showing the time left, tags, comments, and it gives the users the ability to upvote/downvote a prediction.  If the user is logged in they may add comments, which appear instantly, and have both server-side and client-side validation. Voting also requires a login, and the user will get a pop-up notification telling them to log in if they try to vote while not logged in.</p>
+
+    <p>If the prediction has finished, the number of days left is replaced by a sign saying 'FINISHED - DECISION PENDING' until an admin has marked this prediction as having come true or not having come true. When this happens, the sign is updated to either say 'SUCCEEDED' or 'FAILED'.</p>
+
+    <p>The buttons on the left-hand side of the page for voting will be highlighted if the user has already voted on the prediction (the bottom one will be highlighted if they have downvoted it, and the top one if they have upvoted it). Their vote is stored in the database so this information persists across sessions and also different users. Once they have voted, they cannot vote again, and a pop-up notification will appear telling them this if they try to vote on a prediction they have already voted on. </p>
+
+    <h2>Navigation Bar</h2>
+
+    <h4>New prediction button</h4>
+
+    <p>Our 'New Prediction' button also uses JavaScript to inject a modal window containing a form into the page.  If the user is not logged in it will display a notification to the user asking them to login.  Otherwise, it shows the form.  This form gathers the data input by the user and creates a new prediction in the database. Form validation is done through Angular using a variety of directives. The fields with the red stars indicate required items, and if the user highlights one of these and switches away while it's still blank, a red error message indicating that the field is required will appear. This is done using ng-messages. The 'Submit' button will appear greyed out until the required fields are filled in. This is achieved using the ng-disabled directive, which checks if the expression passed to it (in this case it's the $invalid boolean of the form) is true or false, and disables the element it's placed on accordingly. </p>
+
+    <p>Completing the form and pressing the 'Submit' button will call the submitPrediction method inside the 'modalController'. It will first verify that the user exists, ask Google Maps to find the location that was given in the form, and following this, will proceed to save the object into the database. This process of collecting data and sending it uses the $resource service in Angular, that creates an object that is able to interact with a specific REST api endpoint (that is specified in its factory method - in our project this can be found in the angularModule.js file.)</p>
+
+    <h4>Register button</h4>
+
+    <p>The register button, like the 'New Prediction' button, injects a modal form into the web page that allows new users to register by filling in a username, email address and password. Form validation is done via Angular once again. All fields are required and the form cannot be submitted until these are all filled, the email address format is correct, and the password is 8 or more characters in length (and the two passwords match). </p>
+    <p>
+        Once the form is submitted, a new User is created in the 'users' collection in the MongoDB database. This user can then log in using their username and password through the login form.
+    </p>
+
+    <h4>Login/Cancel button</h4>
+
+    <p>The login button reveals a login form which slides down at the top of the page. Clicking the button again submits the username and password.</p>
+
+    <p>Once the user is logged in, the login and register buttons are hidden, and a small dashboard showing basic info about the user appears in their place. Ng-hide and ng-show directives are used to hide and show the different elements depending on whether the user is logged in or not.</p>
+
+    <p>We have also implemented a variety of useful JavaScript functions for common tasks, such as inserting and deleting elements, getting element coordinates, and adding and removing event listeners.</p>
+
+    <h4>Home and Stats buttons</h4>
+    <p>On the far left are the 'Home' button and the 'Stats' buttons. These are fairly self-explanatory - the home button takes the user back to the homepage and the stats button takes the user to the stats page, if they are logged in. A failure notification will appear if they try to access this page without being logged in.</p>
+
+    <h2>Stats Page</h2>
+    <p>The stats page is a simple page showing some very basic stats for the currently-logged in user. It shows the number of successful and unsuccessful predictions that they have voted on (if the prediction itself was unsuccessful and they downvoted it, it counts as successful on their page). It also calculates and shows the percentage of successful votes that they have placed. Aside from this, there are also global stats for the site that are displayed here.</p>
+
+    <h2>Admin page</h2>
+    <p>The admin page can be accessed at '#/admin' by an account that has admin privileges. As mentioned in the 'Usage' section of the report, this is only the account with username 'admin' at the moment. The admin page shows the predictions that have been marked as 'finished' based on their end date and the current date, but haven't yet been marked as coming true or not. Each prediction has a 'TRUE' and a 'FALSE' button next to them, and the admin can research whether the prediction has come true or not and mark the prediction accordingly (or just play God, if they wish). </br>
+    When they mark a prediction, this will update the stats for the user (success/fail counts) as well as the global stats, so that the stats page will show the correct user and site-wide stats next time the user navigates there. It will also remove that prediction from the admin page dynamically, since it has now been marked. The admin can search within the predictions using the search bar. Once all finished predictions have been marked, a message stating that there are no more predictions to mark will appear on the page.</p>
+
+    <h2>SVG</h2>
+
+    <p>Each prediction has a start date - the date the prediction was made - and an end date - the date it was meant to come true.  An SVG progress bar displays the time passed.  The progress bar is controlled by JavaScript, which injects values into the SVG to change both the length of the bar and the colour - from green to red.  Making this taught us a lot about SVG and vector graphics, and it took some time to get the animation right and correctly calculate the size of the bar based on the dates.</p>
+
+    <p>The SVG was initially created in Inkscape, but heavily edited by hand afterwards to make it fit with our overall design.</p>
+
+    <h2>Images</h2>
+
+    <p>We have designed several images, including the vote up and down buttons, the close button used by modal windows and soft pop-up notifications, the home and stats icons on the navbar, and the main banner on the homepage.  This last one was the most difficult, and was done by tracing an image found via Google Image search for 'prophet' and running the result through several different filters.  This was a few hours worth of work.</p>
+
+    <h2>CSS</h2>
+
+    <p>We have split our CSS into several different files in an attempt to keep it modular, and avoid the problem which is often seen in web development where there is a single CSS file with several thousand lines in it.  Strict specification of selectors means that the style definitions from one file do not accidentally bleed over and affect elements which they were not intended to, and the main.css file holds style definitions which are meant to apply globally, such as some basic normalisations and conventions about linking. We did not use libraries such as Bootstrap and designed (almost) everything ourselves.</p>
+
+    <h2>Javascript and Angular</h2>
+
+    <p>We have learnt a lot about both these languages, not having worked with them before.  In particular, learning to think asynchronously was a challenge but we think we have been successful here.  For example, the Google maps API was often loading before other parts of the page it was depending on, so we have changed it to be injected after they have loaded.</p>
+
+    <p>We have also learned a lot about callback functions, promises, and so on. We tried to use a variety of Angular services and directives across our website. For example, a single prediction on the prediction page (predictionController.js) is fetched using a $resource that we named 'Prediction' - which aims to wrap HTTP requests to simplify the process - and the data is filled in inside the success callback function. In other places we used the slightly lower-level $http service itself to make requests, in order to get familiar with both methods.</p>
+    <p>Another important service that we wrote was for authentication. If the route is authenticated, the 'authentication' service's verifyUser()' function is called, which attempts to take the token stored in the user's browsers's 'localstorage' and makes a http request to the '/decode' endpoint of our server. This endpoint takes the token, decodes it (retrieving the username and expiry date from it), attempts to find a user in the database with that username, and returns some information about the user if that user does exist (and the token is not expired). Of course, there is error-checking and errors are returned in a variety of situations, such as if the token doesn't exist, is expired, or if the user doesn't exist. Angular will then handle that error accordingly, which varies according to the route, but it normally displays a notification to the user stating what the error was.</p>
+
+    <h1>Server</h1>
+
+    <p>The server uses Express.js to handle routing, and we have managed to get Angular communicating with Express, which then accesses a MongoDB database in order to fetch the list of predictions, and display them on the homepage. </p>
+
+    <p>We have also implemented fetching of data from the MongoDB database for individual predictions, and we are injecting that data into the prediction page template using Angular, and these can be accessed by following links from the homepage. For the database implementation, we used both Mongoose (which allows the developer to define database schemas, much like in RDBMSs, and use these to call MongoDB methods) for users, and the official 'mongodb' package for Node.js to handle predictions, which is simply used to connect to the database and execute queries, and allows schema-less operation as is usual for MongoDB.</p>
+
+    <p>Because we are using Angular, the server is mainly used to handle REST API endpoints, rather than for serving different html pages. It serves index.html on the general route ('/*'), and the other page changes are handled by routing in Angular, which then allows you to specify a template file and a controller for each route that you wish to have on your site. This can be seen in the 'angularModule.js' file. It's worth noting that the html is sent as xhtml by setting its headers in the sendAsXHTML function inside server.js, but only if the browser advertises itself as supporting it - otherwise it is sent as HTML.</p>
+
+    <p>Only files in the public folder of the website are visible to users, and any attempt to browse directly to another file intercepted by the express routing and redirected to the main page.  This also stops any potential attacker going up the directory tree using the '/../' trick.</p>
+
+    <p>The server also handles token generation, salting/hashing passwords, and verifying passwords. No passwords are stored directly.</p>
+
+    <p>The JWT (JSON Web Token) package is used to create a token when a user logs in successfully, which is then sent back to the client and stored in 'localstorage' in their browser. The user is then allowed to stay logged in until the token expiry date, as authenticated routes will send this token alongside other data so that it can be verified. We have made sure that all routes that need the user to be logged in validate this when the user tries to navigate to them.</p>
+
+    <h4>HTTPS</h4>
+    <p>Our server is an HTTPS server, and we have generated a private key and a public certificate that is kept in the 'sslcert' folder in our project. Because it's self-generated, the browser will still complain that it's not a trusted certificate. We attempted to get a free certificate from an authority but ran into the problem that we didn't have a domain name that we could register. However, for the purposes of development, we thought a self-generated certificate would be enough since the packets are still being encrypted. </p>
+
+    <p>In the part of the module we learnt a lot about creating and working with an API, and connecting server, database and front-end. Creating the user system was particularly challenging and we are quite proud of what we have achieved there.</p>
+
     </main>
 </body>
 </html>

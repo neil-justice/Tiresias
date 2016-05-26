@@ -31,7 +31,7 @@
         <img ng-switch-when="true" src="/images/succeed.png"/>
         <img ng-switch-default="" src="/images/blank.png"/>
         <div class="prediction-votes">
-          <span>{{prediction.votes}}</span>
+          <a href="" ng-click="setOrder('votes')">{{prediction.votes}}</a>
         </div>
       </div>
       <div class="prediction-text">
@@ -39,7 +39,7 @@
         <p class="prediction-description">{{prediction.description}}</p>
         <div class="prediction-links">
           <a class="prediction-comments-link prediction-info" href="#/predictions/{{prediction._id}}#comments">{{prediction.noOfComments}} comments</a>
-          <a href="" ng-click="setOrder('orderDateAdded')" class="prediction-info">{{prediction.dateAdded}}</a>
+          <a href="" ng-click="setOrder('-orderDateAdded')" class="prediction-info">{{prediction.dateAdded}}</a>
           <a href="" ng-click="setOrder('-orderEndDate')"  class="prediction-info end-date">   Ends: {{prediction.endDate}}</a>
           <a href="" class="prediction-info">Created by: {{prediction.user}}</a>
           <p class="tag-wrapper">

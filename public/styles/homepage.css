@@ -10,10 +10,11 @@
     position: relative;
 }
 
-/*.prediction-pending {
-  border: 10px solid #CCC;
+.prediction-pending {
+  border: 0px solid #F7CA18;
+  background-color: #FFFDD6;
 }
-*/
+
 .prediction-true {
   border: 0px solid #52A060;
   background-color: #EEFFEE;

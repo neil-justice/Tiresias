@@ -6,18 +6,18 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
     Prediction.query({}, function(data) {
 
         predictions.list = [];
-        $scope.order = '-orderEndDate';
+        $scope.order = 'orderDateAdded';
 
         angular.forEach(data, function(predictionResource) {
             var prediction = predictionResource.toJSON();
-            predictions.list.push(prediction);
 
             prediction.orderDateAdded = new Date(prediction.dateAdded);
             prediction.orderEndDate = new Date(prediction.endDate);
             prediction.dateAdded = moment(prediction.dateAdded).format("Do MMM YYYY");
             prediction.endDate = moment(prediction.endDate).format("Do MMM YYYY");
+            predictions.list.push(prediction);
 
-            var daysLeft = moment(prediction.endDate).diff(moment(), 'days');
+            var daysLeft = moment(prediction.orderEndDate).diff(moment(), 'days');
             if (daysLeft <= 0) {
                 prediction.finished = true;
             }
