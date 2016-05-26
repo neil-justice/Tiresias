@@ -38,7 +38,9 @@
           <a class="prediction-comments-link prediction-info" href="#/predictions/{{prediction._id}}#comments">{{prediction.noOfComments}} comments</a>
           <a href="" class="prediction-info">{{prediction.dateAdded}}</a>
           <a href="" class="prediction-info">Created by: {{prediction.user}}</a>
-          <a class="tag prediction-tag" ng-repeat="tag in prediction.tags" ng-click="tagFilters.tag = tag">{{tag}}</a>
+          <p class="tag-wrapper">
+            <a class="tag prediction-tag" ng-repeat="tag in prediction.tags" ng-click="tagFilters.tag = tag">{{tag}}</a>
+          </p>
         </div>
       </div>
     </li>
