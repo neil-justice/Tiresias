@@ -21,7 +21,7 @@
 
     <p>In order to run, mongodb, npm and Bower (can be found on npm) must be installed.  Next, the command "npm install", and then "bower install", must be run from the website's main directory.  These will install the necessary packages as defined in bower.json and package.json. To run, the mongo server ("mongod") must be running, as well as the node server.</p>
 
-    <p>  To populate the database with our dummy data, the bash script 'import.sh', situated in the root folder can be run. </p>
+    <p> To populate the database with our dummy data, the bash script 'import.sh', situated in the root folder can be run. We are using port 8081. </p>
 
     <h4>User Accounts</h4>
     <p>To make the most of the site, a user account is necessary, as there is token authentication on some of the routes. Additionally, an admin login is required to access the '/admin' page, as this has additional privileges over the user accounts. Currently, there are three accounts registered in our database, with usernames 'neil', 'berk', and 'admin', each with the very secure password 'password'. These can be used to try out the different features of the site. Or, a new user can be registered by pressing the 'Register' button in the navigation bar, though these users will not get admin privileges.</p>
@@ -120,6 +120,7 @@
     <p>The JWT (JSON Web Token) package is used to create a token when a user logs in successfully, which is then sent back to the client and stored in 'localstorage' in their browser. The user is then allowed to stay logged in until the token expiry date, as authenticated routes will send this token alongside other data so that it can be verified. We have made sure that all routes that need the user to be logged in validate this when the user tries to navigate to them.</p>
 
     <h4>HTTPS</h4>
+    <p>Our server is an HTTPS server, and we have generated a private key and a public certificate that is kept in the 'sslcert' folder in our project. Because it's self-generated, the browser will still complain that it's not a trusted certificate. We attempted to get a free certificate from an authority but ran into the problem that we didn't have a domain name that we could register. However, for the purposes of development, we thought a self-generated certificate would be enough since the packets are still being encrypted. </p>
 
     <p>In the part of the module we learnt a lot about creating and working with an API, and connecting server, database and front-end. Creating the user system was particularly challenging and we are quite proud of what we have achieved there.</p>
 
