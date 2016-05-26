@@ -23,6 +23,9 @@
 
     <p>  To populate the database with our dummy data, the bash script 'import.sh', situated in the root folder can be run. </p>
 
+    <h4>User Accounts</h4>
+    <p>To make the most of the site, a user account is necessary, as there is token authentication on some of the routes. Additionally, an admin login is required to access the '/admin' page, as this has additional privileges over the user accounts. Currently, there are three accounts registered in our database, with usernames 'neil', 'berk', and 'admin', each with the very secure password 'password'. These can be used to try out the different features of the site. Or, a new user can be registered by pressing the 'Register' button in the navigation bar, though these users will not get admin privileges.</p>
+
     <h1>Client</h1>
 
     <h2>Homepage</h2>
@@ -74,6 +77,9 @@
     <h4>Home and Stats buttons</h4>
     <p>On the far left are the 'Home' button and the 'Stats' buttons. These are fairly self-explanatory - the home button takes the user back to the homepage and the stats button takes the user to the stats page, if they are logged in. A failure notification will appear if they try to access this page without being logged in.</p>
 
+    <h2>Stats Page</h2>
+    <p>The stats page is a simple page showing some very basic stats for the currently-logged in user. It shows the number of successful and unsuccessful predictions that they have voted on (if the prediction itself was unsuccessful and they downvoted it, it counts as successful on their page). It also calculates and shows the percentage of successful votes that they have placed. Aside from this, there are also global stats for the site that are displayed here.</p>
+
     <h2>SVG</h2>
 
     <p>Each prediction has a start date - the date the prediction was made - and an end date - the date it was meant to come true.  An SVG progress bar displays the time passed.  The progress bar is controlled by Javascript, which injects values into the SVG to change both the length of the bar and the colour - from green to red.  Making this taught us a lot about SVG and vector graphics, and it took some time to get the animation right and correctly calculate the size of the bar based on the dates.</p>
@@ -106,7 +112,7 @@
 
     <p>The server also handles token generation, salting/hashing passwords, and verifying passwords.  No passwords are stored directly.</p>
 
-    <p>The JWT (JSON Web Token) package is used to create a token when a user logs in successfully, which is then sent back to the client and stored in 'localstorage' in their browser. The user is then allowed to stay logged in until the token expiry date, as authenticated routes will send this token alongside other data so that it can be verified.</p>
+    <p>The JWT (JSON Web Token) package is used to create a token when a user logs in successfully, which is then sent back to the client and stored in 'localstorage' in their browser. The user is then allowed to stay logged in until the token expiry date, as authenticated routes will send this token alongside other data so that it can be verified. We have made sure that all routes that need the user to be logged in validate this when the user tries to navigate to them.</p>
 
     <h4>HTTPS</h4>
 
