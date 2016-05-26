@@ -17,7 +17,7 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
             prediction.endDate = moment(prediction.endDate).format("Do MMM YYYY");
             predictions.list.push(prediction);
 
-            var daysLeft = moment(prediction.endDate).diff(moment(), 'days');
+            var daysLeft = moment(prediction.orderEndDate).diff(moment(), 'days');
             if (daysLeft <= 0) {
                 prediction.finished = true;
             }

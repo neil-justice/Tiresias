@@ -11,7 +11,8 @@
 }
 
 .prediction-pending {
-  border: 10px solid #F7CA18;
+  border: 0px solid #F7CA18;
+  background-color: #FFFDD6;
 }
 
 .prediction-true {
