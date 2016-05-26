@@ -42,14 +42,21 @@
 }
 
 .prediction-text {
-    margin-left: 10%;
+    width:85%;
     padding-bottom: 5px;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
+    display: inline-block;
+    vertical-align:top;
 }
 
 .prediction-image {
-  position: absolute;
+  width:10%;
+  display:inline-block;
+}
+
+.prediction-image img {
+  width:100%;
 }
 
 .prediction-links {
@@ -58,13 +65,31 @@
     margin-top: 5px;
 }
 
+.prediction-info {
+  display:block;
+  float:left;
+  margin-right:2em;
+}
+
 .prediction-comments-link {
     color: #128FDC;
-    margin-right: 1%;
 }
 
 .prediction-tag {
-    float: right;
+  margin-bottom:0.2em;  
+}
+
+.tag-wrapper {
+  white-space: nowrap;
+  float:right;
+  display:inline;
+  margin:0;
+}
+
+.prediction-votes {
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  width: 100%;
 }
 
 .searchBar {
@@ -88,7 +113,7 @@
 }
 
 .post-creator {
-    padding-left: 3em;
+
 }
 
 #banner {
