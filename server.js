@@ -44,6 +44,8 @@ var userSchema = new mongoose.Schema( {
     admin: Boolean
 });
 
+
+// Password methods
 userSchema.methods.setPassword = function(password) {
     this.salt = crypto.randomBytes(16).toString('hex');
     this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
@@ -54,6 +56,7 @@ userSchema.methods.isValidPassword = function(password) {
     return this.hash === hash;
 }
 
+// Create a token to authorise the current user, valid for one week.
 userSchema.methods.generateJwt = function() {
     var expiry = new Date();
     expiry.setDate(expiry.getDate() + 7);
@@ -81,7 +84,7 @@ app.use(express.static("bower_components"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// Routes
+// Get all predictions
 router.route('/api/predictions').get(function(req, res, next) {
 
         // Get all the documents in the collection
@@ -95,7 +98,7 @@ router.route('/api/predictions').get(function(req, res, next) {
     });
 });
 
-
+// First validate user. If everything looks right, add new prediction to the database.
 router.route('/api/predictions/').post(function(req, res) {
 
     if (!verifyUser(req.body.token, req.body.user)) {
@@ -122,6 +125,7 @@ router.route('/api/predictions/:pid')
             res.sendStatus(404);
         }
 
+        // Get prediction with that ID
         predictions.find({"_id": new ObjectID(req.params['pid'])}).toArray(function(err, data) {
             if (err) {
                 console.log(err);
@@ -205,6 +209,7 @@ router.route('/api/vote').post(function(req, res) {
     });
 });
 
+// Global stats
 router.get('/api/stats', function(req, res) {
 
     stats.findOne({name: 'stats'}, function(err, obj) {
@@ -302,6 +307,7 @@ router.post('/api/decode', function(req, res) {
         return res.status(403).json({success: false, msg: 'No user found in token'});
     }
 
+    // Find user with username that's stored in the token and return their info. Errors if not everything is right.
     User.findOne({
         username: decodedToken.username
     }, function(err, user) {

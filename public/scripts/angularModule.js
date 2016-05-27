@@ -57,7 +57,7 @@ homepageApp.factory('authentication', function($http, $window) {
     };
 });
 
-// soft popup notification functions used by several controllers
+// Soft pop-up notification functions used by several controllers
 homepageApp.factory('notifications', function() {
     var notificationIndex = 0; //ID for notifications
     var notifications = {}; // list of notifications
@@ -98,6 +98,7 @@ homepageApp.config(['$locationProvider', '$routeProvider', function($locationPro
         });
 }]);
 
+// Holds predictions in the homepage so that the list can be dynamically updated when new ones are added.
 homepageApp.factory('predictions', function() {
     return {
         list: []
@@ -145,6 +146,7 @@ homepageApp.directive('sameAs', function() {
     };
 });
 
+// Used to compare end date to start date in the New Prediction form
 homepageApp.directive('dateLaterThan', function() {
     return {
         require: 'ngModel',

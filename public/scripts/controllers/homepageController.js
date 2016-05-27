@@ -3,6 +3,7 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
 
     $scope.tagFilters = {};
 
+    // Fetch predictions and fill in their data so that the html template can be filled in.
     Prediction.query({}, function(data) {
 
         predictions.list = [];
@@ -11,6 +12,8 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
         angular.forEach(data, function(predictionResource) {
             var prediction = predictionResource.toJSON();
 
+            // The dates preceded by 'order' are used for ordering, because Angular isn't able to sort dates once they have been formatted
+            // by Moment.js
             prediction.orderDateAdded = new Date(prediction.dateAdded);
             prediction.orderEndDate = new Date(prediction.endDate);
             prediction.dateAdded = moment(prediction.dateAdded).format("Do MMM YYYY");
@@ -36,6 +39,7 @@ homepageApp.controller('homepageController', ['$scope', '$window', 'Prediction',
         console.log('Error: ' + res);
     });
 
+    // Control banner placement based on scroll position
     angular.element($window).on('scroll', function() {
         var banner = document.querySelector("#banner");
     

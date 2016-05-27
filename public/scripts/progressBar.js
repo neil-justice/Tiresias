@@ -37,8 +37,6 @@ function setProgress(percent)
   var animate = document.querySelector("#svg-animate");
   var animateColor = document.querySelector("#svg-animate-color");
 
-  console.log(percent);
-
   animate.setAttribute("to",  (percent - 3) + '%');
   animateColor.setAttribute("to",  color[Math.floor(percent / 10)]);
 }

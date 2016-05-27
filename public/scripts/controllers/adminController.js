@@ -3,6 +3,7 @@ homepageApp.controller('adminController', function($scope, $window, $http, Predi
 
     $scope.tagFilters = {};
 
+    // Verify admin
     authentication.verifyUser().then(function successCallback(data) {
         if (!data.isLoggedIn || !data.currentUser.admin) {
             $location.path('/').replace();
@@ -10,6 +11,7 @@ homepageApp.controller('adminController', function($scope, $window, $http, Predi
         }
     });
 
+    // Retrieve all predictions that have been finished but not marked as having come true or false.
     Prediction.query({}, function(data) {
 
         predictions.list = [];
