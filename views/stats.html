@@ -1,0 +1,16 @@
+<section id="avatar">
+    <img class="profile-pic" src="/images/avatar.png" alt="profile pic"/>
+    <span class="username">{{username}}</span>
+</section>
+<section id="stats">
+    <div class="user-stats">
+        <p class="stats-text">Predictions guessed correctly: {{successCount}}</p>
+        <p class="stats-text">Predictions guessed incorrectly: {{failCount}}</p>
+        <p class="stats-text">Success percentage: {{successPercentage}}%</p>
+    </div>
+    <div class="global-stats">
+        <p class="stats-text">Site-wide success count: {{globalSuccessCount}}</p>
+        <p class="stats-text">Site-wide failure count: {{globalFailCount}}</p>
+        <p class="stats-text">Global success percentage: {{globalSuccessPercentage}}%</p>
+    </div>
+</section>

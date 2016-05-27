@@ -4,7 +4,7 @@ eventListener("load", setNavElementHeights, window);
 
 function setNavElementHeights()
 {
-  var navHeight = document.querySelector("nav").clientHeight;
+  var navHeight = document.querySelector(".nav-button-section").clientHeight;
 
   setNavButtonVertAlign(navHeight);
   setNavLinkPadding(navHeight);
@@ -12,7 +12,7 @@ function setNavElementHeights()
 
 function setNavButtonVertAlign(navHeight)
 {
-  var btnHeight = document.querySelector("nav .button").clientHeight;
+  var btnHeight = document.querySelector(".nav-button-section .button").clientHeight;
   var height = (navHeight - btnHeight) / 2;
   var newHeight = height.toString() + "px";
 

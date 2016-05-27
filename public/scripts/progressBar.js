@@ -1,9 +1,19 @@
 "use strict";
 
-function calcProgress()
+function calcProgress(start, end)
 {
-  // This is a dummy value while JSON objects don't contain a date
-  setProgress(100);
+  var startDay = moment(start);
+  var endDay = moment(end);
+
+  var now = moment();
+  var totalTime = endDay.diff(startDay, 'days');
+  var daysPassed = now.diff(startDay, 'days');
+
+  setProgress((daysPassed*100) / totalTime);
+
+  return { startDay: startDay.format("Do MMM YYYY"),
+           endDay: endDay.format("Do MMM YYYY"),
+           daysLeft: endDay.diff(now, 'days')};
 }
 
 function setProgress(percent)
@@ -27,13 +37,8 @@ function setProgress(percent)
   var animate = document.querySelector("#svg-animate");
   var animateColor = document.querySelector("#svg-animate-color");
 
-  var cont = document.querySelector("#svg-border");
-  var rect = cont.getBoundingClientRect();
-  var contWidth = rect.right - rect.left;
+  console.log(percent);
 
-  var maxBarWidth = contWidth * 0.985;
-  var width = maxBarWidth / (100 / percent);
-
-  animate.setAttribute("to",  width + 'px');
+  animate.setAttribute("to",  (percent - 3) + '%');
   animateColor.setAttribute("to",  color[Math.floor(percent / 10)]);
 }

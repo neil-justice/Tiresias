@@ -24,7 +24,7 @@ nav a > .plussign {
 }
 
 nav > .nav-link-list {
-  width: 70%;
+  width: 25%;
   height:100%;
   float:left;
 }
@@ -42,6 +42,7 @@ nav .nav-button-container {
 nav .nav-button-section {
   right:16.5%;
   position: absolute;
+  height:2.7em;
 }
 
 /*nav > .nav-button-container:last-child {
@@ -79,7 +80,6 @@ nav li > a:hover {
 nav .login-button {
   padding-left:1em;
   padding-right:1em;
-  margin-left: 0.5em;
 }
 
 .login-slider-wrapper {
@@ -87,6 +87,7 @@ nav .login-button {
   width: 100%;
   margin: 0;
   padding: 0;
+  top:-200px;
   background-color: #2c3e50;
   z-index: 6;
 }
@@ -126,7 +127,7 @@ nav .login-button {
 .nav-button {
   width: 3em;
   height: 3em;
-  left: 13%;
+  left: 33%;
   position: relative;
   display: inline-block;
   margin: 0;
@@ -163,7 +164,7 @@ nav .login-button {
 .nav-button a {
   transition: 0.5s;
 }
- 
+
 nav input, nav textarea {
   width:90%;
   margin-bottom: 6px;
@@ -171,4 +172,47 @@ nav input, nav textarea {
 
 nav input:focus, nav textarea:focus {
   background-color: #ffff8d;
+}
+
+.hidden-button {
+  display:none;
+}
+
+nav .user-info-panel {
+  color: white;
+  float: right;
+  overflow:hidden;
+  height:99%;
+  padding-right:2em;
+}
+
+nav .user-info {
+  font-size: 80%;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  float:left;
+  padding-top:5px;
+}
+
+nav .user-info-panel p {
+  font-weight: 700;
+  padding: 0;
+  margin: 0;
+}
+
+nav .user-image {
+  padding:5px;
+  float:left;
+}
+
+nav .user-image > img {
+  height: 2em;
+}
+
+nav .user-success-count {
+  color: green;
+}
+
+nav .user-fail-count {
+  color: red;
 }

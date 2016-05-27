@@ -3,17 +3,23 @@
   <h1>{{title}}</h1>
 </section>
 <aside id="side-buttons">
-  <img  class="vote-button vote-up"
-        src="/images/Upvote.png"
-        alt="Upvote button"/>
-  <span class="vote-number">150</span>
-  <img  class="vote-button vote-down"
-        src="/images/Downvote.png"
-        alt="Downvote button"/>
+  <a ng-click="sendVote(true)">
+    <img  class="vote-button vote-up"
+          ng-class="{upVotePressed: upvote}"
+          src="/images/Upvote.png"
+          alt="Upvote button"/>
+  </a>
+  <span class="vote-number">{{votes}}</span>
+  <a ng-click="sendVote(false)">
+    <img  class="vote-button vote-down"
+          ng-class="{downVotePressed: downvote}"
+          src="/images/Downvote.png"
+          alt="Downvote button"/>
+  </a>
 </aside>
 <section id="link">
   <a class="button" href="{{link}}">
-    LINK: {{link}} </a>
+    LINK </a>
   <!-- Make these all bit.ly links -->
 </section>
 <section id="description">
@@ -21,11 +27,11 @@
 </section>
 
 <section id="timer">
-  <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="50" width="95%" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="50" width="100%" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
    <g>
-    <rect id="svg-bg" height="51.318" width="95%" y="-1.1506" x="0.98327" fill="#FFF"/>
-    <rect id="svg-border" height="30" width="95%" y="10.983" x="12.134" fill="#CCC"/>
-    <rect id="svg-bar" height="17.485" y="16.889" x="17.669" fill="#0F0">
+    <rect id="svg-bg" height="51.318" width="100%" y="-1.1506" x="0.98327" fill="#FFF"/>
+    <rect id="svg-border" height="30" width="100%" y="10.983" x="1%" fill="#CCC"/>
+    <rect id="svg-bar" height="17.485" y="16.889" x="2%" fill="#0F0">
       <animate id="svg-animate"
         attributeName="width"
         from="0"
@@ -47,17 +53,25 @@
     </rect>
    </g>
   </svg>
-</section>      
+  <p class="date-wrapper">
+      <span class="date-col date-start">Start: {{dateStrings.startDay}}</span>
+      <span class="date-col centre-col" ng-show="dateStrings.daysLeft > 0">{{dateStrings.daysLeft}} Days left</span>
+      <span class="date-col centre-col prediction-page-true-label" ng-show="finishedState === true">SUCCEEDED</span>
+      <span class="date-col centre-col prediction-page-false-label" ng-show="finishedState === false">FAILED</span>
+      <span class="date-col centre-col prediction-page-pending-label" ng-show="dateStrings.daysLeft &lt;= 0 &amp;&amp; finishedState === undefined">FINISHED - DECISION PENDING</span>
+      <span class="date-col date-end">Finish: {{dateStrings.endDay}}</span>
+  </p>
+</section>
 
 <section id="stats">
 
 </section>
 <section id="tags">
-  <span ng-repeat="tag in tags"><a class="tag" href="#">{{tag}}</a>
+  <span ng-repeat="tag in tags"><a class="tag" href="">{{tag}}</a>
   </span>
 </section>
 
-<section id="map"></section>
+<section id="map" ng-show="entry['location'] !== undefined"></section>
 
 <section id="comments">
 <h1 style="font-size: large">Comments:</h1>
@@ -73,4 +87,17 @@
   </li>
 </ul>
 
-      </section>
+<form class="new-comment" name="commentForm">
+    <section class="new-comment-text-section">
+      <label ng-messages="commentForm.newText.$error">New Comment
+        <span class="new-error" ng-message="minlength">Comment too short (should be 20 or more characters)</span>
+      </label>
+      <textarea name="newText" rows="5" class="new-comment-text" ng-model="comment.text" ng-minlength="20" ></textarea>
+    </section>
+
+    <section class="new-comment-submit">
+    <input type="submit" value="SUBMIT" class="button" ng-disabled="commentForm.$invalid" ng-click="sendComment()"/>
+    </section>
+</form>
+
+</section>

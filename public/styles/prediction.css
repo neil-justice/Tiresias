@@ -28,10 +28,6 @@ aside#side-buttons {
   margin-top: 0.3em;
 }
 
-.vote-up {
-  margin-bottom: 0.3em;
-}
-
 .vote-down:hover {
   background-color: rgb(161,57,69);
 }
@@ -48,6 +44,13 @@ aside#side-buttons {
   background-color: rgb(164,215,190);
 }
 
+.downVotePressed {
+  background-color: rgb(181,77,89);
+}
+
+.upVotePressed {
+  background-color: rgb(144,195,170);
+}
 #map {
   margin-top: 2em;
   height: 15em;
@@ -129,4 +132,71 @@ input:focus, textarea:focus {
   position:absolute;
   margin-left: -1em;
   content: url('/images/comSide.png');
+}
+
+.date-wrapper {
+  display:table;
+  width:100%;
+}
+
+.date-col {
+  display: table-cell;
+}
+
+.date-start {
+  text-align: left;
+}
+.centre-col {
+  text-align: center;
+}
+.date-end {
+  text-align: right;
+}
+
+.prediction-creator {
+  float: right;
+  font-size: 80%;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  padding-top:5px;
+}
+
+.new-comment-text {
+  width:100%;
+  display:block;
+  border-radius:5px;
+}
+
+.new-comment .button {
+  margin-top: 1em;
+}
+
+.new-comment .button:focus {
+  background-color:#1570A5;
+}
+
+.new-comment {
+    padding-bottom: 10em;
+}
+
+.prediction-page-true-label,
+.prediction-page-false-label,
+.prediction-page-pending-label {
+  padding: 0.2em;
+  color:white;
+  border-radius: 3px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.prediction-page-true-label {
+  background-color:#00A500;
+}
+
+.prediction-page-false-label {
+  background-color: #A50000;
+}
+
+.prediction-page-pending-label {
+  background-color: #CCC;
 }

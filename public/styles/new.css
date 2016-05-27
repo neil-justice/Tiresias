@@ -1,6 +1,6 @@
 /* CSS for the New Prediction modal window */
 
-#form-div {
+.form-div {
   background-color: #F9F9F9;
   color: #888888;
   border: 1px solid #D4D4D4;
@@ -14,22 +14,27 @@
   z-index:7;
 }
 
-#form-div h1  {
+.form-div h1  {
   font-size: 1.6em;
   padding-bottom: 0;
-  width:90%;
+  color: #888888;
+  text-align:center;
 }
 
-.form-title  {
-  border-bottom: 1px solid #D4D4D4;
-  margin-bottom: 0.5em
+.form-div .form-title  {
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 0.5em;
+  margin-left: -1em;
+  margin-right: -1em;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
-.close-button {
+.form-div .close-button {
   display:inline;
   position:absolute;
-  top:0;
-  right:0;
+  top:7px;
+  right:5px;
   cursor:pointer;
 }
 
@@ -44,63 +49,49 @@
   background-color: rgba(0,0,0,0.7);
 }
 
-.input-fields {
+.form-div .input-fields {
   overflow:hidden;
 }
 
-.new {
+.form-div .new {
   padding-top:0.3em;
   padding-bottom: 0.3em;
 }
 
-form label {
-  font-size: 0.9em;
-  font-weight: 600;
-  font-family: roboto;
-  padding-bottom: 0.3em;
-}
-
-.new > *  {
+.form-div .new > *  {
   display:block;
 }
 
-.col-left {
+.form-div .col-left {
   width:49%;
   float:left;
 }
 
-.col-right {
+.form-div .col-right {
   width:49%;
   float:right;
 }
 
-.new input {
+.form-div .new input {
   width:97%;
   height: 1.2em;
 }
 
-.new textarea, .new-title input, .new-link input {
+.form-div .new textarea,
+.form-div .new-title input,
+.form-div .new-link input {
   width:98.5%;
 }
 
-.new-submit {
+.form-div .new-submit {
   margin-top:2em;
 }
 
-.new-prediction-error {
-  font-weight: bold;
-  font-size: 11px;
-  color: red;
-  margin: 0;
-  padding-right: 2em;
-  float: right;
-}
-
-.required-field {
+.form-div .required-field {
   color:red;
 }
 
-#submit {
+.form-div #submit {
   width:auto;
   height:auto;
   border:1px solid #3e9cbf;
@@ -113,11 +104,25 @@ form label {
   margin-right: auto;
 }
 
-#submit:hover {
+.form-div #submit:hover {
   background-color: #1D74AB;
 }
 
-#submit:disabled {
+.form-div #submit:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+.form-div  input:focus, 
+.form-div  textarea:focus {
+  background-color: #ffff8d;
+}
+
+.form-div #submit:focus {
+  background-color: #1D74AB;
+}
+
+.user-modal {
+  width:20%;
+  left:40%;
 }

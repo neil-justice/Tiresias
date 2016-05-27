@@ -1,6 +1,10 @@
+html {
+  height:100%;
+}
 
 body {
   width: 100%;
+  height:100%;
   font-family: 'Montserrat';
   margin: 0;
   padding: 0;
@@ -8,6 +12,7 @@ body {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 /* Disables blue border outline on image links in IE8/9/10: */
@@ -16,11 +21,15 @@ a img {
 }
 
 main {
-  margin-left: 15%;
-  margin-right: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  min-width:35em;
+  max-width:70em;
+  width:65%;
   margin-top: 4em;
   display: block;
-  transition: 400ms;
+  transition: 200ms;
+  min-height:100%;
 }
 
 ul {
@@ -39,6 +48,13 @@ h1 {
   font-weight:500;
 }
 
+form label {
+  font-size: 0.9em;
+  font-weight: 600;
+  font-family: roboto;
+  padding-bottom: 0.3em;
+}
+
 .tag {
   padding:0.2em 0.6em;
   margin-right:0.3em;
@@ -54,6 +70,42 @@ h1 {
 .tag:hover {
   background-color:#128FDC;
   color: #FFFFFF;
+}
+
+.footer {
+  height:15em;
+  background-color:#282222;
+  clear:both !important;
+}
+/*
+.new-error {
+  padding:0.6em;
+  font-size:0.8em;
+  background-color: #a50000;
+  color:white;
+  position:absolute;
+  left:101%;
+  border-radius:3px;
+  display:block;
+}
+*/
+
+.new-error {
+  font-weight: bold;
+  font-size: 11px;
+  color: red;
+  margin: 0;
+  margin-top:0.35em;
+  padding-right: 2em;
+  float: right;
+}
+
+.empty-list {
+  text-align:center;
+  color: #CCC;
+  font-size:2em;
+  margin:auto;
+  width:100%;
 }
 
 growl-notifications {
@@ -74,14 +126,14 @@ growl-notifications growl-notification {
 }
 
 .success-notification {
-  color: #52A060;
-  background-color: #DFF0D8;
-  
+  color: #FFF;
+  background-color: #52A060;
+
 }
 
 .failure-notification {
-  color: #A50000;
-  background-color: #FFDDDD;
+  color: #FFF;
+  background-color: #A50000;
 }
 
 .close-notification {
