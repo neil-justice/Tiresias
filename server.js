@@ -74,7 +74,6 @@ var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser');
 
-// app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use('/views', express.static(__dirname + '/views'));
 app.use(express.static("bower_components"));
@@ -401,11 +400,6 @@ router.route('/api/setFinishedState').post(function(req, res) {
         }
 
     });
-
-
-    
-
-
 });
 
 router.route('/*').get(function(req, res) {
@@ -421,7 +415,14 @@ router.route('/*').get(function(req, res) {
 });
 
 app.use('/', router);
-app.listen(8081);
+// (From Expressjs.com security best practices) Attackers can use this header (which is enabled by default) to
+// detect apps running Express and then launch specifically-targeted attacks.
+app.disable('x-powered-by');
+
+https.createServer({
+    key: fs.readFileSync("sslcert/tiresias.pem"),
+    cert: fs.readFileSync("sslcert/tiresias.crt")
+}, app).listen(8081);
 
 function sendAsXHTML(req, options) {
 
